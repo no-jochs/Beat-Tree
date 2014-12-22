@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(@track) do |f| %>
+      <% if @track.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@track.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+          <ul>
+          <% @track.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field form-group col-md-5">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+	  
+	  <div class="field form-group col-md-5">
+		<%= f.label :artist %><br>
+		<%= f.text_field :artist, class: 'form-control' %>
+	  </div>
+		  
+      <div class="field form-group col-md-2">
+        <%= f.label :score %><br />
+        <%= f.number_field :score, class: 'form-control' %>
+      </div>
+
+      <div class="field form-group col-md-12">
+        <%= f.label :text %><br />
+        <%= f.text_area :text, class: 'form-control' %>
+      </div>
+
+      <div class="actions form-group col-md-12">
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
