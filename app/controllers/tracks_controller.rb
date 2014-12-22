@@ -20,7 +20,7 @@ class TracksController < ApplicationController
     
     respond_to do |format|
       if @track.save
-        format.html { redirect_to @track, notice: 'Track was successfully created.'}
+        format.html { redirect_to @track, notice: 'Track node was successfully created.'}
         format.json { render action: 'show', status: :created, location: @track }
       else
         format.html { render action: 'new' }
@@ -32,7 +32,7 @@ class TracksController < ApplicationController
   def update
     respond_to do |format|
       if @track.update(track_params)
-        format.html { redirect_to @track, notice: 'Track was successfully updated.'}
+        format.html { redirect_to @track, notice: 'Track node was successfully updated.'}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -53,6 +53,10 @@ class TracksController < ApplicationController
   
   def set_track
     @track = Track.find(params[:id])
-  end  
+  end
+  
+  def track_params
+    params[:track]
+  end
   
 end
