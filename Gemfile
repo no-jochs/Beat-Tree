@@ -27,6 +27,7 @@ gem 'neo4j', github: 'andreasronge/neo4j'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'figaro'
 
 group :development do
   gem 'spring'
