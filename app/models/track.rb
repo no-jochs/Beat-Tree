@@ -13,5 +13,5 @@ class Track
     self.score = score * 100
   end
   
-  has_n(:comments).to(Comment)
+  has_many :in, :comments, origin: :track
 end

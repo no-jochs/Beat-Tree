@@ -4,5 +4,5 @@ class Comment
   property :text
   
   index :title
-  has_one(:track).from(Track, :comments)
+  has_one :out, :track, type: :track, model_class: Track
 end
