@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   
-  resources :artists do
-    resources :comments
-  end
+  resources :artists
   
   resources :comments
 
