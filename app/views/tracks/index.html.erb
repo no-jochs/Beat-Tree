@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="text-center">Listing Tracks</h1>
+  </div>
+
+  <table class="table">
+    <% @tracks.each do |track| %>
+      <tr>
+        <td><%= track.title %></td>
+		<td><%= track.artist %></td>
+        <td><%= link_to 'Show', track, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Edit', edit_track_path(track), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= link_to 'New Track', new_track_path, class: 'btn btn-default' %>
