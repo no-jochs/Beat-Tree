@@ -1,6 +1,7 @@
 class Track
   include Neo4j::ActiveNode
   property :title
+  property :artist
   property :text, default: "blah blah"
   property :score, type: Integer, default: 0
   
