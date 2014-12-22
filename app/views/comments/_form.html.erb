@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for([@track, @comment]) do |f| %>
+      <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+          <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <div class="field form-group">
+          <%= f.label :title %><br />
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+
+        <div class="field form-group">
+          <%= f.label :text %><br />
+          <%= f.text_area :text, class: 'form-control' %>
+        </div>
+
+        <div class="actions form-group">
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
