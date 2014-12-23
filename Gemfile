@@ -35,6 +35,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'pry-rails'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 # Use unicorn as the app server
