@@ -14,6 +14,5 @@
 
 //= require underscore
 //= require backbone
-	
 //= require beat-tree.js
 //= require_tree .
