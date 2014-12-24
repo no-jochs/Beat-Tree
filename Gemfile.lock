@@ -53,15 +53,13 @@ GEM
     builder (3.2.2)
     callsite (0.0.11)
     coderay (1.1.0)
-    coffee-rails (4.0.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.2.0)
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
+    ejs (1.0.0)
     erubis (2.7.0)
     eventmachine (1.0.4)
     execjs (2.2.2)
@@ -130,6 +128,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.7)
       sprockets-rails (~> 2.0)
+    rails-backbone (0.7.2)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      railties (>= 3.1.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -170,8 +172,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.6.0)
@@ -186,7 +186,6 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
-  coffee-rails (~> 4.0.0)
   figaro
   jbuilder (~> 2.0)
   jquery-rails
@@ -195,10 +194,10 @@ DEPENDENCIES
   os
   pry-rails
   rails (= 4.1.7)
+  rails-backbone
   rails_12factor
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
   thin
-  turbolinks
   uglifier (>= 1.3.0)
