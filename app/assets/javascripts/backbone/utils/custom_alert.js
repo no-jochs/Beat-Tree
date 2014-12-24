@@ -1,7 +1,7 @@
 //Diveloggr.Alert is just a custom alert dialogue.  It takes a header
 //message, a body message, and an array of items (useful for validation errors)
 
-Diveloggr.Alert = function () {
+BT.Alert = function () {
 	this.render = function(header, message, items){
 		var winW = window.innerWidth;
 	    var winH = window.innerHeight;
