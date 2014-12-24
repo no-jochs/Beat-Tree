@@ -22,20 +22,21 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 		}).done( function (data) { that.populateResults(data); });
 	},
 	populateResults: function (data) {
-		var $tableEl = $('#spotify-search-results')
-		$tableEl.empty();
+		this.removeSubviews();
 		var tracks = [];
+		var that = this;
 		_(data.tracks.items).each( function (track) {
 			var trackModel = new BT.Models.Track();
 			trackModel.set(track);
 			tracks.push(trackModel);
 			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
-			$tableEl.append(resultView.render().$el);
+			debugger
+			that.addSubview('#spotify-search-results', resultView)
 		});
 	}
 });
 
-BT.Views.spotSearchResult = Backbone.View.extend({
+BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	initialize: function () {
 		
 	},
