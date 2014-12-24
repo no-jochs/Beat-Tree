@@ -30,7 +30,6 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 			trackModel.set(track);
 			tracks.push(trackModel);
 			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
-			debugger
 			that.addSubview('#spotify-search-results', resultView)
 		});
 	}
@@ -42,10 +41,25 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	},
 	template: JST['backbone/templates/search/spotResult'],
 	tagName: 'tr',
-	events: {},
+	events: {
+		"mouseenter": "highlightItem",
+		"mouseleave": "deHighlightItem",
+		"click": "addNode"
+	},
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
 		return this;
+	},
+	highlightItem: function (event) {
+		event.currentTarget.style.background = "black";
+		event.currentTarget.style.color = "white";
+	},
+	deHighlightItem: function (event) {
+		event.currentTarget.style.background = "";
+		event.currentTarget.style.color = "";
+	},
+	addNode: function (event) {
+		alert("add node");
 	}
 });
