@@ -44,7 +44,7 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	events: {
 		"mouseenter": "highlightItem",
 		"mouseleave": "deHighlightItem",
-		"click": "addNode"
+		"click #db-check-btn": "trackCheck"
 	},
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -59,7 +59,18 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		event.currentTarget.style.background = "";
 		event.currentTarget.style.color = "";
 	},
-	addNode: function (event) {
-		alert("add node");
+	trackCheck: function (event) {
+		var testTrack = new BT.Models.Track({ id: this.model.id });
+		testTrack.fetch({
+			success: function (model, response, options) {
+				alert("This node is already in the beat-tree DB.");
+				console.log(model);
+				console.log(response);
+				console.log(options);
+			},
+			error: function (model, response, options) {
+				alert("This node does not yet exist in the BTDB.");
+			}
+		});
 	}
 });

@@ -7,7 +7,11 @@ class Api::TracksController < ApplicationController
   
   def show
     @track = Track.find(params[:id])
-    render json: @track
+    if @track
+      render json: @track
+    else
+      render json: ["Track Does Not Exist"], status: :not_found
+    end
   end
   
   def create

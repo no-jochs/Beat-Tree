@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="text-center"><%= track.get('name') %></h1>
+  </div>
+  <div class="row">
+	  <div class="col-md-8">
+		  <div class="panel-body lead">
+			  <p>Artist: <%= track.get('artists')[0].name %></p>
+			  <p>Album: <%= track.get('album').name %></p>
+			  <p>Time: <%= track.get('duration_ms') %></p>
+			  <p>ID: <%= track.get('id') %></p>
+			  <p>Spotify URI: <%= track.get('uri') %></p>
+		  </div>
+	  </div>
+	  <div class="col-md-4">
+		  <img src="<%= track.get('album').images[0].url %>">
+	  </div>
+  </div>
+</div>
