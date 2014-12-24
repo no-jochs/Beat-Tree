@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'tracks#index'
+  root 'static_pages#index'
   
   resources :tracks do
     resources :comments
