@@ -6,7 +6,7 @@ BT.Router = Backbone.Router.extend({
 		"search": "trackSearch"
 	},
 	trackSearch: function () {
-		var view = new BT.Views.trackSearch();
+		var view = new BT.Views.nodeSearch();
 		this._swapView(view);
 	},
 	_swapView: function (view) {
