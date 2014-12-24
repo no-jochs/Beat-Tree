@@ -814,3 +814,4 @@ Storage files: (filename : modification date - size)
 2014-12-24 01:22:35.261+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
 2014-12-24 01:22:35.275+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(title) [provider: {key=lucene, version=1.0}]]
 2014-12-24 01:22:35.292+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(title) [provider: {key=lucene, version=1.0}]]
+2014-12-24 02:05:35.400+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 327ms.
