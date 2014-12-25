@@ -1,7 +1,8 @@
 class Track
   include Neo4j::ActiveNode
   
-  property :id
+  id_property :spot_id, on: :DBID
+  
   property :track_spotify_id
   property :track_name
   property :track_number
@@ -25,7 +26,14 @@ class Track
   
   validates :track_name, :track_spotify_id, presence: true
   
-  index :id
   index :track_spotify_id
+  
+  has_many :out, :sampled_tracks, model_class: Track
+  has_one :out, :covered_track, model_class: Track
+  has_one :out, :remixed_track, model_class: Track
+  
+  def DBID
+    self.track_spotify_id
+  end
 
 end
