@@ -18,7 +18,7 @@ class Api::TracksController < ApplicationController
     else
       @track = Track.find(params[:id])
       if @track
-        render json: @track, status: :ok
+        render "api/tracks/show", status: :ok
       else
         render json: ["Track Does Not Exist"], status: :not_found
       end
