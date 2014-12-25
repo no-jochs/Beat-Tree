@@ -28,9 +28,10 @@ class Track
   
   index :track_spotify_id
   
-  has_many :out, :sampled_tracks, model_class: Track
-  has_one :out, :covered_track, model_class: Track
-  has_one :out, :remixed_track, model_class: Track
+  has_many :out, :samples, model_class: Track
+  has_one :out, :covers, model_class: Track
+  has_one :out, :remixes, model_class: Track
+  
   
   def DBID
     self.track_spotify_id
