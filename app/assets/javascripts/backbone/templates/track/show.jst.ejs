@@ -6,15 +6,15 @@
 	  <div class="col-md-2">
 		  <ul class="list-group">
 		    <li class="list-group-item active">
-		      <span class="badge">6</span>
+		      <span class="badge"><%= track.sampled_by_tracks.length %></span>
 		      Sampled By Active Node
 		    </li>
 		    <li class="list-group-item">
-		      <span class="badge">2</span>
+		      <span class="badge">X</span>
 		      Covered By Active Node
 		    </li>
 		    <li class="list-group-item">
-		      <span class="badge">1</span>
+		      <span class="badge">X</span>
 		      Remixed By Active Node
 		    </li>
 		  </ul>
@@ -44,6 +44,7 @@
 			  <p>Time: <%= track.get('track_duration_ms') %></p>
 			  <p>ID: <%= track.get('id') %></p>
 			  <p>Spotify URI: <%= track.get('track_spotify_uri') %></p>
+			  <iframe src="https://embed.spotify.com/?uri=<%= track.get('track_spotify_uri') %>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 		  </div>
 	  </div>
 	  <div class="col-md-4">
