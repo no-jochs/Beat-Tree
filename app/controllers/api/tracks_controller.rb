@@ -6,11 +6,32 @@ class Api::TracksController < ApplicationController
   end
   
   def show
-    @track = Track.find(params[:id])
-    if @track
-      render json: @track
+    if params[:id] == "db_check"
+      @track = Track.where(
+        track_spotify_id: params[:track_spotify_id]
+      ).first
+      if @track
+        render json: @track, status: :ok
+      else
+        render json: ["Track Does Not Exist"], status: :not_found
+      end
     else
-      render json: ["Track Does Not Exist"], status: :not_found
+      @track = Track.find(params[:id])
+      if @track
+        render json: @track, status: :ok
+      else
+        render json: ["Track Does Not Exist"], status: :not_found
+      end
+    end
+  end
+  
+  def update
+    @track = Track.new(track_params)
+    
+    if @track.save
+      render json: @track, status: :ok
+    else
+      render json: @track.errors, status: :unprocessable_entity
     end
   end
   
@@ -38,5 +59,11 @@ class Api::TracksController < ApplicationController
     else
       render json: @track, status: :unprocessable_entity
     end
+  end
+  
+  private
+  
+  def track_params
+    params[:track]
   end
 end

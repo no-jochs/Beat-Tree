@@ -3,6 +3,7 @@ window.BT = {
 	Collections: {},
 	Views: {},
 	Router: {},
+	Utils: {},
 	initialize: function () {
 		console.log("here");
 		new BT.Router({ $rootEl: $('#beat-tree-content')});

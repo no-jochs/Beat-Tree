@@ -23,12 +23,10 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 	},
 	populateResults: function (data) {
 		this.removeSubviews();
-		var tracks = [];
 		var that = this;
 		_(data.tracks.items).each( function (track) {
-			var trackModel = new BT.Models.Track();
-			trackModel.set(track);
-			tracks.push(trackModel);
+			var trackModel = BT.Utils.ParseTrack(track);
+			debugger
 			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
 			that.addSubview('#spotify-search-results', resultView)
 		});
@@ -36,9 +34,7 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 });
 
 BT.Views.spotSearchResult = Backbone.CompositeView.extend({
-	initialize: function () {
-		
-	},
+	initialize: function () {},
 	template: JST['backbone/templates/search/spotResult'],
 	tagName: 'tr',
 	events: {
@@ -59,17 +55,16 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		event.currentTarget.style.background = "";
 		event.currentTarget.style.color = "";
 	},
-	trackCheck: function (event) {
-		var testTrack = new BT.Models.Track({ id: this.model.id });
-		testTrack.fetch({
-			success: function (model, response, options) {
-				alert("This node is already in the beat-tree DB.");
-				console.log(model);
-				console.log(response);
-				console.log(options);
-			},
-			error: function (model, response, options) {
-				alert("This node does not yet exist in the BTDB.");
+	trackCheck: function () {
+		var id = this.model.get('track_spotify_id');
+		debugger
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/tracks/db_check",
+			data: { track_spotify_id: id },
+			statusCode: { 
+				404: function () { alert("Not Found in BTDB") },
+				200: function () { alert("This Track is already in the Beat Tree.")}
 			}
 		});
 	}

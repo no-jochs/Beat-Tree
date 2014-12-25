@@ -818,3 +818,8 @@ Storage files: (filename : modification date - size)
 2014-12-24 10:47:05.038+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 418450ms.
 2014-12-24 10:47:08.142+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 288ms.
 2014-12-24 21:30:02.419+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 37478654ms.
+2014-12-24 23:50:30.659+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(id) [provider: {key=lucene, version=1.0}]]
+2014-12-24 23:50:30.668+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(id) [provider: {key=lucene, version=1.0}]]
+2014-12-25 00:25:30.292+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 244ms.
+2014-12-25 06:33:29.242+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(track_spotify_id) [provider: {key=lucene, version=1.0}]]
+2014-12-25 06:33:29.249+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(track_spotify_id) [provider: {key=lucene, version=1.0}]]
