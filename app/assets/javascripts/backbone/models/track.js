@@ -1,3 +1,10 @@
 BT.Models.Track = Backbone.Model.extend({
-	urlRoot: "api/tracks", 
+	urlRoot: "api/tracks",
+	parse: function (respJSON) {
+		if (respJSON.track) {
+			return respJSON.track;
+		} else {
+			return respJSON;
+		}
+	}
 })
