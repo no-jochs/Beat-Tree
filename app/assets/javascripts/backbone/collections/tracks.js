@@ -14,6 +14,7 @@ BT.Collections.Tracks = Backbone.Collection.extend({
 				success: function () { tracks.add(track); }
 			});
 		}
+		return track;
 	}
 });
 
