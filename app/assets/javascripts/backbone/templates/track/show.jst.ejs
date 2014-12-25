@@ -1,11 +1,45 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h1 class="text-center"><%= track.get('name') %></h1>
+    <h1 class="text-center">Parents</h1>
+  </div>
+  <div class="row">
+	  <div class="col-md-2">
+		  <ul class="list-group">
+		    <li class="list-group-item active">
+		      <span class="badge">6</span>
+		      Sampled By Active Node
+		    </li>
+		    <li class="list-group-item">
+		      <span class="badge">2</span>
+		      Covered By Active Node
+		    </li>
+		    <li class="list-group-item">
+		      <span class="badge">1</span>
+		      Remixed By Active Node
+		    </li>
+		  </ul>
+	  </div>
+	  <div class="col-md-10" id="parent-node-container">
+		  <div class="thumbnail">
+		        <img data-src="holder.js/300x300" alt="...">
+		        <div class="caption">
+		          <h3>Thumbnail label</h3>
+		          <p>...</p>
+		          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+		        </div>
+		      </div>
+	  </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="text-center">Active Node</h1>
   </div>
   <div class="row">
 	  <div class="col-md-8">
 		  <div class="panel-body lead">
 			  <p>Artist: <%= track.get('artist_name') %></p>
+			  <p>Track: <%= track.get('track_name') %></p>
 			  <p>Album: <%= track.get('album_name') %></p>
 			  <p>Time: <%= track.get('track_duration_ms') %></p>
 			  <p>ID: <%= track.get('id') %></p>
@@ -13,7 +47,12 @@
 		  </div>
 	  </div>
 	  <div class="col-md-4">
-		  <img src="<%= track.get('album_l_image') %>">
+		  <img class="track-show-image" src="<%= track.get('album_l_image') %>">
+	  </div>
+  </div>
+  <div class="row">
+	  <div class="panel-heading">
+			  <h2 class="text-center">Parents</h2>
 	  </div>
   </div>
 </div>

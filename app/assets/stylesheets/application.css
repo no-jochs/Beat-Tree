@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+.track-show-image {
+	width: 100%;
+}
+
+.children-marker {
+	background-color: green;
+	height: 200px;
+}
+
+.rotate {
+/* Safari */
+-webkit-transform: rotate(-90deg);
+/* Firefox */
+-moz-transform: rotate(-90deg);
+/* IE */
+-ms-transform: rotate(-90deg);
+/* Opera */
+-o-transform: rotate(-90deg);
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}

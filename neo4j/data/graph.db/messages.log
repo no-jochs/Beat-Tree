@@ -823,3 +823,18 @@ Storage files: (filename : modification date - size)
 2014-12-25 00:25:30.292+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 244ms.
 2014-12-25 06:33:29.242+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(track_spotify_id) [provider: {key=lucene, version=1.0}]]
 2014-12-25 06:33:29.249+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(track_spotify_id) [provider: {key=lucene, version=1.0}]]
+2014-12-25 11:21:19.106+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 393771ms.
+2014-12-25 11:22:27.029+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 18459ms.
+2014-12-25 12:20:06.092+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 582222ms.
+2014-12-25 14:16:24.433+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:16:24.462+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:17:05.093+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:17:05.123+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:17:19.163+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:17:19.185+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:18:09.082+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:18:09.103+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:18:09.124+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(spot_id) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:18:09.131+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(spot_id) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:28:01.362+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population started: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
+2014-12-25 14:28:01.383+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
