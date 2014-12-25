@@ -26,7 +26,6 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 		var that = this;
 		_(data.tracks.items).each( function (track) {
 			var trackModel = BT.Utils.ParseTrack(track);
-			debugger
 			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
 			that.addSubview('#spotify-search-results', resultView)
 		});
@@ -40,7 +39,8 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	events: {
 		"mouseenter": "highlightItem",
 		"mouseleave": "deHighlightItem",
-		"click #db-check-btn": "trackCheck"
+		"click #db-check-btn": "trackCheck",
+		"click #add-to-db": "addToDB"
 	},
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -57,15 +57,36 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	},
 	trackCheck: function () {
 		var id = this.model.get('track_spotify_id');
-		debugger
+		var createAddButton = function () {
+			debugger
+			var btn = this.$el.find('#db-check-btn');
+			btn.replaceWith('<button type="button" id="add-to-db" class="btn btn-success">Add Node</button>');
+		}
+		var alreadyCreated = function () {
+			debugger
+			var btn = this.$el.find('#db-check-btn');
+			btn.replaceWith('<span>Node Already Exists</span>');
+		}
+		var that = this;
 		$.ajax({
 			type: "GET",
 			url: "http://localhost:3000/api/tracks/db_check",
 			data: { track_spotify_id: id },
 			statusCode: { 
-				404: function () { alert("Not Found in BTDB") },
-				200: function () { alert("This Track is already in the Beat Tree.")}
+				404: createAddButton.bind(that),
+				200: alreadyCreated.bind(that)
 			}
 		});
+	},
+	addToDB: function () {
+		this.model.save({},{
+			success: function (model, response, options) {
+				debugger
+				Backbone.history.navigate('tracks/' + model.id, { trigger: true });
+			},
+			error: function () {
+				alert("Something went wrong with the request");
+			}
+		});	
 	}
 });
