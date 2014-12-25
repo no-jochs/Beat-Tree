@@ -32,6 +32,7 @@ class Track
   has_one :out, :covers, model_class: Track
   has_one :out, :remixes, model_class: Track
   
+  has_many :in, :sampled_by, model_class: Track, origin: :samples
   
   def DBID
     self.track_spotify_id
