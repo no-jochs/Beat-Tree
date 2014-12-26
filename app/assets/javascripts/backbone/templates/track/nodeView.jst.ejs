@@ -1,0 +1,8 @@
+<div class="thumbnail">
+    <iframe src="https://embed.spotify.com/?uri=<%= track.get('track_spotify_uri') %>" width="200" height="80" frameborder="0" allowtransparency="true"></iframe>
+    <div class="caption">
+      <h5><%= track.escape('track_name') %></h5>
+      <p>Artist: <%= track.escape('artist_name') %></p>
+      <p><a href="#/tracks/<%= track.get('id') %>" class="btn btn-default" role="button">Go Here</a> <a href="#" class="btn btn-info" role="button">Relation</a></p>
+    </div>
+</div>

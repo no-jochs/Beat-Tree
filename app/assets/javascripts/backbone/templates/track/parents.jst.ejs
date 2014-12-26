@@ -1,0 +1,57 @@
+<div class="row">
+<div class="col-md-10">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" class="filter-options active" data-option="1">
+		<a href="">
+	      <span class="badge">
+			  <%= track.sampled_tracks.length %>
+		  </span>
+      Sampled By Active Node
+		</a>
+    </li>
+    <li role="presentation" class="filter-options" data-option="2">
+		<a href="">
+	      <span class="badge">
+			  <%= track.covered_tracks.length %>
+		  </span>
+      Covered By Active Node
+		</a>
+    </li>
+    <li role="presentation" class="filter-options" data-option="3">
+		<a href="">
+	      <span class="badge">
+			  <%= track.remixed_tracks.length %>
+		  </span>
+      Remixed By Active Node
+		</a>
+    </li>
+  </ul>
+</div>
+<div class="col-md-2">
+	<button type="button" class="btn btn-success add-parent-node-btn" data-toggle="modal" data-target=".select-parent-node-lg">
+		<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+		Add New Parent Node
+	</button>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12" id="parent-node-container">
+<!--Individual Node Views Get Inserted Here -->
+</div>
+</div>
+
+<div class="modal fade select-parent-node-lg" tabindex="-1" role="dialog" aria-labelledby="parent-node-modal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+		  <h2>Add a New Parent Node</h2>
+	  </div>
+	  <div class="modal-body" id="parent-node-search-container">
+	  </div>
+	  <div class="modal-body" id="parent-node-confirm-container">
+	  </div>
+	  <div class="modal-body" id="parent-node-relationship-container">
+	  </div>
+    </div>
+  </div>
+</div>

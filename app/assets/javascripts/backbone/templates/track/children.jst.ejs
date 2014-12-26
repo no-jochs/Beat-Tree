@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-md-10">
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" class="filter-options active" data-option="1">
+		<a href="">
+	      <span class="badge">
+			  <%= track.sampling_tracks.length %>
+		  </span>
+      Samples Active Node
+		</a>
+    </li>
+    <li role="presentation" class="filter-options" data-option="2">
+		<a href="">
+	      <span class="badge">
+			  <%= track.covering_tracks.length %>
+		  </span>
+      Covers Active Node
+		</a>
+    </li>
+    <li role="presentation" class="filter-options" data-option="3">
+		<a href="">
+	      <span class="badge">
+			  <%= track.remixing_tracks.length %>
+		  </span>
+      Remixes Active Node
+		</a>
+    </li>
+  </ul>
+</div>
+<div class="col-md-2">
+	<button type="button" class="btn btn-success">
+		<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+		Add New Child Node
+	</button>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12" id="child-node-container">
+<!--Individual Node Views Get Inserted Here -->
+</div>
+</div>

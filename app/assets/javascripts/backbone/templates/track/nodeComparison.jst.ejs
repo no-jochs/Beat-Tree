@@ -1,0 +1,45 @@
+<div class="col-md-4">
+    <div class="thumbnail comparison">
+      <img src="<%= childModel.get('album_m_image') %>" alt="Child Album Art">
+      <div class="caption">
+        <h4>Child Node</h4>
+        <p>Track: <%= childModel.get('track_name') %></p>
+		<p>Artist: <%= childModel.get('artist_name') %></p>
+		<p>Album: <%= childModel.get('album_name') %></p>
+		<p>
+			<iframe class="spotplayer" src="https://embed.spotify.com/?uri=<%= childModel.get('track_spotify_uri') %>" width="235" height="80" frameborder="0" allowtransparency="true"></iframe>
+		</p>
+      </div>
+    </div>
+</div>
+<div class="col-md-4">
+	<div class="relationship-definition">
+	 	<h3>Define Relationship</h3>
+		<hr>
+		<img class='relationship-marker' src=https://s3-us-west-1.amazonaws.com/beat-tree-images/relationship-arrow.png>
+		<select id="relation-dropdown" class="form-control">
+		  <option value="samples">SAMPLES</option>
+		  <option value="covers">COVERS</option>
+		  <option value="remixes">REMIXES</option>
+		</select>
+		<div id="relationship-clarification-well" class="well well-small">
+			This will create a relationship in the BeatTree that states that <strong><%= childModel.get('artist_name') %>'s</strong> <em><%= childModel.escape('track_name') %></em> samples from, is a cover of, or is a remix of <strong><%= parentModel.escape('artist_name') %>'s</strong> <em><%= parentModel.escape('track_name') %></em>.
+			<button type="button" class="btn btn-danger" id="create-relationship-btn">Create Relationship</button>
+			<button type="button" class="btn btn-default" id="cancel-relationship-create">Cancel</button>
+		</div>
+	</div>
+</div>
+<div class="col-md-4">
+    <div class="thumbnail comparison">
+      <img src="<%= parentModel.get('album_m_image') %>" alt="Child Album Art">
+      <div class="caption">
+        <h4>Parent Node</h4>
+        <p>Track: <%= parentModel.get('track_name') %></p>
+		<p>Artist: <%= parentModel.get('artist_name') %></p>
+		<p>Album: <%= parentModel.get('album_name') %></p>
+		<p>
+			<iframe class="spotplayer" src="https://embed.spotify.com/?uri=<%= parentModel.get('track_spotify_uri') %>" width="235" height="80" frameborder="0" allowtransparency="true"></iframe>
+		</p>
+      </div>
+    </div>
+</div>
