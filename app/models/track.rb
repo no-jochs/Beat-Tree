@@ -37,5 +37,9 @@ class Track
   def DBID
     self.track_spotify_id
   end
+  
+  def self.find_by_spotify_id(id)
+    @track = Track.where(track_spotify_id: id).first
+  end
 
 end

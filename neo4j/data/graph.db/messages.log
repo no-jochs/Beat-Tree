@@ -840,3 +840,23 @@ Storage files: (filename : modification date - size)
 2014-12-25 14:28:01.383+0000 INFO  [o.n.k.i.a.i.IndexPopulationJob]: Index population completed. Index is now online: [:Track(uuid) [provider: {key=lucene, version=1.0}]]
 2014-12-25 15:28:31.041+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 502357ms.
 2014-12-25 15:35:52.040+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 391663ms.
+2014-12-25 23:44:34.053+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1354661ms.
+2014-12-26 02:44:27.986+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 531ms.
+2014-12-26 03:43:47.006+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 930699ms.
+2014-12-26 03:56:55.031+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 735951ms.
+2014-12-26 05:42:24.855+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1079ms.
+2014-12-26 11:49:27.570+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 93690ms.
+2014-12-26 11:51:53.036+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 96229ms.
+2014-12-26 11:51:54.854+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 230ms.
+2014-12-26 11:52:08.007+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 10464ms.
+2014-12-26 13:21:38.061+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 3594375ms.
+2014-12-26 14:52:23.062+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 5394521ms.
+2014-12-26 16:41:30.041+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 6474137ms.
+2014-12-26 17:04:38.018+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1337517ms.
+2014-12-26 18:05:09.066+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 3594240ms.
+2014-12-26 19:50:54.094+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 6294826ms.
+2014-12-26 21:21:39.043+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 5394692ms.
+2014-12-26 21:23:36.050+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 66793ms.
+2014-12-26 21:23:37.929+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 778ms.
+2014-12-26 21:26:25.007+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 163912ms.
+2014-12-26 21:26:29.988+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1311ms.
