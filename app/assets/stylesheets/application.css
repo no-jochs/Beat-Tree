@@ -35,3 +35,62 @@
 /* Internet Explorer */
 filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
+
+.thumbnail {
+	float: left;
+	max-width: 210px;
+	min-height: 300px;
+}
+
+div.thumbnail.comparison {
+	min-width: 100%;
+	min-height: 300px;
+}
+
+iframe.spotplayer {
+	width: 100%;
+}
+
+button#create-relationship-btn {
+	margin-top: 5px;
+	width: 100%;
+}
+
+button#cancel-relationship-create {
+	margin-top: 5px;
+	width: 100%;
+}
+
+#relationship-clarification-well {
+	margin-top: 150px;
+}
+
+.relationship-marker {
+	position: absolute;
+	z-index: 5;
+	margin-top: -100px;
+	margin-left: -5px;
+}
+
+#relation-dropdown {
+	position: absolute;
+	z-index: 10;
+	width: 160px;
+	margin-left: 74px;
+	margin-top: 40px;
+}
+
+.node-view-image {
+	width: 100%;
+	border-radius: 5px;
+}
+
+.no-node-placeholder {
+	height: 100%;
+	background-color: #e8e8e8;
+	color: black;
+}
+
+.no-node-placeholder-text {
+	.center-block();
+}
