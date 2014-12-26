@@ -1,9 +1,15 @@
 BT.Models.Track = Backbone.Model.extend({
 	initialize: function () {
 		this.sampled_tracks = new BT.Collections.Tracks;
-		this.sampled_by_tracks = new BT.Collections.Tracks;
+		this.sampling_tracks = new BT.Collections.Tracks;
+		this.covered_tracks = new BT.Collections.Tracks;
+		this.covering_tracks = new BT.Collections.Tracks;
+		this.remixed_tracks = new BT.Collections.Tracks;
+		this.remixing_tracks = new BT.Collections.Tracks;
 	},
+	
 	urlRoot: "api/tracks",
+	
 	parse: function (respJSON) {
 		if (respJSON.sampled_tracks) {
 			var st = [];
@@ -11,7 +17,6 @@ BT.Models.Track = Backbone.Model.extend({
 				var model = new BT.Models.Track(track);
 				st.push(model);
 			});
-			debugger
 			this.sampled_tracks.set(st);
 			delete respJSON.sampled_tracks;
 		}
@@ -21,7 +26,7 @@ BT.Models.Track = Backbone.Model.extend({
 				var model = new BT.Models.Track(track);
 				st.push(model);
 			});
-			this.sampled_by_tracks.set(st);
+			this.sampling_tracks.set(st);
 			delete respJSON.sampled_by;
 		}
 		if (respJSON.track) {
