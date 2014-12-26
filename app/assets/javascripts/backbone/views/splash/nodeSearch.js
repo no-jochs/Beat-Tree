@@ -1,7 +1,5 @@
 BT.Views.nodeSearch = Backbone.CompositeView.extend({
-	initialize: function () {
-		
-	},
+	initialize: function () {},
 	template: JST['backbone/templates/search/track'],
 	className: 'search',
 	events: {
@@ -40,7 +38,8 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		"mouseenter": "highlightItem",
 		"mouseleave": "deHighlightItem",
 		"click #db-check-btn": "trackCheck",
-		"click #add-to-db": "addToDB"
+		"click #add-to-db": "addToDB",
+		"click #use-existing-track": "useExistingTrack"
 	},
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -58,14 +57,13 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	trackCheck: function () {
 		var id = this.model.get('track_spotify_id');
 		var createAddButton = function () {
-			debugger
 			var btn = this.$el.find('#db-check-btn');
-			btn.replaceWith('<button type="button" id="add-to-db" class="btn btn-success">Add Node</button>');
+			btn.replaceWith('<button type="button" id="add-to-db" class="btn btn-warning">Add Node</button>');
 		}
 		var alreadyCreated = function () {
-			debugger
+			this.model.set({ id: this.model.get('track_spotify_id')});
 			var btn = this.$el.find('#db-check-btn');
-			btn.replaceWith('<span>Node Already Exists</span>');
+			btn.replaceWith('<button type="button" id="use-existing-track" class="btn btn-success">Go</button>');
 		}
 		var that = this;
 		$.ajax({
@@ -79,14 +77,19 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		});
 	},
 	addToDB: function () {
+		var that = this;
 		this.model.save({},{
 			success: function (model, response, options) {
-				debugger
-				Backbone.history.navigate('tracks/' + model.id, { trigger: true });
+				var btn = that.$el.find('#add-to-db');
+				btn.replaceWith('<button type="button" id="use-existing-track" class="btn btn-success">Go</button>');
 			},
-			error: function () {
-				alert("Something went wrong with the request");
+			error: function (model, response, options) {
+				alert("Something went wrong with the request.  Please refresh the page and try your search again.");
 			}
 		});	
+	},
+	useExistingTrack: function () {
+		Backbone.history.navigate("tracks/" + this.model.get('track_spotify_id'), { trigger: true });
 	}
+	
 });
