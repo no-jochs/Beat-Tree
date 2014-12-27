@@ -42,13 +42,14 @@ BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
-		this.addNodes(this.model.sampling_tracks)
+		this.addNodes(this.model.sampling_tracks);
+		this.attachSubviews();
 		return this;
 	},
 	
 	addNodes: function (collection) {
 		this.removeSubviews();
-		$('#child-node-container').empty();
+		this.$el.find('#child-node-container').empty();
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
@@ -92,6 +93,7 @@ BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
 BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 	initialize: function () {
 		this.listenTo(this.model, "sync", this.render);
+		this.listenTo(this.model.sampled_tracks, "sync", this.render);
 	},
 	
 	events: {
@@ -104,13 +106,14 @@ BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
-		this.addNodes(this.model.sampled_tracks)
+		this.addNodes(this.model.sampled_tracks);
+		this.attachSubviews();
 		return this;
 	},
 	
 	addNodes: function (collection) {
 		this.removeSubviews();
-		$('#parent-node-container').empty();
+		this.$el.find('#parent-node-container').empty();
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
@@ -168,7 +171,9 @@ BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 });
 
 BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
-	initialize: function () {},
+	initialize: function () {
+		this.listenTo(this.model, 'sync', this.render);
+	},
 	
 	template: JST['backbone/templates/track/nodeView'],
 	
@@ -257,7 +262,6 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 					this.childModel = model;
 					$('#create-relationship-button').html('Created!');
 					$('#cancel-relationship-create').html('Dismiss');
-					debugger
 				}
 			});
 		}
