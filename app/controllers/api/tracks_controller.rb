@@ -41,9 +41,19 @@ class Api::TracksController < ApplicationController
           associatedID = tauParams[:new_samples]
           associatedTrack = Track.find_by_spotify_id(associatedID)
           @track.samples << associatedTrack
-          render json: [@track, associatedTrack], status: :expectation_failed
+          render "api/tracks/show", status: :ok
+        elsif tauParams[:new_covers]
+          associatedID = tauParams[:new_covers]
+          associatedTrack = Track.find_by_spotify_id(associatedID)
+          @track.covers << associatedTrack
+          render "api/tracks/show", status: :ok
+        elsif tauParams[:new_remixes]
+          associatedID = tauParams[:new_remixes]
+          associatedTrack = Track.find_by_spotify_id(associatedID)
+          @track.remixes << associatedTrack
+          render "api/tracks/show", status: :ok
         else
-          render json: @track, status: :expectation_failed
+          render json: ['There was an error with your parameters'], status: :bad_request
         end
       else
         render json: @track, status: :ok
