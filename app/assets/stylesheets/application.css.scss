@@ -10,8 +10,8 @@
 	height: 200px;
 }
 
-.container{
-	max-width: 90%;
+.container {
+	min-width: 1600px;
 }
 
 .rotate {
@@ -80,8 +80,4 @@ button#cancel-relationship-create {
 	height: 100%;
 	background-color: #e8e8e8;
 	color: black;
-}
-
-.no-node-placeholder-text {
-	.center-block();
 }
