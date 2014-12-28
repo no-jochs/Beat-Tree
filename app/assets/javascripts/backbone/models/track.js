@@ -29,6 +29,42 @@ BT.Models.Track = Backbone.Model.extend({
 			this.sampling_tracks.set(st);
 			delete respJSON.sampled_by;
 		}
+		if (respJSON.remixed_tracks) {
+			var st = [];
+			_(respJSON.remixed_tracks).each( function (track) {
+				var model = new BT.Models.Track(track);
+				st.push(model);
+			});
+			this.remixed_tracks.set(st);
+			delete respJSON.remixed_tracks;
+		}
+		if (respJSON.remixed_by) {
+			var st = [];
+			_(respJSON.remixed_by).each( function (track) {
+				var model = new BT.Models.Track(track);
+				st.push(model);
+			});
+			this.remixing_tracks.set(st);
+			delete respJSON.remixed_by;
+		}
+		if (respJSON.covered_tracks) {
+			var st = [];
+			_(respJSON.covered_tracks).each( function (track) {
+				var model = new BT.Models.Track(track);
+				st.push(model);
+			});
+			this.covered_tracks.set(st);
+			delete respJSON.covered_tracks;
+		}
+		if (respJSON.covered_by) {
+			var st = [];
+			_(respJSON.covered_by).each( function (track) {
+				var model = new BT.Models.Track(track);
+				st.push(model);
+			});
+			this.covering_tracks.set(st);
+			delete respJSON.covered_by;
+		}
 		if (respJSON.track) {
 			delete respJSON.track;
 		}
