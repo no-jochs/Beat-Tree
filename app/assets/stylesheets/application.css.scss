@@ -4,17 +4,24 @@
 // FOOTER
 
 nav.navbar-fixed-bottom {
-	height: 90px;
+	height: 84px;
 	
 }
 
 .track-queue-container iframe {
-
+	float:left;
 }
 
 .track-queue-item-container {
 	float: left;
 	display: inline-block;
+}
+
+button.track-queue-delete {
+	float: right;
+	height: 80px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 // SEARCH FIELD
