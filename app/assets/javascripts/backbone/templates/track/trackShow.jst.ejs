@@ -1,0 +1,110 @@
+<div class="row">
+	<div class="col-xs-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Current Track</h3>
+		  </div>
+		  <div class="panel-body">
+  		    <div class="row">
+				<div class="col-xs-4">
+					<img class="current-track-album-show" src="<%= track.get('album_m_image') %>">
+				</div>
+				<div class="col-xs-8">
+					<dl class="dl-horizontal">
+					  <h4>
+					  <dt>Track Title:</dt>
+					  <dd><%= track.escape('track_name') %></dd>
+					  <dt>Artist Name:</dt>
+					  <dd><%= track.escape('artist_name') %></dd>
+  					  </h4>
+					  <dt>Album Name:</dt>
+					  <dd><%= track.escape('album_name') %></dd>
+					  <dt>Length:</dt>
+					  <dd><%= track.escape('track_duration_ms') %> ms</dd>
+					  <dt>Spotify URI:</dt>
+					  <dd><%= track.escape('track_spotify_uri') %></dd>
+					  <hr>
+					  <dt>Follow Artist on Spotify:</dt>
+					  <dd>
+					  	<iframe src="https://embed.spotify.com/follow/1/?uri=spotify:artist:<%= track.get('artist_spotify_id') %>&size=basic&theme=light" width="200" height="25" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+					  </dd>
+					  <dt>Add Track to Player:</dt>
+					  <dd>
+					  	<button class="btn btn-default add-track-to-player" type="button">
+					  		<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+							Add Track to Player
+					  	</button>
+					  </dd>
+					</dl>
+				</div>
+  			</div>
+		  </div>
+		</div>
+	</div>
+	<div class="col-xs-4">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Graphical Views</h3>
+		  </div>
+		  <div class="panel-body">
+			<div class="media">
+			  <a class="media-left" href="">
+			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
+			  </a>
+			  <div class="media-body">
+			    <h4 class="media-heading">Predecessors & Progeny</h4>
+			    A graph of the track itself, along with its immediate predecessors and immediate progeny.
+			  </div>
+			</div>
+			<div class="media">
+			  <a class="media-left" href="">
+			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
+			  </a>
+			  <div class="media-body">
+			    <h4 class="media-heading">The Neighborhood</h4>
+			    A graph of this track, its immediate predecessors and progeny, and their immediate predecessors and progeny.
+			  </div>
+			</div>
+			<div class="media">
+			  <a class="media-left" href="">
+			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
+			  </a>
+			  <div class="media-body">
+			    <h4 class="media-heading">The Inspiration</h4>
+			    A graph showing the current track, its predecessors, and the shortest path from each predecessor to an origin (track that has no predecessor). 
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Connections</h3>
+  </div>
+  <div class="panel-body" id="node-view-container">
+	  <div class="row">
+		  <div class="col-xs-5" id="connections-predecessors-container">
+		  </div>
+		  <div class="col-xs-2" id="connections-current-track-container">
+			  <h3 class="text-center">
+				  <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Current Track
+			  </h3>
+			  <img src="https://s3-us-west-1.amazonaws.com/beat-tree-images/artist-nodes.png">
+			  <div class="current-track-node-image">
+				  <img class="current-track-node-image" src="<%= track.escape('album_m_image') %>">
+			  </div>
+			  <div class="current-track-node-info">
+				  <center>
+				  <h5><%= BT.Utils.SliceText(track.escape('track_name'), 45) %></h5>
+				  <%= BT.Utils.SliceText(track.escape('artist_name'), 55) %>
+				  </center>
+			  </div>
+			  <img class="rotate" src="https://s3-us-west-1.amazonaws.com/beat-tree-images/artist-nodes.png">
+		  </div>
+		  <div class="col-xs-5" id="connections-progeny-container">
+		  </div>
+	  </div>
+  </div>
+</div>

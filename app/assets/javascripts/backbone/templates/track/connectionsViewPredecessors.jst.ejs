@@ -1,0 +1,49 @@
+<h3 class="text-center"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Predecessors</h3>
+	<ul class="nav nav-pills">
+		<li role="presentation" class="active filter-options" data-option="1">
+			<a>
+				Sampled
+	    		<span class="badge"><%= track.sampled_tracks.length %></span>
+			</a>
+		</li>
+		<li role="presentation" class="filter-options" data-option="2">
+			<a>
+				Covered
+	    		<span class="badge"><%= track.covered_tracks.length %></span>
+			</a>
+		</li>
+		<li role="presentation" class="filter-options" data-option="3">
+			<a>
+				Remixed
+	    		<span class="badge"><%= track.remixed_tracks.length %></span>
+			</a>
+		</li>
+		<li role="presentation" class="add-predecessor-node" data-toggle="modal" data-target=".select-predecessor-node-lg">
+			<a href="#">
+				Add Predecessor Node
+	    		<span class="glyphicon glyphicon-plus-sign"></span>
+			</a>
+		</li>
+	</ul>
+<div class="panel panel-default">
+	<div class="panel-body" id="nodes-container">
+	</div>
+</div>
+
+<!-- Markup Below is for Modals which allow for addition of Predecessor Nodes -->
+
+<div class="modal fade select-predecessor-node-lg" tabindex="-1" role="dialog" aria-labelledby="parent-node-modal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+		  <h3>Add a Predecessor</h3>
+	  </div>
+	  <div class="modal-body" id="predecessor-node-search-container">
+	  </div>
+	  <div class="modal-body" id="predecessor-node-confirm-container">
+	  </div>
+	  <div class="modal-body" id="predecessor-node-relationship-container">
+	  </div>
+    </div>
+  </div>
+</div>

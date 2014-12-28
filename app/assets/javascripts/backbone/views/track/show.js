@@ -3,41 +3,50 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		this.listenTo(this.model, 'sync', this.render);
 	},
 	
-	template: JST['backbone/templates/track/show'],
+	events: {
+		"click button.add-track-to-player": "swapTrack"
+	},
+	
+	template: JST['backbone/templates/track/trackShow'],
 	
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent)
-		this.addParentView();
-		this.addChildView();
+		this.addPredecessorsView();
+		this.addProgenyView();
 		return this;
 	},
 	
-	addParentView: function () {
-		var parentsView = new BT.Views.TrackShowParentView({
+	addPredecessorsView: function () {
+		var predecessorView = new BT.Views.ConnectionsPredecessorsView({
 			model: this.model
 		});
-		this.addSubview('#parents-view-container', parentsView);
+		this.addSubview('#connections-predecessors-container', predecessorView);
 	},
 	
-	addChildView: function () {
-		var childrenView = new BT.Views.TrackShowChildView({
+	addProgenyView: function () {
+		var progenyView = new BT.Views.ConnectionsProgenyView({
 			model: this.model
 		});
-		this.addSubview('#children-view-container', childrenView);
+		this.addSubview('#connections-progeny-container', progenyView);
+	},
+	
+	swapTrack: function (event) {
+		BT.Utils.changePlayerTrack(this.model.get('track_spotify_id'));
 	}
 });
 
-BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
+BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 	initialize: function () {
 		this.listenTo(this.model, "sync", this.render);
 	},
 	
 	events: {
-		"click li.filter-options": "filterNodeView"
+		"click li.filter-options": "filterNodeView",
+		"click li.add-progeny-node": "addSearchView"
 	},
 	
-	template: JST['backbone/templates/track/children'],
+	template: JST['backbone/templates/track/connectionsViewProgeny'],
 	
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -49,17 +58,17 @@ BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
 	
 	addNodes: function (collection) {
 		this.removeSubviews();
-		this.$el.find('#child-node-container').empty();
+		this.$el.find('#nodes-container').empty();
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
 				var nodeView = new BT.Views.TrackShowNodeView({
 					model: track
 				});
-				that.addSubview('#child-node-container', nodeView);
+				that.addSubview('#nodes-container', nodeView);
 			});
 		} else {
-			$('#child-node-container').html(
+			this.$el.find('#nodes-container').html(
 				'<div class="no-node-placeholder">' +
 					'<h3 class="text-center no-node-placeholder-text">' +
 						'No Nodes To Show' +
@@ -72,7 +81,7 @@ BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
 	filterNodeView: function (event) {
 		event.preventDefault();
 		var option = $(event.currentTarget).data('option');
-		this.$el.find('li.filter-options').removeClass('active')
+		this.$el.find('li.filter-options.active').removeClass('active')
 		$(event.currentTarget).addClass('active');
 		switch (option) {
 			case 1:
@@ -85,23 +94,42 @@ BT.Views.TrackShowChildView = Backbone.CompositeView.extend({
 				this.addNodes(this.model.remixing_tracks);
 				break;
 			}
-	}
+	},
+	
+	addSearchView: function (event) {
+		event.preventDefault();
+		$('#progeny-node-search-container').empty();
+		$('#progeny-node-confirm-container').empty();
+		$('#progeny-node-relationship-container').empty();
+		var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
+		this.addSubview('#progeny-node-search-container', searchView);
+	},
+	
+	addConfirmationView: function (model) {
+		var searchView = this.subviews('#progeny-node-search-container')[0];
+		this.removeSubview('#progeny-node-search-container', searchView);
+		var confirmView = new BT.Views.nodeConfirmView({
+			childModel: model,
+			parentModel: this.model
+		});
+		this.addSubview('#progeny-node-confirm-container', confirmView);
+	},
 
 });
 
 
-BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
+BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 	initialize: function () {
-		this.listenTo(this.model, "sync", this.render);
-		this.listenTo(this.model.sampled_tracks, "sync", this.render);
+		this.listenTo(this.model, "sync change", this.render);
+		this.listenTo(this.model.sampled_tracks, "add remove", this.render);
 	},
 	
 	events: {
 		"click li.filter-options": "filterNodeView",
-		"click button.add-parent-node-btn": "addSearchView"
+		"click li.add-predecessor-node": "addSearchView"
 	},
 	
-	template: JST['backbone/templates/track/parents'],
+	template: JST['backbone/templates/track/connectionsViewPredecessors'],
 	
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -113,17 +141,17 @@ BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 	
 	addNodes: function (collection) {
 		this.removeSubviews();
-		this.$el.find('#parent-node-container').empty();
+		this.$el.find('#nodes-container').empty();
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
 				var nodeView = new BT.Views.TrackShowNodeView({
 					model: track
 				});
-				that.addSubview('#parent-node-container', nodeView);
+				that.addSubview('#nodes-container', nodeView);
 			});
 		} else {
-			$('#parent-node-container').html(
+			this.$el.find('#nodes-container').html(
 				'<div class="no-node-placeholder">' +
 					'<h3 class="text-center no-node-placeholder-text">' +
 						'No Nodes To Show' +
@@ -135,7 +163,7 @@ BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 	filterNodeView: function (event) {
 		event.preventDefault();
 		var option = $(event.currentTarget).data('option');
-		this.$el.find('li.filter-options').removeClass('active')
+		this.$el.find('li.filter-options.active').removeClass('active')
 		$(event.currentTarget).addClass('active');
 		switch (option) {
 			case 1:
@@ -151,21 +179,22 @@ BT.Views.TrackShowParentView = Backbone.CompositeView.extend({
 	},
 	
 	addSearchView: function (event) {
-		$('#parent-node-search-container').empty();
-		$('#parent-node-confirm-container').empty();
-		$('#parent-node-relationship-container').empty();
+		event.preventDefault();
+		$('#predecessor-node-search-container').empty();
+		$('#predecessor-node-confirm-container').empty();
+		$('#predecessor-node-relationship-container').empty();
 		var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
-		this.addSubview('#parent-node-search-container', searchView);
+		this.addSubview('#predecessor-node-search-container', searchView);
 	},
 	
 	addConfirmationView: function (model) {
-		var searchView = this.subviews('#parent-node-search-container')[0];
-		this.removeSubview('#parent-node-search-container', searchView);
+		var searchView = this.subviews('#predecessor-node-search-container')[0];
+		this.removeSubview('#predecessor-node-search-container', searchView);
 		var confirmView = new BT.Views.nodeConfirmView({
 			childModel: this.model,
 			parentModel: model
 		});
-		this.addSubview('#parent-node-confirm-container', confirmView);
+		this.addSubview('#predecessor-node-confirm-container', confirmView);
 	},
 	
 });
@@ -175,14 +204,24 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 		this.listenTo(this.model, 'sync', this.render);
 	},
 	
-	template: JST['backbone/templates/track/nodeView'],
+	events: {
+		"click button.add-node-to-player": "swapTrack"
+	},
+	
+	template: JST['backbone/templates/track/largeNodeView'],
 	
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
 		return this;
+	},
+	
+	swapTrack: function (event) {
+		BT.Utils.changePlayerTrack(this.model.get('track_spotify_id'));
 	}
 });
+
+//The following views are for the add node modal
 
 BT.Views.trackShowSpotSearch = BT.Views.nodeSearch.extend({
 	initialize: function (options) {
@@ -257,9 +296,11 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 				console.log("Tampering with server requests in not a nice thing to do.");
 		}
 		if (proceed) {
+			var that = this;
 			this.childModel.save({},{
 				success: function (model, response, options) {
-					this.childModel = model;
+					that.childModel.fetch();
+					that.parentModel.fetch();
 					$('#create-relationship-button').html('Created!');
 					$('#cancel-relationship-create').html('Dismiss');
 				}

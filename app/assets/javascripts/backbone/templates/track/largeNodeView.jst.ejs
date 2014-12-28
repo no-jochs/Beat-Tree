@@ -1,0 +1,27 @@
+<div class="media">
+	<div class="row">
+		<div class="col-xs-2">
+		  <a class="media-left" href="#tracks/<%= track.escape('track_spotify_id') %>">
+		    <img src="<%= track.escape('album_s_image') %>" alt="albart">
+		  </a>
+	  </div>
+	  <div class="col-xs-7">
+		  <div class="media-body">
+		    <h5 class="media-heading"><%= BT.Utils.SliceText(track.escape('track_name'), 45) %></h5>
+		    Artist: <%= BT.Utils.SliceText(track.escape('artist_name'), 65) %>
+		  </div>
+	  </div>
+	  <div class=col-xs-3>
+		  <div class="media-right node-button-options">
+			  <button type="button" class="btn btn-primary btn-small add-node-to-player">
+				  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+			  </button>
+		  </div>
+		  <div class="media-right node-button-options">
+			  <button type="button" class="btn btn-info btn-small">
+				  <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+			  </button>
+		  </div>
+	  </div>
+	</div>
+</div>

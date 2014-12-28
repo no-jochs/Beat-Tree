@@ -39,7 +39,8 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		"mouseleave": "deHighlightItem",
 		"click #db-check-btn": "trackCheck",
 		"click #add-to-db": "addToDB",
-		"click #use-existing-track": "useExistingTrack"
+		"click #use-existing-track": "useExistingTrack",
+		"click #spot-preview-play": "swapTrack"
 	},
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
@@ -81,6 +82,7 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		this.model.save({},{
 			success: function (model, response, options) {
 				var btn = that.$el.find('#add-to-db');
+				that.model.set('id', that.model.get('track_spotify_id'));
 				btn.replaceWith('<button type="button" id="use-existing-track" class="btn btn-success">Go</button>');
 			},
 			error: function (model, response, options) {
@@ -90,6 +92,11 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 	},
 	useExistingTrack: function () {
 		Backbone.history.navigate("tracks/" + this.model.get('track_spotify_id'), { trigger: true });
+	},
+	
+	swapTrack: function (event) {
+		event.preventDefault();
+		BT.Utils.changePlayerTrack(this.model.get('track_spotify_id'));
 	}
 	
 });

@@ -1,0 +1,51 @@
+<h3 class="text-center">Progeny <span class="glyphicon glyphicon-forward" aria-hidden="true"></span></h3>
+	<ul class="nav nav-pills">
+		<li role="presentation" class="active filter-options" data-option="1">	      
+		  <a href="#">
+			  Sampling
+			  <span class="badge">
+				  <%= track.sampling_tracks.length %>
+			  </span>
+		  </a>
+		</li>
+		<li role="presentation" class="filter-options" data-option="2">
+			<a href="#">
+				Covering
+	    		<span class="badge"><%= track.covering_tracks.length %></span>
+			</a>
+		</li>
+		<li role="presentation" class="filter-options" data-option="3">
+			<a href="#">
+				Remixing
+	    		<span class="badge"><%= track.remixing_tracks.length %></span>
+			</a>
+		</li>
+		<li role="presentation" class="add-progeny-node" data-toggle="modal" data-target=".select-progeny-node-lg">
+			<a href="#">
+				Add Progeny Node
+	    		<span class="glyphicon glyphicon-plus-sign"></span>
+			</a>
+		</li>
+	</ul>
+<div class="panel panel-default">
+	<div class="panel-body" id="nodes-container">
+	</div>
+</div>
+
+<!-- Markup Below is for Modals which allow for addition of Predecessor Nodes -->
+
+<div class="modal fade select-progeny-node-lg" tabindex="-1" role="dialog" aria-labelledby="progeny-node-modal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+		  <h3>Add a Progeny</h3>
+	  </div>
+	  <div class="modal-body" id="progeny-node-search-container">
+	  </div>
+	  <div class="modal-body" id="progeny-node-confirm-container">
+	  </div>
+	  <div class="modal-body" id="progeny-node-relationship-container">
+	  </div>
+    </div>
+  </div>
+</div>
