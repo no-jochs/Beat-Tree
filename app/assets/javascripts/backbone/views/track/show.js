@@ -38,7 +38,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 
 BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 	initialize: function () {
-		this.listenTo(this.model, "sync", this.render);
+		this.listenTo(this.model, "sync change", this.render);
 	},
 	
 	events: {
@@ -227,27 +227,41 @@ BT.Views.trackShowSpotSearch = BT.Views.nodeSearch.extend({
 	initialize: function (options) {
 		this.parentModel = options.parentModel;
 	},
-	populateResults: function (data) {
-		this.removeSubviews();
+	
+	populateSpotResults: function (data) {
 		var that = this;
 		_(data.tracks.items).each( function (track) {
 			var trackModel = BT.Utils.ParseTrack(track);
-			var resultView = new BT.Views.trackShowSpotSearchResult({
+			var resultView = new BT.Views.TrackShowSpotSearchResult({ 
 				model: trackModel,
 				parentModel: that.parentModel
 			});
-			that.addSubview('#spotify-search-results', resultView);
+			that.addSubview('#spot-search-results', resultView);
+		});
+	},
+
+	populateBTResults: function (data) {
+		var that = this;
+		_(data).each( function(track) {
+			var trackModel = new BT.Models.Track(track.track);
+			var resultView = new BT.Views.TrackShowSpotSearchResult({
+				model: trackModel,
+				parentModel: that.parentModel
+			});
+			that.addSubview("#bt-search-results", resultView);
 		});
 	}
+
 });
 
-BT.Views.trackShowSpotSearchResult = BT.Views.spotSearchResult.extend({
+BT.Views.TrackShowSpotSearchResult = BT.Views.SearchResult.extend({
 	initialize: function (options) {
+		debugger
 		this.parentModel = options.parentModel;
 		this.model = options.model;
 		this.previousView = options.previousView;
 	},
-	useExistingTrack: function () {
+	useExistingTrack: function (event) {
 		this.parentModel.addConfirmationView(this.model);
 	}
 });
@@ -299,8 +313,7 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 			var that = this;
 			this.childModel.save({},{
 				success: function (model, response, options) {
-					that.childModel.fetch();
-					that.parentModel.fetch();
+					that.childModel.set(model.attributes);
 					$('#create-relationship-button').html('Created!');
 					$('#cancel-relationship-create').html('Dismiss');
 				}

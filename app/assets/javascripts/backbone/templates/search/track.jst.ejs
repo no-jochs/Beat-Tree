@@ -1,11 +1,11 @@
 <p>Enter the name of a track and click search...</p>
 <label>Track Name
-	<input type='text' id='spotify-search-field'>
+	<input type='text' id='track-search-field'>
 </label>
-<button type='button' id='spotify-search-go' class='btn btn-primary'>Search</button>
+<button type='button' id='search-go' class='btn btn-primary'>Search</button>
 <hr>
 <h3>Search Results</h3>
-<table class="table table-striped">
+<table class="table table-striped search-results-container">
   <thead>
 	  <tr>
 		  <th>Preview</th>
@@ -15,6 +15,8 @@
 		  <th>Database Check</th>
 	  </tr>
   </thead>
-  <tbody id="spotify-search-results">
+  <tbody id="bt-search-results">
+  </tbody>
+  <tbody id="spot-search-results">
   </tbody>
 </table>

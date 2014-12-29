@@ -1,0 +1,13 @@
+<td>
+	<a href="" id="spot-preview-play">
+		<img class="tiny-spot-album-preview" src="<%= track.get('album_s_image') %>">
+	</a>
+</td>
+<td><%= track.get('track_name') %></td>
+<td><%= track.get('artist_name') %></td>
+<td><%= track.get('album_name') %></td>
+<% if (track.isNew()) { %>
+	<td><button type="button" id="db-check-btn" class="btn btn-small btn-primary">Check Database</button></td>
+<% } else { %>
+	<td><button type="button" id="use-existing-track" class="btn btn-success">In BT Database</button></td>
+<% } %>

@@ -33,9 +33,14 @@ img.tiny-spot-album-preview {
 	border: 1px solid black;
 }
 
-tbody#spotify-search-results td {
+tbody#spot-search-results td {
 	vertical-align: middle;
 }
+
+tbody#bt-search-results td {
+	vertical-align: middle;
+}
+
 
 // TRACK SHOW SPECIFIC
 .current-track-album-show {

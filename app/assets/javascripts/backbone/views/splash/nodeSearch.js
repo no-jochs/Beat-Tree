@@ -3,47 +3,52 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 	template: JST['backbone/templates/search/track'],
 	className: 'search',
 	events: {
-		'click #spotify-search-go': 'doSpotSearch'
+		'click #search-go': 'doSearch'
 	},
 	render: function () {
+		this.attachSubviews();
 		var renderedContent = this.template();
 		this.$el.html(renderedContent);
 		return this;
 	},
-	doSpotSearch: function (event) {
+	doSearch: function (event) {
 		event.preventDefault();
-		var query = $('#spotify-search-field').val();
+		this.removeSubviews();
+		var query = $('#track-search-field').val();
 		var that = this;
 		$.ajax({
 			type: "GET",
 			url: "https://api.spotify.com/v1/search?q=" + query + "&type=track"
-		}).done( function (data) { that.populateResults(data); });
+		}).done( function (data) { that.populateSpotResults(data); });
 		
 		$.ajax({
 			type: "GET",
 			url: "http://localhost:3000/api/tracksearch?q=" + query,
-		});
+		}).done( function (data) { that.populateBTResults(data); });
+		
 	},
-	populateResults: function (data) {
-		this.removeSubviews();
+	populateSpotResults: function (data) {
 		var that = this;
 		_(data.tracks.items).each( function (track) {
 			var trackModel = BT.Utils.ParseTrack(track);
-			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
-			that.addSubview('#spotify-search-results', resultView)
+			var resultView = new BT.Views.SearchResult({ model: trackModel });
+			that.addSubview('#spot-search-results', resultView);
 		});
 	},
-	doBTSearch: function (event) {
-		event.preventDefault();
-		var query = $('#spotify-search-field').val();
-		var that = this;
 
+	populateBTResults: function (data) {
+		var that = this;
+		_(data).each( function(track) {
+			var trackModel = new BT.Models.Track(track.track);
+			var resultView = new BT.Views.SearchResult({ model: trackModel });
+			that.addSubview("#bt-search-results", resultView);
+		});
 	}
 });
 
-BT.Views.spotSearchResult = Backbone.CompositeView.extend({
+BT.Views.SearchResult = Backbone.CompositeView.extend({
 	initialize: function () {},
-	template: JST['backbone/templates/search/spotResult'],
+	template: JST['backbone/templates/search/searchResult'],
 	tagName: 'tr',
 	events: {
 		"mouseenter": "highlightItem",
@@ -54,6 +59,7 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		"click #spot-preview-play": "swapTrack"
 	},
 	render: function () {
+		this.attachSubviews();
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
 		return this;
@@ -102,6 +108,7 @@ BT.Views.spotSearchResult = Backbone.CompositeView.extend({
 		});	
 	},
 	useExistingTrack: function () {
+		debugger
 		Backbone.history.navigate("tracks/" + this.model.get('track_spotify_id'), { trigger: true });
 	},
 	

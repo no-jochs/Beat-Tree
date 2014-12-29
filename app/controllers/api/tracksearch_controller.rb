@@ -1,9 +1,9 @@
 class Api::TracksearchController < ApplicationController
   
   def index
-    searchstring = params[:q]
-    
-    @tracks = Neo4j::Session.query.match(t: :Track).where("t.track_name =~ \"(?i).*#{searchstring}.*\"").pluck(:t)
+    @tracks = Neo4j::Session.query.match(t: :Track).where(
+      "t.track_name =~ \"(?i).*#{query_params[:q]}.*\""
+      ).pluck(:t)
     
     render json: @tracks, status: :ok
   end
@@ -11,9 +11,6 @@ class Api::TracksearchController < ApplicationController
   private
   
   def query_params
-  end
-  
-  def escape(string)
-    string.gsub(/"/,"/'")
+    params.permit(:q)
   end
 end
