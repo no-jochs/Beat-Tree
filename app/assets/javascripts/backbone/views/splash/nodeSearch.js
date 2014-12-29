@@ -3,14 +3,14 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 	template: JST['backbone/templates/search/track'],
 	className: 'search',
 	events: {
-		'click #spotify-search-go': 'doSearch'
+		'click #spotify-search-go': 'doSpotSearch'
 	},
 	render: function () {
 		var renderedContent = this.template();
 		this.$el.html(renderedContent);
 		return this;
 	},
-	doSearch: function (event) {
+	doSpotSearch: function (event) {
 		event.preventDefault();
 		var query = $('#spotify-search-field').val();
 		var that = this;
@@ -18,6 +18,11 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 			type: "GET",
 			url: "https://api.spotify.com/v1/search?q=" + query + "&type=track"
 		}).done( function (data) { that.populateResults(data); });
+		
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/tracksearch?q=" + query,
+		});
 	},
 	populateResults: function (data) {
 		this.removeSubviews();
@@ -27,6 +32,12 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 			var resultView = new BT.Views.spotSearchResult({ model: trackModel });
 			that.addSubview('#spotify-search-results', resultView)
 		});
+	},
+	doBTSearch: function (event) {
+		event.preventDefault();
+		var query = $('#spotify-search-field').val();
+		var that = this;
+
 	}
 });
 
