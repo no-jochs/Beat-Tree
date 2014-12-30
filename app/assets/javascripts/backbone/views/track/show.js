@@ -314,8 +314,7 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 			this.childModel.save({},{
 				success: function (model, response, options) {
 					that.childModel.set(model.attributes);
-					$('#create-relationship-button').html('Created!');
-					$('#cancel-relationship-create').html('Dismiss');
+					$('body').removeClass('modal-open');
 				}
 			});
 		}
