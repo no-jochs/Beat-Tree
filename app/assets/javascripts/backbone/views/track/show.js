@@ -320,5 +320,7 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 		}
 	},
 	
-	cancelRelationship: function (event) {}
+	cancelRelationship: function (event) {
+		$('.modal').modal('hide');
+	}
 })
