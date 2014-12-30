@@ -13,6 +13,7 @@
 //= require ../../../vendor/assets/javascripts/jquery-1.11.2.min.js	
 //= require ../../../vendor/assets/javascripts/underscore.js
 //= require ../../../vendor/assets/javascripts/backbone.js
+//= require ../../../vendor/assets/javascripts/d3.js
 
 //= require bootstrap-sprockets
 
