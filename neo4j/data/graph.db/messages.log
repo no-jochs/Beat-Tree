@@ -2663,3 +2663,10 @@ Storage files: (filename : modification date - size)
 2014-12-31 09:36:51.366+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1003ms.
 2014-12-31 09:39:09.059+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 3064ms.
 2014-12-31 19:10:44.087+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 33539508ms.
+2014-12-31 20:10:20.023+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 101979ms.
+2014-12-31 20:10:24.856+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 627ms.
+2014-12-31 22:01:22.069+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 6368901ms.
+2014-12-31 22:03:20.028+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 68382ms.
+2014-12-31 22:03:22.929+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 1261ms.
+2015-01-01 01:06:46.094+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 469862ms.
+2015-01-01 01:06:49.137+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for 906ms.
