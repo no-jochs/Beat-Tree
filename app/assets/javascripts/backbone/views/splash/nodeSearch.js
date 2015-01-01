@@ -108,7 +108,6 @@ BT.Views.SearchResult = Backbone.CompositeView.extend({
 		});	
 	},
 	useExistingTrack: function () {
-		debugger
 		Backbone.history.navigate("tracks/" + this.model.get('track_spotify_id'), { trigger: true });
 	},
 	

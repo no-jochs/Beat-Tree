@@ -47,10 +47,11 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	},
 	
 	addPredProgData: function (data) {
+		var that = this;
 		
-		var w = 600, h = 400;
+		var w = 1200, h = 800;
 		
-		var parsedData = BT.Utils.ParseNodesAndLinks(data);
+		var parsedData = BT.Utils.ParseNodesAndLinks(data, this.model.id);
 		var nodes = parsedData.nodes, links = parsedData.links;
 		
 		var graph = d3.select('#pred-and-prog-graph-container')
@@ -64,6 +65,12 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 			.gravity(0.1)
 			.charge(-1000)
 			.size([w, h])
+	
+		var link = graph.selectAll('.link')
+				.data(links)
+				.enter().append('line')
+				.attr('class', 'link')
+				.style('stroke', '#000000');
 		
 		var node = graph.selectAll('circle')
 				.data(nodes)
@@ -73,15 +80,14 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		node.append('circle')
 			.attr('cx', function (d) { return d.x })
 			.attr('cy', function (d) { return d.y })
-			.attr('r', 5)
-			.attr('fill', '#D06F78')
-			
-			
-		var link = graph.selectAll('.link')
-				.data(links)
-				.enter().append('line')
-				.attr('class', 'link')
-				.style('stroke', '#000000');
+			.attr('r', 20)
+			.attr('fill', function (d) {
+				if (d.id === that.model.id) {
+					return "#DDFFDD"
+				} else {
+					return "#DFDFDF"
+				}
+			});
 				
 		node.append('text')
 			.text( function(d) { return d.track_name } )
@@ -120,7 +126,7 @@ BT.Views.PredProgGraph = Backbone.CompositeView.extend({
 		
 		var w = 600, h = 400;
 		
-		var parsedData = BT.Utils.ParseNodesAndLinks(this.data);
+		var parsedData = BT.Utils.ParseNodesAndLinks(this.data, this.model.id);
 		var nodes = parsedData.nodes, links = parsedData.links;
 		
 		var graph = d3.select('#pred-and-prog-graph-container')
@@ -140,7 +146,6 @@ BT.Views.PredProgGraph = Backbone.CompositeView.extend({
 				.enter().append('circle')
 				.attr('class', 'node')
 				.attr('r', 5)
-				.style('fill', '#DDDDDD')
 				.call(force.drag);
 			
 		var link = graph.selectAll('.link')
@@ -384,7 +389,6 @@ BT.Views.trackShowSpotSearch = BT.Views.nodeSearch.extend({
 
 BT.Views.TrackShowSpotSearchResult = BT.Views.SearchResult.extend({
 	initialize: function (options) {
-		debugger
 		this.parentModel = options.parentModel;
 		this.model = options.model;
 		this.previousView = options.previousView;

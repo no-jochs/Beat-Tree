@@ -4,7 +4,7 @@
 
 */
 
-BT.Utils.ParseNodesAndLinks = function (data) {
+BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 	
 	var nodeHash = {};
 	var nodeArray = [];
@@ -19,7 +19,6 @@ BT.Utils.ParseNodesAndLinks = function (data) {
 		
 		//If start node has not been added to the nodes array, it adds it
 		//while keeping track of its position in the array.
-		debugger
 		if (nodeHash[startNodeId] === undefined) {
 			nodeHash[startNodeId] = nodeArray.length;
 			nodeArray.push(respObj.startNode.track);
@@ -33,22 +32,52 @@ BT.Utils.ParseNodesAndLinks = function (data) {
 		}
 		
 		//Creates a link if it hasn't been created already.  The linkHash
-		//simply keeps track of wheather or not a link has been created so
-		//no duplicates are created.
+		//also keeps track of the progeny of a particular track as such:
+		// linkHash = {trackID : { samples: [prog1ID, prog2ID, ...], covers: [ ... ], ...} ... }
 		
-		var linkIndx = startNodeId + relType + endNodeId;
-		
-		if (linkHash[linkIndx] === undefined) {
-			linkHash[linkIndx] = true;
+		if (linkHash[startNodeId] === undefined) {
+			linkHash[startNodeId] = {};
+			linkHash[startNodeId][relType] = [endNodeId];
 			linkArray.push({
 				"source": nodeHash[startNodeId],
 				"target": nodeHash[endNodeId],
 				"label": relType
 			});
+		} else if (linkHash[startNodeId][relType] === undefined) {
+			linkHash[startNodeId][relType] = [endNodeId];
+			
+		} else {
+			if (linkHash[startNodeId][relType].indexOf(endNodeId) === -1) {
+				linkHash[startNodeId][relType].push(endNodeId);
+			}
 		}
+		
+		
 	});
+		
+	var progToTag = [];
+	var tagged = [];
+	
+	
+	
+	//Initially populating the array of tracks to tag as progeny
+	_.each(linkHash[trackId], function (trackArr, relType) {
+		progToTag = progToTag.concat(trackArr);
+	}, this)
+	
+	while (progToTag.length > 0) {
+		currentId = progToTag[0];
+		if (tagged.indexOf(currentId) === -1) {
+			_.each(linkHash[currentId], function (trackArr, relType) {
+				progToTag.concat(trackArr);
+			}, this)
+			nodeArray[nodeHash[currentId]]["predecessor"] = true;
+			tagged.push(currentId);
+		}
+		progToTag.shift();
+	}
 	
 	debugger
 	
 	return { nodes: nodeArray, links: linkArray };
-}
+};

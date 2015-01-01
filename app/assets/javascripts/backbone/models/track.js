@@ -5,7 +5,7 @@ BT.Models.Track = Backbone.Model.extend({
 		this.covered_tracks = new BT.Collections.Tracks;
 		this.covering_tracks = new BT.Collections.Tracks;
 		this.remixed_tracks = new BT.Collections.Tracks;
-		this.remixing_tracks = new BT.Collections.Tracks;
+		this.remixing_tracks =  new BT.Collections.Tracks;
 	},
 	
 	urlRoot: "api/tracks",
