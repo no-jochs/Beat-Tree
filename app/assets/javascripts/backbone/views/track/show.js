@@ -4,7 +4,8 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	},
 	
 	events: {
-		"click button.add-track-to-player": "swapTrack"
+		"click button.add-track-to-player": "swapTrack",
+		"click .pred-and-prog-btn": "graphPredProg"
 	},
 	
 	template: JST['backbone/templates/track/trackShow'],
@@ -33,6 +34,133 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	
 	swapTrack: function (event) {
 		BT.Utils.changePlayerTrack(this.model.get('track_spotify_id'));
+	},
+	
+	graphPredProg: function (event) {
+		var that = this;
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/neojson?query_type=predandprog&node_id=" + that.model.get('track_spotify_id'),
+		}).done( function (jsonResp) {
+			that.addPredProgData(jsonResp);
+		});
+	},
+	
+	addPredProgData: function (data) {
+		
+		var w = 600, h = 400;
+		
+		var parsedData = BT.Utils.ParseNodesAndLinks(data);
+		var nodes = parsedData.nodes, links = parsedData.links;
+		
+		var graph = d3.select('#pred-and-prog-graph-container')
+			.append('svg')
+			.attr('width', w)
+			.attr('height', h)
+		
+		var force = d3.layout.force()
+			.nodes(nodes)
+			.links(links)
+			.gravity(0.1)
+			.charge(-1000)
+			.size([w, h])
+		
+		var node = graph.selectAll('circle')
+				.data(nodes)
+				.enter().append('g')
+				.call(force.drag);
+				
+		node.append('circle')
+			.attr('cx', function (d) { return d.x })
+			.attr('cy', function (d) { return d.y })
+			.attr('r', 5)
+			.attr('fill', '#D06F78')
+			
+			
+		var link = graph.selectAll('.link')
+				.data(links)
+				.enter().append('line')
+				.attr('class', 'link')
+				.style('stroke', '#000000');
+				
+		node.append('text')
+			.text( function(d) { return d.track_name } )
+			.attr('fill', '#000000')
+			.attr('x', 5)
+			.attr('y', -10)
+			.attr('text-anchor', 'end')
+			.attr('font-size', '1em')
+				
+	    force.on("tick", function() {
+	      link.attr("x1", function(d) { return d.source.x; })
+	          .attr("y1", function(d) { return d.source.y; })
+	          .attr("x2", function(d) { return d.target.x; })
+	          .attr("y2", function(d) { return d.target.y; });
+
+			  node.attr("transform", function(d, i) {
+				  return 'translate(' + d.x + ', ' + d.y + ')';
+			  });
+	    });
+		
+		force.start();
+		
+	}
+});
+
+BT.Views.PredProgGraph = Backbone.CompositeView.extend({
+	initialize: function (options) {
+		this.data = options.data;
+	},
+	
+	template: JST['backbone/templates/graph/predandprog'],
+	
+	render: function () {
+		var renderedContent = this.template();
+		this.$el.html(renderedContent);
+		
+		var w = 600, h = 400;
+		
+		var parsedData = BT.Utils.ParseNodesAndLinks(this.data);
+		var nodes = parsedData.nodes, links = parsedData.links;
+		
+		var graph = d3.select('#pred-and-prog-graph-container')
+			.append('svg')
+			.attr('width', w)
+			.attr('height', h)
+		
+		var force = d3.layout.force()
+			.nodes(nodes)
+			.links(links)
+			.gravity(0.1)
+			.charge(-1000)
+			.size([w, h])
+		
+		var node = graph.selectAll('.node')
+				.data(nodes)
+				.enter().append('circle')
+				.attr('class', 'node')
+				.attr('r', 5)
+				.style('fill', '#DDDDDD')
+				.call(force.drag);
+			
+		var link = graph.selectAll('.link')
+				.data(links)
+				.enter().append('link')
+				.attr('class', 'link')
+				.style('stroke-width', 2);
+				
+	    force.on("tick", function() {
+	      link.attr("x1", function(d) { return d.source.x; })
+	          .attr("y1", function(d) { return d.source.y; })
+	          .attr("x2", function(d) { return d.target.x; })
+	          .attr("y2", function(d) { return d.target.y; });
+
+	      node.attr("cx", function(d) { return d.x; })
+	          .attr("cy", function(d) { return d.y; });
+	    });
+		
+		force.start();
+		
 	}
 });
 
