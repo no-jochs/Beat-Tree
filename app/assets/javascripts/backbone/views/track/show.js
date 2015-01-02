@@ -126,6 +126,9 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var node = graph.selectAll('circle')
 						.data(nodes)
 						.enter().append('g')
+						.attr('track-id', function (d) {
+							return d.track_spotify_id;
+						})
 						.on('dblclick', dblclick)
 						.call(force.drag);
 				
@@ -177,7 +180,17 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		force.start();
 		
 		function dblclick(d) {
-			d3.select(this).classed('fixed', d.fixed = false);
+			var circle = d3.select(this);
+			circle.classed('fixed', d.fixed = false);
+			if (circle.classed('active-portal')) {
+				debugger
+				var trackId = $(circle.node()).attr('track-id');
+				Backbone.history.navigate('#tracks/' + trackId, { trigger: true });
+			}
+			circle.classed('active-portal', true);
+			setTimeout( function () {
+				circle.classed('active-portal', false);
+			}, 1000);
 		}
 		
 		function dragstart(d) {
@@ -474,5 +487,6 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 	
 	cancelRelationship: function (event) {
 		$('.modal').modal('hide');
+		$('body').removeClass('modal-open');
 	}
 })
