@@ -49,33 +49,85 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	addPredProgData: function (data) {
 		var that = this;
 		
-		var w = 1200, h = 800;
+		var w = 890, h = 600;
 		
 		var parsedData = BT.Utils.ParseNodesAndLinks(data, this.model.id);
 		var nodes = parsedData.nodes, links = parsedData.links;
+		var legendData = [
+			{"key": "Predecessors", "color": "#FFDE00"},
+			{"key": "Current Track", "color": "#6599FF"},
+			{"key": "Progeny", "color": "#FF9900"},			
+		];
 		
 		var graph = d3.select('#pred-and-prog-graph-container')
-			.append('svg')
-			.attr('width', w)
-			.attr('height', h)
+					  .append('svg')
+					  .attr('width', w)
+					  .attr('height', h);
+					  
+		var legend = graph.selectAll('.legend')
+					  	  .data(legendData)
+					  	  .enter()
+					      .append('svg:g')
+					  	  .attr('class', 'legend')
+					  	  .attr('transform', function (d, i) {
+							  return 'translate(10, ' + (10 + 20 * i) + ')'
+					  	  })
+						  
+      		  	    legend.append('rect')
+						  .attr('width', 16)
+						  .attr('height', 16)
+						  .style('fill', function (d) {
+							  return d.color;
+						  })
+						  
+					legend.append('text')
+						  .attr('class', 'legend-text')
+						  .text( function (d) {
+							  return d.key;
+						  })
+						  .attr('x', 20)
+						  .attr('y', 15)
+						  
+			
+		graph.append("svg:defs").selectAll("marker")
+							    .data(["arrow"])
+								.enter().append("svg:marker")
+							    .attr("id", String)
+							    .attr("viewBox", "0 -5 10 10")
+							    .attr("refX", 10)
+							    .attr("refY", 0)
+							    .attr("markerWidth", 10)
+							    .attr("markerHeight", 10)
+							    .attr("orient", "auto")
+							    .append("svg:path")
+							    .attr("d", "M-1 -2L4 0L-1 2");
+								
 		
 		var force = d3.layout.force()
-			.nodes(nodes)
-			.links(links)
-			.gravity(0.1)
-			.charge(-1000)
-			.size([w, h])
+							  .nodes(nodes)
+							  .links(links)
+							  .gravity(0.1)
+							  .charge(-1000)
+							  .size([w, h])
+							  .linkDistance(120);
+		
+	  var drag = force.drag().on('dragstart', dragstart);
 	
 		var link = graph.selectAll('.link')
-				.data(links)
-				.enter().append('line')
-				.attr('class', 'link')
-				.style('stroke', '#000000');
+						.data(links)
+						.enter().append('line')
+						.attr('class', 'link arrow')
+						.attr('marker-end', 'url(#arrow)')
+						.style({
+							'stroke': '#909090',
+							'stroke-width': '3px'
+						})
 		
 		var node = graph.selectAll('circle')
-				.data(nodes)
-				.enter().append('g')
-				.call(force.drag);
+						.data(nodes)
+						.enter().append('g')
+						.on('dblclick', dblclick)
+						.call(force.drag);
 				
 		node.append('circle')
 			.attr('cx', function (d) { return d.x })
@@ -83,19 +135,22 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 			.attr('r', 20)
 			.attr('fill', function (d) {
 				if (d.id === that.model.id) {
-					return "#DDFFDD"
+					return "#6599FF";
+				} else if (d.predecessor != undefined ) {
+					return "#FFDE00";
 				} else {
-					return "#DFDFDF"
+					return "#FF9900";
 				}
-			});
-				
-		node.append('text')
-			.text( function(d) { return d.track_name } )
-			.attr('fill', '#000000')
-			.attr('x', 5)
-			.attr('y', -10)
-			.attr('text-anchor', 'end')
-			.attr('font-size', '1em')
+			}).style({'border': '1px solid black'});
+			
+	   var labels = graph.selectAll('.link-label')
+	   	 			     .data(links)
+	   	 			     .enter()
+	   	 			     .append('svg:text')
+	   	 			     .text( function (d) {
+	   	 			     	 return d.label;
+	   	 			     }).attr('class', 'link-label')
+	   	 			     .attr('text-anchor', 'middle');
 				
 	    force.on("tick", function() {
 	      link.attr("x1", function(d) { return d.source.x; })
@@ -103,68 +158,33 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	          .attr("x2", function(d) { return d.target.x; })
 	          .attr("y2", function(d) { return d.target.y; });
 
-			  node.attr("transform", function(d, i) {
+		  node.attr("transform", function(d, i) {
 				  return 'translate(' + d.x + ', ' + d.y + ')';
 			  });
+			  
+		  labels.attr('transform', function (d) {
+	   		 var dx = (nodes[d.target.index].x - nodes[d.source.index].x),
+	   			 dy = (nodes[d.target.index].y - nodes[d.source.index].y);
+	   			 var dr = Math.sqrt(dx * dx + dy * dy);
+	   			 var offset = (1 - (1 / dr)) / 2;
+	   			 var deg = 180 / Math.PI * Math.atan2(dy, dx);
+	   			 var x = (nodes[d.source.index].x + dx * offset);
+	   			 var y = (nodes[d.source.index].y + dy * offset);
+	   			 return "translate(" + x + ", " + y + ") rotate(" + deg + ")";
+	   	 });
 	    });
 		
 		force.start();
 		
-	}
-});
+		function dblclick(d) {
+			d3.select(this).classed('fixed', d.fixed = false);
+		}
+		
+		function dragstart(d) {
+			d3.select(this).classed('fixed', d.fixed = true);
+		}
+		
 
-BT.Views.PredProgGraph = Backbone.CompositeView.extend({
-	initialize: function (options) {
-		this.data = options.data;
-	},
-	
-	template: JST['backbone/templates/graph/predandprog'],
-	
-	render: function () {
-		var renderedContent = this.template();
-		this.$el.html(renderedContent);
-		
-		var w = 600, h = 400;
-		
-		var parsedData = BT.Utils.ParseNodesAndLinks(this.data, this.model.id);
-		var nodes = parsedData.nodes, links = parsedData.links;
-		
-		var graph = d3.select('#pred-and-prog-graph-container')
-			.append('svg')
-			.attr('width', w)
-			.attr('height', h)
-		
-		var force = d3.layout.force()
-			.nodes(nodes)
-			.links(links)
-			.gravity(0.1)
-			.charge(-1000)
-			.size([w, h])
-		
-		var node = graph.selectAll('.node')
-				.data(nodes)
-				.enter().append('circle')
-				.attr('class', 'node')
-				.attr('r', 5)
-				.call(force.drag);
-			
-		var link = graph.selectAll('.link')
-				.data(links)
-				.enter().append('link')
-				.attr('class', 'link')
-				.style('stroke-width', 2);
-				
-	    force.on("tick", function() {
-	      link.attr("x1", function(d) { return d.source.x; })
-	          .attr("y1", function(d) { return d.source.y; })
-	          .attr("x2", function(d) { return d.target.x; })
-	          .attr("y2", function(d) { return d.target.y; });
-
-	      node.attr("cx", function(d) { return d.x; })
-	          .attr("cy", function(d) { return d.y; });
-	    });
-		
-		force.start();
 		
 	}
 });
