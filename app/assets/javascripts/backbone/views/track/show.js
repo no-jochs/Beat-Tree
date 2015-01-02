@@ -144,7 +144,10 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 				} else {
 					return "#FF9900";
 				}
-			}).style({'border': '1px solid black'});
+			}).style({'border': '1px solid black'})
+			.on('mouseover', showtooltip)
+			.on('mouseleave', hidetooltip);
+
 			
 	   var labels = graph.selectAll('.link-label')
 	   	 			     .data(links)
@@ -154,6 +157,15 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	   	 			     	 return d.label;
 	   	 			     }).attr('class', 'link-label')
 	   	 			     .attr('text-anchor', 'middle');
+						 
+ 		node.append('svg:text')
+ 			.attr('class', 'node-tooltip')
+ 			.style('opacity', 1e-6)
+			.attr('dx', 20)
+			.attr('dy', 5)
+ 			.text(function (d) {
+ 				return "[" + d.artist_name + "] " + d.track_name;
+ 			})
 				
 	    force.on("tick", function() {
 	      link.attr("x1", function(d) { return d.source.x; })
@@ -186,6 +198,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 				debugger
 				var trackId = $(circle.node()).attr('track-id');
 				Backbone.history.navigate('#tracks/' + trackId, { trigger: true });
+				BT.Utils.FreePage();
 			}
 			circle.classed('active-portal', true);
 			setTimeout( function () {
@@ -197,8 +210,22 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 			d3.select(this).classed('fixed', d.fixed = true);
 		}
 		
-
+		function showtooltip (d) {
+			debugger
+			d3.select(this.parentElement)
+			  .select('text')
+			  .transition()
+			  .duration(500)
+			  .style('opacity', 1);
+		}
 		
+		function hidetooltip (d) {
+		d3.select(this.parentElement)
+		  .select('text')
+		  .transition()
+		  .duration(500)
+		  .style('opacity', 1e-6);
+		}
 	}
 });
 
