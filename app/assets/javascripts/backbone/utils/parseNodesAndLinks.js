@@ -44,11 +44,22 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 				"label": relType
 			});
 		} else if (linkHash[startNodeId][relType] === undefined) {
-			linkHash[startNodeId][relType] = [endNodeId];
+			linkHash[startNodeId][relType] = [];
+			linkHash[startNodeId][relType].push(endNodeId);
+			linkArray.push({
+				"source": nodeHash[startNodeId],
+				"target": nodeHash[endNodeId],
+				"label": relType
+			});
 			
 		} else {
 			if (linkHash[startNodeId][relType].indexOf(endNodeId) === -1) {
 				linkHash[startNodeId][relType].push(endNodeId);
+				linkArray.push({
+					"source": nodeHash[startNodeId],
+					"target": nodeHash[endNodeId],
+					"label": relType
+				});
 			}
 		}
 		
@@ -77,7 +88,6 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		progToTag.shift();
 	}
 	
-	debugger
 	
 	return { nodes: nodeArray, links: linkArray };
 };
