@@ -5,7 +5,9 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	
 	events: {
 		"click button.add-track-to-player": "swapTrack",
-		"click .pred-and-prog-btn": "graphPredProg"
+		"click .pred-and-prog-btn": "graphPredProg",
+		"click .origins-btn": "graphOrigins",
+		"click .inspirations-btn": "graphInspirations"
 	},
 	
 	template: JST['backbone/templates/track/trackShow'],
@@ -40,198 +42,58 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "http://localhost:3000/api/neojson?query_type=predandprog&node_id=" + that.model.get('track_spotify_id'),
+			url: "http://localhost:3000/api/neojson?query_type=predandprog&node_id=" + that.model.get('track_spotify_id')
 		}).done( function (jsonResp) {
 			that.addPredProgData(jsonResp);
 		});
 	},
 	
-	addPredProgData: function (data) {
+	graphOrigins: function (event) {
 		var that = this;
-		
-		var w = 890, h = 600;
-		
-		var parsedData = BT.Utils.ParseNodesAndLinks(data, this.model.id);
-		var nodes = parsedData.nodes, links = parsedData.links;
-		var legendData = [
-			{"key": "Predecessors", "color": "#FFDE00"},
-			{"key": "Current Track", "color": "#6599FF"},
-			{"key": "Progeny", "color": "#FF9900"},			
-		];
-		
-		var graph = d3.select('#pred-and-prog-graph-container')
-					  .append('svg')
-					  .attr('width', w)
-					  .attr('height', h);
-					  
-		var legend = graph.selectAll('.legend')
-					  	  .data(legendData)
-					  	  .enter()
-					      .append('svg:g')
-					  	  .attr('class', 'legend')
-					  	  .attr('transform', function (d, i) {
-							  return 'translate(10, ' + (10 + 20 * i) + ')'
-					  	  })
-						  
-      		  	    legend.append('rect')
-						  .attr('width', 16)
-						  .attr('height', 16)
-						  .style('fill', function (d) {
-							  return d.color;
-						  })
-						  
-					legend.append('text')
-						  .attr('class', 'legend-text')
-						  .text( function (d) {
-							  return d.key;
-						  })
-						  .attr('x', 20)
-						  .attr('y', 15)
-						  
-			
-		graph.append("svg:defs").selectAll("marker")
-							    .data(["arrow"])
-								.enter().append("svg:marker")
-							    .attr("id", String)
-							    .attr("viewBox", "0 -5 10 10")
-							    .attr("refX", 10)
-							    .attr("refY", 0)
-							    .attr("markerWidth", 10)
-							    .attr("markerHeight", 10)
-							    .attr("orient", "auto")
-							    .append("svg:path")
-							    .attr("d", "M-1 -2L4 0L-1 2");
-								
-		
-		var force = d3.layout.force()
-							  .nodes(nodes)
-							  .links(links)
-							  .gravity(0.1)
-							  .charge(-1000)
-							  .size([w, h])
-							  .linkDistance(120);
-		
-	  var drag = force.drag().on('dragstart', dragstart);
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/neojson?query_type=origins&node_id=" + that.model.get('track_spotify_id')
+		}).done( function (jsonResp) {
+			that.addOriginsData(jsonResp);
+		});
+	},
 	
-		var link = graph.selectAll('.link')
-						.data(links)
-						.enter().append('line')
-						.attr('class', 'link arrow')
-						.attr('marker-end', 'url(#arrow)')
-						.style({
-							'stroke': '#909090',
-							'stroke-width': '3px'
-						})
+	graphInspirations: function (event) {
+		var that = this;
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/neojson?query_type=inspirations&node_id=" + that.model.get('track_spotify_id')
+		}).done( function (jsonResp) {
+			that.addInspirationsData(jsonResp);
+		});
+	},
+	
+	addPredProgData: function (data) {
+		var title = "Immediate Predecessors & Progeny",
+			info = "Showing tracks derived from the current track, tracks the current track is derived from, and the current track itself.";
 		
-		var node = graph.selectAll('circle')
-						.data(nodes)
-						.enter().append('g')
-						.attr('track-id', function (d) {
-							return d.track_spotify_id;
-						})
-						.on('dblclick', dblclick)
-						.call(force.drag);
-				
-		node.append('circle')
-			.attr('cx', function (d) { return d.x })
-			.attr('cy', function (d) { return d.y })
-			.attr('r', 20)
-			.attr('fill', function (d) {
-				if (d.id === that.model.id) {
-					return "#6599FF";
-				} else if (d.predecessor != undefined ) {
-					return "#FFDE00";
-				} else {
-					return "#FF9900";
-				}
-			}).style({'border': '1px solid black'})
-			.on('mouseover', showtooltip)
-			.on('mouseleave', hidetooltip);
-
-			
-	   var labels = graph.selectAll('.link-label')
-	   	 			     .data(links)
-	   	 			     .enter()
-	   	 			     .append('svg:text')
-	   	 			     .text( function (d) {
-	   	 			     	 return d.label;
-	   	 			     }).attr('class', 'link-label')
-	   	 			     .attr('text-anchor', 'middle');
-						 
- 		node.append('svg:text')
- 			.attr('class', 'node-tooltip')
- 			.style('opacity', 1e-6)
-			.attr('dx', 20)
-			.attr('dy', 5)
- 			.text(function (d) {
- 				return "[" + d.artist_name + "] " + d.track_name;
- 			})
-				
-	    force.on("tick", function() {
-	      link.attr("x1", function(d) { return d.source.x; })
-	          .attr("y1", function(d) { return d.source.y; })
-	          .attr("x2", function(d) { return d.target.x; })
-	          .attr("y2", function(d) { return d.target.y; });
-
-		  node.attr("transform", function(d, i) {
-				  return 'translate(' + d.x + ', ' + d.y + ')';
-			  });
-			  
-		  labels.attr('transform', function (d) {
-	   		 var dx = (nodes[d.target.index].x - nodes[d.source.index].x),
-	   			 dy = (nodes[d.target.index].y - nodes[d.source.index].y);
-	   			 var dr = Math.sqrt(dx * dx + dy * dy);
-	   			 var offset = (1 - (1 / dr)) / 2;
-	   			 var deg = 180 / Math.PI * Math.atan2(dy, dx);
-	   			 var x = (nodes[d.source.index].x + dx * offset);
-	   			 var y = (nodes[d.source.index].y + dy * offset);
-	   			 return "translate(" + x + ", " + y + ") rotate(" + deg + ")";
-	   	 });
-	    });
+		BT.Utils.TrackShowD3(this, data, title, info);
+	},
+	
+	addOriginsData: function (data) {
+		var title = "Track Origins",
+			info = "Showing tracks the current track is derived from, and recursively showing the tracks they are derived from in turn.";
+	
+		BT.Utils.TrackShowD3(this, data, title, info);
+	},
+	
+	addInspirationsData: function (data) {
+		var title = "Track Inspirations",
+		info = "Showing tracks that are inspired by the current track, and then recursively showing derivations of those tracks to the eventual terminus.";
 		
-		force.start();
-		
-		function dblclick(d) {
-			var circle = d3.select(this);
-			circle.classed('fixed', d.fixed = false);
-			if (circle.classed('active-portal')) {
-				debugger
-				var trackId = $(circle.node()).attr('track-id');
-				Backbone.history.navigate('#tracks/' + trackId, { trigger: true });
-				BT.Utils.FreePage();
-			}
-			circle.classed('active-portal', true);
-			setTimeout( function () {
-				circle.classed('active-portal', false);
-			}, 1000);
-		}
-		
-		function dragstart(d) {
-			d3.select(this).classed('fixed', d.fixed = true);
-		}
-		
-		function showtooltip (d) {
-			debugger
-			d3.select(this.parentElement)
-			  .select('text')
-			  .transition()
-			  .duration(500)
-			  .style('opacity', 1);
-		}
-		
-		function hidetooltip (d) {
-		d3.select(this.parentElement)
-		  .select('text')
-		  .transition()
-		  .duration(500)
-		  .style('opacity', 1e-6);
-		}
+		BT.Utils.TrackShowD3(this, data, title, info);
 	}
 });
 
 BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 	initialize: function () {
 		this.listenTo(this.model, "sync change", this.render);
+		this.listenTo(this.model.sampling_tracks, "add remove", this.render);
 	},
 	
 	events: {
@@ -505,15 +367,15 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 			var that = this;
 			this.childModel.save({},{
 				success: function (model, response, options) {
-					that.childModel.set(model.attributes);
-					$('body').removeClass('modal-open');
+					that.childModel.fetch();
+					that.parentModel.fetch();
+					BT.Utils.FreePage();
 				}
 			});
 		}
 	},
 	
 	cancelRelationship: function (event) {
-		$('.modal').modal('hide');
-		$('body').removeClass('modal-open');
+		BT.Utils.FreePage();
 	}
 })
