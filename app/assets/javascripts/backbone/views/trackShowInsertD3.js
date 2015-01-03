@@ -1,16 +1,16 @@
 BT.Utils.TrackShowD3 = function (view, data, title, info) {
-	$('div.track-show-d3').find('.modal-header')
+	$('div.track-show-d3 .modal-header')
 	    .empty()
 		.html(
 			'<h3>' + title + '</h3>' +
 			'<em>' + info + '</em>'
 		);
 		
-	$('div.track-show-d3').find('#track-show-d3-container').empty();
+	$('#track-show-d3-container').empty();
 	
 	var that = view;
 	
-	var w = 890, h = 600;
+	var w = 1140, h = 600;
 	
 	var parsedData = BT.Utils.ParseNodesAndLinks(data, that.model.id);
 	var nodes = parsedData.nodes, links = parsedData.links;
@@ -117,6 +117,7 @@ BT.Utils.TrackShowD3 = function (view, data, title, info) {
    	 			     .text( function (d) {
    	 			     	 return d.label;
    	 			     }).attr('class', 'link-label')
+					 .attr('dy', -3)
    	 			     .attr('text-anchor', 'middle');
 					 
 	node.append('svg:text')
@@ -156,7 +157,6 @@ BT.Utils.TrackShowD3 = function (view, data, title, info) {
 		var circle = d3.select(this);
 		circle.classed('fixed', d.fixed = false);
 		if (circle.classed('active-portal')) {
-			debugger
 			var trackId = $(circle.node()).attr('track-id');
 			Backbone.history.navigate('#tracks/' + trackId, { trigger: true });
 			BT.Utils.FreePage();
@@ -172,7 +172,6 @@ BT.Utils.TrackShowD3 = function (view, data, title, info) {
 	}
 	
 	function showtooltip (d) {
-		debugger
 		d3.select(this.parentElement)
 		  .select('text')
 		  .transition()
