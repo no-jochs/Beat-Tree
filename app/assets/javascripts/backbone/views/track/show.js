@@ -7,7 +7,8 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		"click button.add-track-to-player": "swapTrack",
 		"click .pred-and-prog-btn": "graphPredProg",
 		"click .origins-btn": "graphOrigins",
-		"click .inspirations-btn": "graphInspirations"
+		"click .inspirations-btn": "graphInspirations",
+		"click .subgraph-btn": "graphSubgraph"
 	},
 	
 	template: JST['backbone/templates/track/trackShow'],
@@ -68,6 +69,16 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		});
 	},
 	
+	graphSubgraph: function (event) {
+		var that = this;
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:3000/api/neojson?query_type=subgraph&node_id=" + that.model.get('track_spotify_id')
+		}).done( function (jsonResp) {
+			that.addSubgraphData(jsonResp);
+		});
+	},
+	
 	addPredProgData: function (data) {
 		var title = "Immediate Predecessors & Progeny",
 			info = "Showing tracks derived from the current track, tracks the current track is derived from, and the current track itself.";
@@ -85,6 +96,13 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 	addInspirationsData: function (data) {
 		var title = "Track Inspirations",
 		info = "Showing tracks that are inspired by the current track, and then recursively showing derivations of those tracks to the eventual terminus.";
+		
+		BT.Utils.TrackShowD3(this, data, title, info);
+	},
+	
+	addSubgraphData: function (data) {
+		var title = "Full Subgraph",
+		info = "Showing the current track in relation to its position in its isolated subgraph.";
 		
 		BT.Utils.TrackShowD3(this, data, title, info);
 	}
