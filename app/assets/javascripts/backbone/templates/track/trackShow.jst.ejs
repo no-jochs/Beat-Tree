@@ -48,30 +48,30 @@
 		  </div>
 		  <div class="panel-body">
 			<div class="media">
-			  <a type="button" class="media-left btn pred-and-prog-btn" data-toggle="modal" data-target=".immed-pred-and-prog">
+			  <a type="button" class="media-left btn pred-and-prog-btn" data-toggle="modal" data-target=".track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
 			    <h4 class="media-heading">Predecessors & Progeny</h4>
-			    A graph of the track itself, along with its immediate predecessors and immediate progeny.
+			    Immediate predecessors and immediate progeny.
 			  </div>
 			</div>
 			<div class="media">
-			  <a type="button" class="media-left btn" data-toggle="modal" data-target=".immed-pred-and-prog">
+			  <a type="button" class="media-left btn origins-btn" data-toggle="modal" data-target=".track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
-			    <h4 class="media-heading">The Neighborhood</h4>
-			    A graph of this track, its immediate predecessors and progeny, and their immediate predecessors and progeny.
+			    <h4 class="media-heading">Origins</h4>
+			    Where this track came from - trace back to original material.
 			  </div>
 			</div>
 			<div class="media">
-			  <a type="button" class="media-left btn" data-toggle="modal" data-target=".immed-pred-and-prog">
+			  <a type="button" class="media-left btn inspirations-btn" data-toggle="modal" data-target=".track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
-			    <h4 class="media-heading">The Inspiration</h4>
-			    A graph showing the current track, its predecessors, and the shortest path from each predecessor to an origin (track that has no predecessor). 
+			    <h4 class="media-heading">Inspirations</h4>
+			    Where this track is going - see the progression of other works this track has inspired. 
 			  </div>
 			</div>
 		  </div>
@@ -111,14 +111,13 @@
 
 <!-- GRAPHICAL VIEWS MODALS -->
 
-<div class="modal fade immed-pred-and-prog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade track-show-d3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 		<div class="modal-header">
-			<h3>Immediate Predecessors & Progeny</h3>
 		</div>
 		<div class="modal-body">
-			<div id="pred-and-prog-graph-container">
+			<div id="track-show-d3-container">
 			</div>
 		</div>
     </div>
