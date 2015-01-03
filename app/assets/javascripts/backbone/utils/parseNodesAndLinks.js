@@ -76,7 +76,6 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		progToTag = progToTag.concat(trackArr);
 	}, this)
 	
-	debugger
 	
 	while (progToTag.length > 0) {
 		currentId = progToTag[0];
