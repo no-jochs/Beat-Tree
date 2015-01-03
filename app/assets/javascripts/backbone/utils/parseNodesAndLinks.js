@@ -76,11 +76,13 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		progToTag = progToTag.concat(trackArr);
 	}, this)
 	
+	debugger
+	
 	while (progToTag.length > 0) {
 		currentId = progToTag[0];
 		if (tagged.indexOf(currentId) === -1) {
 			_.each(linkHash[currentId], function (trackArr, relType) {
-				progToTag.concat(trackArr);
+				progToTag = progToTag.concat(trackArr);
 			}, this)
 			nodeArray[nodeHash[currentId]]["predecessor"] = true;
 			tagged.push(currentId);
