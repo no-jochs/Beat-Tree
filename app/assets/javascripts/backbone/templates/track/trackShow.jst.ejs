@@ -48,7 +48,7 @@
 		  </div>
 		  <div class="panel-body">
 			<div class="media">
-			  <a type="button" class="media-left btn pred-and-prog-btn" data-toggle="modal" data-target=".track-show-d3">
+			  <a type="button" class="media-left btn pred-and-prog-btn" data-toggle="modal" data-target=".modal.track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
@@ -57,7 +57,7 @@
 			  </div>
 			</div>
 			<div class="media">
-			  <a type="button" class="media-left btn origins-btn" data-toggle="modal" data-target=".track-show-d3">
+			  <a type="button" class="media-left btn origins-btn" data-toggle="modal" data-target=".modal.track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
@@ -66,12 +66,21 @@
 			  </div>
 			</div>
 			<div class="media">
-			  <a type="button" class="media-left btn inspirations-btn" data-toggle="modal" data-target=".track-show-d3">
+			  <a type="button" class="media-left btn inspirations-btn" data-toggle="modal" data-target=".modal.track-show-d3">
 			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
 				</a>
 			  <div class="media-body">
 			    <h4 class="media-heading">Inspirations</h4>
 			    Where this track is going - see the progression of other works this track has inspired. 
+			  </div>
+			</div>
+			<div class="media">
+			  <a type="button" class="media-left btn subgraph-btn" data-toggle="modal" data-target=".modal.track-show-d3">
+			    <img src="http://baltimorenode.org/wp-content/uploads/2013/11/node-favicon-t.png" alt="...">
+				</a>
+			  <div class="media-body">
+			    <h4 class="media-heading">The Subgraph</h4>
+			    The track in the context of its entire subgraph. 
 			  </div>
 			</div>
 		  </div>
@@ -112,7 +121,7 @@
 <!-- GRAPHICAL VIEWS MODALS -->
 
 <div class="modal fade track-show-d3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg track-show-d3">
     <div class="modal-content">
 		<div class="modal-header">
 		</div>
