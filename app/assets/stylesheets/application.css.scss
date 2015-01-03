@@ -8,10 +8,22 @@
 //LINKS
 
 //LINK LABELS
+.link-label {
+	font-family: 'Exo', sans-serif;
+	font-weight: bold;
+}
 
 //NODE TOOLTIPS
 
 .node-tooltip {
+	font-family: 'Exo', sans-serif;
+	background-color: '#DDDDDD';
+}
+
+//D3 TRACK SHOW VIEWER
+
+div.modal-dialog.track-show-d3 {
+	min-width: 1200px;
 }
 
 // FOOTER
