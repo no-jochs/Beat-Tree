@@ -17,7 +17,8 @@ BT.Utils.TrackShowD3 = function (view, data, title, info) {
 	var legendData = [
 		{"key": "Predecessors", "color": "#FFDE00"},
 		{"key": "Current Track", "color": "#6599FF"},
-		{"key": "Progeny", "color": "#FF9900"},			
+		{"key": "Progeny", "color": "#FF9900"},
+		{"key": "Other / No Relation", "color": "#A8A8A8"}		
 	];
 	
 	var graph = d3.select('#track-show-d3-container')
