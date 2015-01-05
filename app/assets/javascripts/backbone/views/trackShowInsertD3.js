@@ -101,10 +101,12 @@ BT.Utils.TrackShowD3 = function (view, data, title, info) {
 		.attr('fill', function (d) {
 			if (d.id === that.model.id) {
 				return "#6599FF";
-			} else if (d.predecessor != undefined ) {
+			} else if (d.predecessor === true) {
 				return "#FFDE00";
+			} else if (d.progeny === true) {
+				return "#FF9900"
 			} else {
-				return "#FF9900";
+				return "#A8A8A8";
 			}
 		}).style({'border': '1px solid black'})
 		.on('mouseover', showtooltip)
