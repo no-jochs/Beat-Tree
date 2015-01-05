@@ -29,12 +29,6 @@ class Api::TracksController < ApplicationController
   def update
     @track = Track.find(params[:id])
     
-    puts "OH HAI!"
-    puts "HERE IS YR TRACK PARAMS:"
-    puts track_params
-    puts "HERE IS YR tauParams:"
-    puts tauParams
-    
     if @track.update(track_params)
       if tauParams
         if tauParams[:new_samples]
