@@ -32,8 +32,8 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		}
 		
 		//Creates a link if it hasn't been created already.  The linkHash
-		//also keeps track of the progeny of a particular track as such:
-		// linkHash = {trackID : { samples: [prog1ID, prog2ID, ...], covers: [ ... ], ...} ... }
+		//also keeps track of the predecessors of a particular track as such:
+		// linkHash = {trackID : { samples: [pred1ID, pred2ID, ...], covers: [ ... ], ...} ... }
 		
 		if (linkHash[startNodeId] === undefined) {
 			linkHash[startNodeId] = {};
@@ -66,29 +66,62 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		
 	});
 		
-	var progToTag = [];
+	var predToTag = [];
 	var tagged = [];
 	
 	
 	
-	//Initially populating the array of tracks to tag as progeny
+	//Initially populating the array of tracks to tag as predecessors
 	_.each(linkHash[trackId], function (trackArr, relType) {
-		progToTag = progToTag.concat(trackArr);
+		predToTag = predToTag.concat(trackArr);
 	}, this)
 	
 	
-	while (progToTag.length > 0) {
-		currentId = progToTag[0];
+	while (predToTag.length > 0) {
+		currentId = predToTag[0];
 		if (tagged.indexOf(currentId) === -1) {
 			_.each(linkHash[currentId], function (trackArr, relType) {
-				progToTag = progToTag.concat(trackArr);
+				predToTag = predToTag.concat(trackArr);
 			}, this)
 			nodeArray[nodeHash[currentId]]["predecessor"] = true;
 			tagged.push(currentId);
 		}
-		progToTag.shift();
+		predToTag.shift();
 	}
 	
+	var progToTag = [];
+	var pTagged = [];
 	
+	
+	//Initially populating the array of tracks which are progeny of the current track 
+	_.each(linkHash, function (predObj, hashId) {
+		_.each(predObj, function (trackArr, relType) {
+			if (trackArr.indexOf(trackId) != -1) {
+				progToTag.push(hashId);
+			}
+		});
+	});
+	
+	debugger
+	while (progToTag.length > 0) {
+		var currentGroup = progToTag;
+		progToTag = [];
+		
+		_.each(linkHash, function (predObj, hashId) {
+			_.each(predObj, function (trackArr, relType) {
+				_.each(trackArr, function (indId) {
+					if (currentGroup.indexOf(indId) != -1) {
+						progToTag.push(hashId);
+					}
+				});
+			});
+		});
+		
+		_.each(currentGroup, function(indId) {
+			nodeArray[nodeHash[indId]]['progeny'] = true;
+		});
+	}
+	
+	debugger
 	return { nodes: nodeArray, links: linkArray };
 };
