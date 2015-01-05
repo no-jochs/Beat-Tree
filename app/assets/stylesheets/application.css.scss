@@ -69,6 +69,26 @@ tbody#bt-search-results td {
 
 // TRACK SHOW SPECIFIC
 
+.node-thumbnail-img {
+	border: 1px solid lightgrey;
+	border-radius: 3px;
+}
+
+.current-track-album-show {
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+}
+
+
+.row.pred-prog-node-row {
+	margin-bottom: 5px;
+	border: 1px solid lightgrey;
+	padding: 3px 0px 3px 0px;
+	border-radius: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
 .track-show-graph-icon{
 	height: 64px;
 	width: 64px;
@@ -107,16 +127,30 @@ ul.dropdown-menu iframe {
 
 // NAVBAR
 
-.navbar-logo-container {
-	height: 40px;
-	width: 40px;
-	border-radius: 4px;
-	background-color: white;
+.navbar-btlogo-img {
+	height: 45px;
+	width: 45px;
 }
 
-.navbar-btlogo-img {
-	width: 100%;
+.navbar-brand.beat-tree-brand {
 	height: 100%;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top: 3px;
+	margin-left: 30px;
+	border-radius: 4px;
+}
+
+.beat-tree-header-title {
+	font-family: 'Exo', sans-serif;
+	font-weight: bold;
+	color: white;
+	font-size: 275%;
+	margin-left: 20px;
+}
+
+.first-left {
+	margin-left: 20px;
 }
 
 //BACKBONE SITE SPECIFIC

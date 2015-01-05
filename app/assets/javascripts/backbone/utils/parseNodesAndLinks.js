@@ -102,7 +102,6 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		});
 	});
 	
-	debugger
 	while (progToTag.length > 0) {
 		var currentGroup = progToTag;
 		progToTag = [];
@@ -122,6 +121,5 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		});
 	}
 	
-	debugger
 	return { nodes: nodeArray, links: linkArray };
 };
