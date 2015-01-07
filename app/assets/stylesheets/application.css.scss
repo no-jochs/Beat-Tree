@@ -3,6 +3,17 @@
 @import url(http://fonts.googleapis.com/css?family=Exo:300);
 
 
+//NEW USER PAGE
+.sign-up-explore {
+	margin-top: 80px;
+}
+
+.bt-sign-up-img {
+	height: 150px;
+	width: 150px;
+	float: right;
+}
+
 //NODES
 
 //LINKS
@@ -50,6 +61,10 @@ button.track-queue-delete {
 }
 
 // SEARCH FIELD
+
+.search-results-container {
+	overflow-y: scroll;
+}
 
 img.tiny-spot-album-preview {
 	width: 100%;
@@ -126,6 +141,11 @@ ul.dropdown-menu iframe {
 }
 
 // NAVBAR
+
+.log-out-btn {
+	margin-top: 10px;
+	margin-left: 20px;
+}
 
 .navbar-btlogo-img {
 	height: 45px;
