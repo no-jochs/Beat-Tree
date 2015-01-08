@@ -1,8 +1,8 @@
 class Api::TracksController < ApplicationController
   
   def index
-    @tracks = Track.all
-    render json: @tracks
+    @tracks = Track.query_as(:t).where("t.created_at > #{Time.now.to_i - 60*60*1000}").return(:t)
+    render json: @tracks, status: :ok
   end
   
   def show
