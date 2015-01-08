@@ -3,6 +3,17 @@
 @import url(http://fonts.googleapis.com/css?family=Exo:300);
 
 
+//STATS
+
+#stats-container * {
+	font-family: 'Exo', sans-serif;
+}
+
+div.thumbnail#most-sampled-track {
+	min-height: 450px;
+	min-width: 270px;
+}
+
 //NEW USER PAGE
 .sign-up-explore {
 	margin-top: 80px;
@@ -12,6 +23,17 @@
 	height: 150px;
 	width: 150px;
 	float: right;
+}
+
+//FEED
+
+#recently-added-track {
+	width: 200px;
+	height: 150px;
+}
+
+tbody#recently-added-tracks-rows tr.track-item td {
+	vertical-align: middle;
 }
 
 //NODES
