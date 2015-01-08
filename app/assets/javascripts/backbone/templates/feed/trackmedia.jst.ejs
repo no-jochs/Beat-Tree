@@ -1,0 +1,8 @@
+<td>
+	<a href="#tracks/<%= track.escape('id') %>">
+		<img src="<%= track.escape('album_s_image') %>">
+	</a>
+</td>
+<td><strong><%= track.escape('track_name') %></strong></td>
+<td><%= track.escape('artist_name') %></td>
+<td><%= track.escape('album_name') %></td>

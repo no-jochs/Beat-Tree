@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">BeatTree Stats</h3>
+			</div>
+			<div class="panel-body" id="stats-container">
+				<div class="col-xs-4">
+					<h1 class="text-center">Tracks</h1>
+					<h1 class="text-center"><%= @numtracks.to_s %></h1>
+				</div>
+				<div class="col-xs-4">
+					<h1 class="text-center">Relationships</h1>
+					<h1 class="text-center"><%= @relationships.to_s %></h1>
+				</div>
+				<div class="col-xs-4">
+					<h1 class="text-center">Users</h1>
+					<h1 class="text-center"><%= @numusers.to_s %></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Top 5 Most-Sampled Tracks</h3>
+			</div>
+			<div class="panel-body">
+				<% @most_sampled.each do |track| %>
+				<div class="thumbnail" id="most-sampled-track">
+					  <a href="http://localhost:3000/#tracks/<%= track.t.track_spotify_id %>">
+					      <img src="<%= track.t.album_m_image %>" alt="...">
+					  </a>
+				      <div class="caption">
+				        <h3><%= track.t.track_name %></h3>
+				        <p><string>Artist: </string><%= track.t.artist_name %></p>
+						<p>Sampled by <%= track.count %> other tracks.</p>
+				      </div>
+				    </div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
