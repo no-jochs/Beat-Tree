@@ -44,6 +44,11 @@
 	<div class="panel-body">
 		<h3>Notes</h3>
 		<hr>
+		<% if (relationship.has('sample_type')) { %>
+			<p>
+				<strong>Sample Type: </strong><%= relationship.escape('sample_type') %>
+			</p>
+		<% } %>
 		<% if (relationship.has('notes')) { %>
 			<%= relationship.escape('notes') %>
 		<% } else { %>
