@@ -19,5 +19,7 @@ json.(track,
 		:album_l_image,
 		:album_m_image,
 		:album_s_image,
-		:album_href
+		:album_href,
+		:created_at,
+		:updated_at
 	)
