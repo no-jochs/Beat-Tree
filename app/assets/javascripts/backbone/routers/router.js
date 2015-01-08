@@ -4,7 +4,13 @@ BT.Router = Backbone.Router.extend({
 	},
 	routes: {
 		"search": "trackSearch",
-		"tracks/:id": "trackShow"
+		"tracks/:id": "trackShow",
+		"users/new": "newUser",
+		"welcome": "welcomePage",
+		"signin": "signIn",
+		"feed": "feed",
+		"stats": "stats",
+		"graphview", "graphView"
 	},
 	trackSearch: function () {
 		var view = new BT.Views.nodeSearch();
@@ -13,6 +19,29 @@ BT.Router = Backbone.Router.extend({
 	trackShow: function (id) {
 		var track = BT.Collections.tracks.getOrFetch(id);
 		var view = new BT.Views.TrackShow({ model: track });
+		this._swapView(view);
+	},
+	newUser: function () {
+		var view = new BT.Views.NewUser();
+		this._swapView(view);
+	},
+	welcomePage: function () {
+		if (CURRENT_USER_ID === null) {
+			Backbone.history.navigate('splash', { trigger: true });
+		}
+		var view = new BT.Views.Welcome();
+		this._swapView(view)
+	},
+	signIn: function () {
+		var view = new BT.Views.SignIn();
+		this._swapView(view);
+	},
+	feed: function () {
+		var view = new BT.Views.Feed();
+		this._swapView(view);
+	},
+	graphView: function () {
+		var view = new BT.Views.GraphView();
 		this._swapView(view);
 	},
 	_swapView: function (view) {
