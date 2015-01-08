@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     
     if @user
       login!(@user)
-      redirect_to "https://beat-tree.herokuapp.com/#feed"
+      redirect_to "https://www.beat-tree.com/#feed"
     else
       flash[:errors] = ["Invalid Username or Password"]
       render "new"
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   
   def destroy
     logout!
-    render json: "Logged out.", status: :ok
+    redirect_to "http://beat-tree.com"
   end
   
   private
