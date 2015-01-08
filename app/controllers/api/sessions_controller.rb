@@ -10,14 +10,14 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render json: @user, status: :ok
     else
-      render json: "Invalid username or password.", status: :unauthorized
+      render json: ["Invalid username or password."], status: :unauthorized
     end
     
   end
   
   def destroy
     logout!
-    render json: "Logged out.", status: :ok
+    render json: ["Logged out."], status: :ok
   end
   
 end
