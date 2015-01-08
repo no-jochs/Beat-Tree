@@ -34,17 +34,29 @@ class Api::TracksController < ApplicationController
         if tauParams[:new_samples]
           associatedID = tauParams[:new_samples]
           associatedTrack = Track.find_by_spotify_id(associatedID)
-          @track.samples << associatedTrack
+          @sample = Samples.new
+          @sample.from_node = @track
+          @sample.to_node = associatedTrack
+          @sample.added_by = current_user.username
+          @sample.save
           render "api/tracks/show", status: :ok
         elsif tauParams[:new_covers]
           associatedID = tauParams[:new_covers]
           associatedTrack = Track.find_by_spotify_id(associatedID)
-          @track.covers << associatedTrack
+          @cover = Covers.new
+          @cover.from_node = @track
+          @cover.to_node = associatedTrack
+          @cover.added_by = current_user.username
+          @cover.save
           render "api/tracks/show", status: :ok
         elsif tauParams[:new_remixes]
           associatedID = tauParams[:new_remixes]
           associatedTrack = Track.find_by_spotify_id(associatedID)
-          @track.remixes << associatedTrack
+          @remixes = Remixes.new
+          @remixes.from_node = @track
+          @remixes.to_node = associatedTrack
+          @remixes.added_by = current_user.username
+          @remixes.save
           render "api/tracks/show", status: :ok
         else
           render json: ['There was an error with your parameters'], status: :bad_request
