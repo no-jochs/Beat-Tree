@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   
+  resources :users, only: [:create, :new, :destroy]
   resource :session, only: [:new, :create, :destroy]
   resources :artists
   resources :stats, only: [:index]
