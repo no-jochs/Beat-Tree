@@ -69,5 +69,5 @@ BT.Models.Track = Backbone.Model.extend({
 			delete respJSON.track;
 		}
 		return respJSON;
-	},
-})
+	}
+});
