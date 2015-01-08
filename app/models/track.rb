@@ -23,6 +23,8 @@ class Track
   property :album_m_image
   property :album_s_image
   property :album_href
+  property :created_at
+  property :updated_at
   
   validates :track_name, :track_spotify_id, presence: true
   
