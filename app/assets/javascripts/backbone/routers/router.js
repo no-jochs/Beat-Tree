@@ -10,7 +10,7 @@ BT.Router = Backbone.Router.extend({
 		"signin": "signIn",
 		"feed": "feed",
 		"stats": "stats",
-		"graphview", "graphView"
+		"graphview": "graphView"
 	},
 	trackSearch: function () {
 		var view = new BT.Views.nodeSearch();
