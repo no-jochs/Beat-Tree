@@ -124,17 +124,18 @@ BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
-		this.addNodes(this.model.sampling_tracks);
+		this.addNodes(this.model.sampling_tracks, 'sampling');
 		this.attachSubviews();
 		return this;
 	},
 	
-	addNodes: function (collection) {
+	addNodes: function (collection, relType) {
 		this.removeSubviews();
 		this.$el.find('#nodes-container').empty();
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
+				track.set({ relationship: 'progeny', relationshipType: relType, parentNodeId: that.model.get('id') });
 				var nodeView = new BT.Views.TrackShowNodeView({
 					model: track
 				});
@@ -158,13 +159,13 @@ BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 		$(event.currentTarget).addClass('active');
 		switch (option) {
 			case 1:
-				this.addNodes(this.model.sampling_tracks);
+				this.addNodes(this.model.sampling_tracks, 'sampling');
 				break;
 			case 2:
-				this.addNodes(this.model.covering_tracks);
+				this.addNodes(this.model.covering_tracks, 'covering');
 				break;
 			case 3:
-				this.addNodes(this.model.remixing_tracks);
+				this.addNodes(this.model.remixing_tracks, 'remixing');
 				break;
 			}
 	},
@@ -268,7 +269,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 			parentModel: model
 		});
 		this.addSubview('#predecessor-node-confirm-container', confirmView);
-	},
+	}
 	
 });
 
@@ -278,7 +279,8 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 	},
 	
 	events: {
-		"click button.add-node-to-player": "swapTrack"
+		"click button.add-node-to-player": "swapTrack",
+		"click button.relationship-link": "goToRelationship"
 	},
 	
 	template: JST['backbone/templates/track/largeNodeView'],
@@ -287,6 +289,32 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
 		return this;
+	},
+	
+	goToRelationship: function(event) {
+		debugger
+		if (this.model.get('relationshipType') === 'sampling') {
+			Backbone.history.navigate(
+				"#relationship/type=SAMPLES&startNodeId=" + 
+				this.model.get('track_spotify_id') + '&' +
+				"endNodeId=" + this.model.get('parentNodeId'),
+				{ trigger: true }
+			);
+		} else if (this.model.get('relationshipType') === 'covering') {
+			Backbone.history.navigate(
+				"#relationship/type=COVERS&startNodeId=" + 
+				this.model.get('track_spotify_id') + '&' +
+				"endNodeId=" + this.model.get('parentNodeId'),
+				{ trigger: true }
+			);
+		} else if (this.model.get('relationshipType') === 'remixing') {
+			Backbone.history.navigate(
+				"#relationship/type=REMIXES&startNodeId=" + 
+				this.model.get('track_spotify_id') + '&' +
+				"endNodeId=" + this.model.get('parentNodeId'),
+				{ trigger: true }
+			);
+		}
 	},
 	
 	swapTrack: function (event) {
