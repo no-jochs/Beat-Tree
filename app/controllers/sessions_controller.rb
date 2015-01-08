@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     
     if @user
       login!(@user)
-      redirect_to "http://localhost:3000/#feed"
+      redirect_to "https://beat-tree.herokuapp.com/#feed"
     else
       flash[:errors] = ["Invalid Username or Password"]
       render "new"
