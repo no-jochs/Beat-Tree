@@ -14,6 +14,7 @@
 //= require ../../../vendor/assets/javascripts/underscore.js
 //= require ../../../vendor/assets/javascripts/backbone.js
 //= require ../../../vendor/assets/javascripts/d3.min.js
+//= require ../../../vendor/assets/javascripts/jquery.serializejson.min.js
 
 //= require bootstrap-sprockets
 
