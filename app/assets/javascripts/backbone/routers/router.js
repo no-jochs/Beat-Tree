@@ -10,7 +10,8 @@ BT.Router = Backbone.Router.extend({
 		"signin": "signIn",
 		"feed": "feed",
 		"stats": "stats",
-		"graphview": "graphView"
+		"graphview": "graphView",
+		"relationship/:query": "showRelationship"
 	},
 	trackSearch: function () {
 		var view = new BT.Views.nodeSearch();
@@ -40,6 +41,17 @@ BT.Router = Backbone.Router.extend({
 	graphView: function () {
 		var view = new BT.Views.GraphView();
 		this._swapView(view);
+	},
+	showRelationship: function (query) {
+		var that = this;
+		$.ajax({
+			type: "GET"
+			url: "http://localhost:3000/api/relationships?" + query,
+		}).done( function(data) {
+			var model = new BT.Models.Relationship(data, { parse: true });
+			var view = new BT.Views.Relationship( model: model );
+			that._swapView(view)
+		});
 	},
 	_swapView: function (view) {
 		this._currentView && this._currentView.remove();
