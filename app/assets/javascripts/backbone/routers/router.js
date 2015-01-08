@@ -26,9 +26,6 @@ BT.Router = Backbone.Router.extend({
 		this._swapView(view);
 	},
 	welcomePage: function () {
-		if (CURRENT_USER_ID === null) {
-			Backbone.history.navigate('splash', { trigger: true });
-		}
 		var view = new BT.Views.Welcome();
 		this._swapView(view)
 	},
