@@ -45,11 +45,11 @@ BT.Router = Backbone.Router.extend({
 	showRelationship: function (query) {
 		var that = this;
 		$.ajax({
-			type: "GET"
+			type: "GET",
 			url: "http://localhost:3000/api/relationships?" + query,
 		}).done( function(data) {
 			var model = new BT.Models.Relationship(data, { parse: true });
-			var view = new BT.Views.Relationship( model: model );
+			var view = new BT.Views.Relationship({ model: model });
 			that._swapView(view)
 		});
 	},
