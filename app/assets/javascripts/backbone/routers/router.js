@@ -46,7 +46,7 @@ BT.Router = Backbone.Router.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "www.beat-tree.com/api/relationships?" + query,
+			url: "http://www.beat-tree.com/api/relationships?" + query,
 		}).done( function(data) {
 			var model = new BT.Models.Relationship(data, { parse: true });
 			var view = new BT.Views.Relationship({ model: model });
