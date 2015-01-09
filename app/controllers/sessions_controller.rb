@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   
   def destroy
     logout!
-    redirect_to "http://beat-tree.com"
+    redirect_to "http://www.beat-tree.com"
   end
   
   private

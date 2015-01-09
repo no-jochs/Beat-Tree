@@ -43,7 +43,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://www.beat-tree.com/api/neojson?query_type=predandprog&node_id=" + that.model.get('track_spotify_id')
+			url: "http://www.beat-tree.com/api/neojson?query_type=predandprog&node_id=" + that.model.get('track_spotify_id')
 		}).done( function (jsonResp) {
 			that.addPredProgData(jsonResp);
 		});
@@ -53,7 +53,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://www.beat-tree.com/api/neojson?query_type=origins&node_id=" + that.model.get('track_spotify_id')
+			url: "http://www.beat-tree.com/api/neojson?query_type=origins&node_id=" + that.model.get('track_spotify_id')
 		}).done( function (jsonResp) {
 			that.addOriginsData(jsonResp);
 		});
@@ -63,7 +63,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://www.beat-tree.com/api/neojson?query_type=inspirations&node_id=" + that.model.get('track_spotify_id')
+			url: "http://www.beat-tree.com/api/neojson?query_type=inspirations&node_id=" + that.model.get('track_spotify_id')
 		}).done( function (jsonResp) {
 			that.addInspirationsData(jsonResp);
 		});
@@ -73,7 +73,7 @@ BT.Views.TrackShow = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://www.beat-tree.com/api/neojson?query_type=subgraph&node_id=" + that.model.get('track_spotify_id')
+			url: "http://www.beat-tree.com/api/neojson?query_type=subgraph&node_id=" + that.model.get('track_spotify_id')
 		}).done( function (jsonResp) {
 			that.addSubgraphData(jsonResp);
 		});
