@@ -2,6 +2,17 @@
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Exo:300);
 
+
+
+//SPLASH
+
+div.jumbotron#splash-jumbo {
+	background-image: url("https://s3-us-west-1.amazonaws.com/beat-tree-images/hiphopbglite.gif");
+}
+.jumbo-img {
+	width: 1000px;
+}
+
 //RELATIONSHIP SHOW
 
 .relationship-show-album-img {
@@ -253,6 +264,10 @@ dl.dl-horizontal.dl-horizontal-special dd {
 
 button.full-width {
 	width: 100%;
+}
+
+.max-width-200 {
+	max-width: 200px;
 }
 
 .rotate {

@@ -3,6 +3,7 @@ BT.Router = Backbone.Router.extend({
 		this.$rootEl = options.$rootEl;
 	},
 	routes: {
+		"": "splash",
 		"search": "trackSearch",
 		"tracks/:id": "trackShow",
 		"users/new": "newUser",
@@ -11,7 +12,13 @@ BT.Router = Backbone.Router.extend({
 		"feed": "feed",
 		"stats": "stats",
 		"graphview": "graphView",
-		"relationship/:query": "showRelationship"
+		"relationship/:query": "showRelationship",
+		"learnmore": "learnMore",
+		"johnochs": "johnOchs"
+	},
+	splash: function () {
+		var view = new BT.Views.Splash();
+		this._swapView(view);
 	},
 	trackSearch: function () {
 		var view = new BT.Views.nodeSearch();
@@ -52,6 +59,14 @@ BT.Router = Backbone.Router.extend({
 			var view = new BT.Views.Relationship({ model: model });
 			that._swapView(view)
 		});
+	},
+	learnMore: function () {
+		var view = new BT.Views.LearnMore();
+		this._swapView(view);
+	},
+	johnOchs: function () {
+		var view = new BT.Views.JohnOchs();
+		this._swapView(view);
 	},
 	_swapView: function (view) {
 		this._currentView && this._currentView.remove();
