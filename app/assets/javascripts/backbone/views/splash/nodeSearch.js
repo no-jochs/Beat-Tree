@@ -86,7 +86,7 @@ BT.Views.SearchResult = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "http://www.beat-tree.com/api/tracks/db_check",
+			url: "https://beat-tree.herokuapp.com/api/tracks/db_check",
 			data: { track_spotify_id: id },
 			statusCode: { 
 				404: createAddButton.bind(that),

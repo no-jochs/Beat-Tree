@@ -17,7 +17,7 @@ BT.Views.SignIn = Backbone.CompositeView.extend({
 		var user = $('.sign-in-data').serializeJSON();
 		$.ajax({
 			type: "POST",
-			url: "http://www.beat-tree.com/api/session",
+			url: "https://beat-tree.herokuapp.com/api/session",
 			data: user,
 			success: function () {
 				Backbone.history.navigate('#search', { trigger: true });
