@@ -23,7 +23,7 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 		
 		$.ajax({
 			type: "GET",
-			url: "http://www.beat-tree.com/api/tracksearch?q=" + query,
+			url: "https://www.beat-tree.com/api/tracksearch?q=" + query,
 		}).done( function (data) { that.populateBTResults(data); });
 		
 	},
@@ -86,7 +86,7 @@ BT.Views.SearchResult = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "http://www.beat-tree.com/api/tracks/db_check",
+			url: "https://www.beat-tree.com/api/tracks/db_check",
 			data: { track_spotify_id: id },
 			statusCode: { 
 				404: createAddButton.bind(that),
