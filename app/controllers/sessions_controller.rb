@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     
     if @user
       login!(@user)
-      redirect_to "https://www.beat-tree.com/#feed"
+      redirect_to "http://www.beat-tree.com/#feed"
     else
       flash[:errors] = ["Invalid Username or Password"]
       render "new"
