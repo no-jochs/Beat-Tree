@@ -23,7 +23,7 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 		
 		$.ajax({
 			type: "GET",
-			url: "http://www.beat-tree.com/api/tracksearch?q=" + query,
+			url: "https://beat-tree.herokuapp.com/api/tracksearch?q=" + query,
 		}).done( function (data) { that.populateBTResults(data); });
 		
 	},
