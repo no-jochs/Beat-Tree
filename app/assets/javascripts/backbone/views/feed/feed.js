@@ -4,7 +4,7 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://beat-tree.herokuapp.com/api/tracks"
+			url: "https://www.beat-tree.com/api/tracks"
 		}).done( function (data) {
 			var tracks = BT.Utils.ParseTracksCollection(data);
 			that.recentlyAdded.reset(tracks);
