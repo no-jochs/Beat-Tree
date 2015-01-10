@@ -245,7 +245,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 				this.addNodes(this.model.sampled_tracks, 'samples');
 				break;
 			case 2:
-				this.addNodes(this.model.covered_tracks, 'coverers');
+				this.addNodes(this.model.covered_tracks, 'covers');
 				break;
 			case 3:
 				this.addNodes(this.model.remixed_tracks, 'remixes');
