@@ -219,6 +219,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 		var that = this;
 		if (collection.length > 0) {
 			collection.each( function (track) {
+				track.set({ relationship: 'predecessor', relationshipType: relType, parentNodeId: that.model.get('id') });
 				var nodeView = new BT.Views.TrackShowNodeView({
 					model: track
 				});
@@ -241,13 +242,13 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 		$(event.currentTarget).addClass('active');
 		switch (option) {
 			case 1:
-				this.addNodes(this.model.sampled_tracks);
+				this.addNodes(this.model.sampled_tracks, 'samples');
 				break;
 			case 2:
-				this.addNodes(this.model.covered_tracks);
+				this.addNodes(this.model.covered_tracks, 'coverers');
 				break;
 			case 3:
-				this.addNodes(this.model.remixed_tracks);
+				this.addNodes(this.model.remixed_tracks, 'remixes');
 				break;
 			}
 	},
@@ -292,7 +293,6 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 	},
 	
 	goToRelationship: function(event) {
-		debugger
 		if (this.model.get('relationshipType') === 'sampling') {
 			Backbone.history.navigate(
 				"#relationship/type=SAMPLES&startNodeId=" + 
@@ -314,7 +314,29 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 				"endNodeId=" + this.model.get('parentNodeId'),
 				{ trigger: true }
 			);
+		} else if (this.model.get('relationshipType') === 'samples') {
+			Backbone.history.navigate(
+				"#relationship/type=SAMPLES&startNodeId=" + 
+				this.model.get('parentNodeId') + '&' +
+				"endNodeId=" + this.model.get('id'),
+				{ trigger: true }
+			);
+		} else if (this.model.get('relationshipType') === 'covers') {
+			Backbone.history.navigate(
+				"#relationship/type=COVERS&startNodeId=" + 
+				this.model.get('parentNodeId') + '&' +
+				"endNodeId=" + this.model.get('id'),
+				{ trigger: true }
+			);
+		} else if (this.model.get('relationshipType') === 'remixes') {
+			Backbone.history.navigate(
+				"#relationship/type=REMIXES&startNodeId=" + 
+				this.model.get('parentNodeId') + '&' +
+				"endNodeId=" + this.model.get('id'),
+				{ trigger: true }
+			);
 		}
+		
 	},
 	
 	swapTrack: function (event) {
