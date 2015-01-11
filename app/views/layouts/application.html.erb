@@ -23,10 +23,10 @@
 			</li>
 			<% if !logged_in? %>
 				<li>
-					<%= link_to "Sign Up", "https://www.beat-tree.com/#users/new" %>
+					<%= link_to "Sign Up", "http://www.beat-tree.com/#users/new" %>
 				</li>
 				<li>
-					<%= link_to "Log In", new_session_url %>
+					<%= link_to "Log In", "http://www.beat-tree/com/#signin" %>
 				</li>
 			<% else %>
 	            <li><%= button_to "Log Out", session_url, method: :delete, class: 'btn btn-danger log-out-btn'%></li>
