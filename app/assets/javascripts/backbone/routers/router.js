@@ -16,7 +16,6 @@ BT.Router = Backbone.Router.extend({
 		"learnmore": "learnMore",
 		"johnochs": "johnOchs"
 	},
-	
 	splash: function () {
 		var view = new BT.Views.Splash();
 		this._swapView(view);
@@ -54,7 +53,7 @@ BT.Router = Backbone.Router.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "https://www.beat-tree.com/api/relationships?" + query,
+			url: "http://www.beat-tree.com/api/relationships?" + query,
 		}).done( function(data) {
 			var model = new BT.Models.Relationship(data, { parse: true });
 			var view = new BT.Views.Relationship({ model: model });
@@ -62,7 +61,6 @@ BT.Router = Backbone.Router.extend({
 		});
 	},
 	learnMore: function () {
-		alert('here!')
 		var view = new BT.Views.LearnMore();
 		this._swapView(view);
 	},

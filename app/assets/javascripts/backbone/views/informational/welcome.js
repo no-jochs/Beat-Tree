@@ -10,6 +10,6 @@ BT.Views.Welcome = Backbone.CompositeView.extend({
 		return this;
 	},
 	findATrack: function (event) {
-		Backbone.history.navigate('trackSearch', { trigger: true });
+		Backbone.history.navigate('#search', { trigger: true });
 	}
 })

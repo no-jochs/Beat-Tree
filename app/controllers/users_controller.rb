@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save && user_params[:password] == params[:password_confirmation]
-      redirect_to "https://www.beat-tree.com/#welcome"
+      redirect_to "http://www.beat-tree.com/#welcome"
     else
       render 'new'
     end
