@@ -16,6 +16,7 @@ BT.Router = Backbone.Router.extend({
 		"learnmore": "learnMore",
 		"johnochs": "johnOchs"
 	},
+	
 	splash: function () {
 		var view = new BT.Views.Splash();
 		this._swapView(view);
