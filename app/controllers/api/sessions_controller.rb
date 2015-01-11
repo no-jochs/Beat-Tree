@@ -8,7 +8,7 @@ class Api::SessionsController < ApplicationController
     
     if @user
       login!(@user)
-      render json: @user, status: :ok
+      redirect_to "http://www.beat-tree.com/#feed"
     else
       render json: ["Invalid username or password."], status: :unauthorized
     end
