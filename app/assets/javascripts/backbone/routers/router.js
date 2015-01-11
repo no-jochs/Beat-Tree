@@ -62,6 +62,7 @@ BT.Router = Backbone.Router.extend({
 		});
 	},
 	learnMore: function () {
+		alert('here!')
 		var view = new BT.Views.LearnMore();
 		this._swapView(view);
 	},
