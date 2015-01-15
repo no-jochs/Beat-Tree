@@ -3,17 +3,16 @@ BT.Router = Backbone.Router.extend({
 		this.$rootEl = options.$rootEl;
 	},
 	routes: {
-		"search": "trackSearch",
-		"tracks/:id": "trackShow",
-		"users/new": "newUser",
-		"welcome": "welcomePage",
-		"signin": "signIn",
-		"feed": "feed",
-		"stats": "stats",
-		"graphview": "graphView",
-		"relationship/:query": "showRelationship",
-		"learnmore": "learnMore",
-		"johnochs": "johnOchs"
+		 "search": "trackSearch",
+		 "tracks/:id": "trackShow",
+		 "users/new": "newUser",
+		 "welcome": "welcomePage",
+		 "signin": "signIn",
+		 "feed": "feed",
+		 "stats": "stats",
+		 "graphview": "graphView",
+		 "relationship/:query": "showRelationship",
+		 "learnmore": "learnMore",
 	},
 	splash: function () {
 		var view = new BT.Views.Splash();
