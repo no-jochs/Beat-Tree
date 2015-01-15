@@ -18,7 +18,7 @@ BT.Views.nodeSearch = Backbone.CompositeView.extend({
 		var that = this;
 		$.ajax({
 			type: "GET",
-			url: "http://api.spotify.com/v1/search?q=" + query + "&type=track"
+			url: "https://api.spotify.com/v1/search?q=" + query + "&type=track"
 		}).done( function (data) { that.populateSpotResults(data); });
 		
 		$.ajax({
