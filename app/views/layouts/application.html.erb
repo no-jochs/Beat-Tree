@@ -2,18 +2,18 @@
 <html>
 <head>
   <title>BeatTree</title>
-  
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
-  <script>BT.current_user = 
-  <% if logged_in? %> 
-  <%= current_user.username %>
+  <script>BT.current_user=
+  <% if logged_in? %>
+  <%= current_user.username %>;
   <% else %>
-  <%= "null" %>
+  <%= "null" %>;
   <% end %>
   </script>
 </head>
+  
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -59,6 +59,7 @@
 	</div>
 </nav>
   <div class="container" id="beat-tree-content">
+	<%= yield %>
   </div>
   <div class="collapse" id="collapse-track-queue">
 	  <nav class="navbar navbar-inverse navbar-fixed-bottom">

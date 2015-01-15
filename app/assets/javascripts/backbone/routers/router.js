@@ -3,7 +3,6 @@ BT.Router = Backbone.Router.extend({
 		this.$rootEl = options.$rootEl;
 	},
 	routes: {
-		"": "splash",
 		"search": "trackSearch",
 		"tracks/:id": "trackShow",
 		"users/new": "newUser",
