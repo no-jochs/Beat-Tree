@@ -5,9 +5,7 @@ BT.Router = Backbone.Router.extend({
 	routes: {
 		 "search": "trackSearch",
 		 "tracks/:id": "trackShow",
-		 "users/new": "newUser",
 		 "welcome": "welcomePage",
-		 "signin": "signIn",
 		 "feed": "feed",
 		 "stats": "stats",
 		 "graphview": "graphView",

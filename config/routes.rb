@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users
 
-  root 'static_pages#index'
+  root 'static_pages#home'
   
   namespace :api, defaults: { format: :json} do
     resources :tracks, only: [:create, :update, :index, :show, :destroy]
