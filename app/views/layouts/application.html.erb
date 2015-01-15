@@ -6,6 +6,13 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
+  <script>BT.current_user = 
+  <% if logged_in? %> 
+  <%= current_user.username %>
+  <% else %>
+  <%= "null" %>
+  <% end %>
+  </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -23,10 +30,10 @@
 			</li>
 			<% if !logged_in? %>
 				<li>
-					<%= link_to "Sign Up", "http://www.beat-tree.com/#users/new" %>
+					<%= link_to "Sign Up", new_user_path %>
 				</li>
 				<li>
-					<%= link_to "Log In", "http://www.beat-tree.com/session/new" %>
+					<%= link_to "Log In", new_session_path %>
 				</li>
 			<% else %>
 	            <li><%= button_to "Log Out", session_url, method: :delete, class: 'btn btn-danger log-out-btn'%></li>
@@ -52,7 +59,6 @@
 	</div>
 </nav>
   <div class="container" id="beat-tree-content">
-	    <%= yield %>
   </div>
   <div class="collapse" id="collapse-track-queue">
 	  <nav class="navbar navbar-inverse navbar-fixed-bottom">
