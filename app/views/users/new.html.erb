@@ -9,39 +9,40 @@
 <hr>
 <div class="row">
 	<div class="col-xs-4 col-xs-offset-4">
-	<form class="new-user-data">
+	<form class="new-user-data" action="/users" method="POST">
+		<input type="hidden" value="authenticity-token">
 		<div class="form-group">
 			<label for="username-field">Username*</label>
-			<input type="text" id="username-field" class="form-control" name="username">
+			<input type="text" id="username-field" class="form-control" name="user[username]">
 
 		</div>
 		<div class="form-group">
 			<label for="email-field">Email</label>
-			<input type="email" class="form-control" id="email-field" name="email">
+			<input type="email" class="form-control" id="email-field" name="user[email]">
 		</div>
 		<div class="form-group">
 			<label for="first-name-field">First Name</label>
-			<input type="text" class="form-control" id="first-name-field" name="fname">
+			<input type="text" class="form-control" id="first-name-field" name="user[fname]">
 		</div>
 		<div class="form-group">
 			<label for="last-name-field">Last Name</label>
-			<input type="text" class="form-control" id="last-name-field" name="lname">
+			<input type="text" class="form-control" id="last-name-field" name="user[lname]">
 		</div>
 		<div class="form-group">
 			<label for="img-url-field">User Image URL</label>
-			<input type="text" class="form-control" id="img-url-field" name="img_url">
+			<input type="text" class="form-control" id="img-url-field" name="user[img_url]">
 		</div>
 		<div class="form-group">
 			<label for="location-field">Location</label>
-			<input type="text" class="form-control" id="location-field" name="location">
+			<input type="text" class="form-control" id="location-field" name="user[location]">
 		</div>
 		<div class="form-group">
 			<label for="password-field">Password*</label>
-			<input type="password" class="form-control" id="password-field" name="password">
+			<input type="password" class="form-control" id="password-field" name="user[password]">
 		</div>
 		<div class="form-group">
 			<label for="confirm-password-field">Confirm Password*</label>
-			<input type="password" class="form-control" id="confirm-password-field" name="password_confirmation">
+			<input type="password" class="form-control" id="confirm-password-field" name="user[password_confirmation]">
 		</div>
 		<div class="form-group">
 			<input type="submit" class="form-control sign-up-btn" value="Sign Up">
