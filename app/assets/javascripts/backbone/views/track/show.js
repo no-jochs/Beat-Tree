@@ -208,7 +208,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 	render: function () {
 		var renderedContent = this.template({ track: this.model });
 		this.$el.html(renderedContent);
-		this.addNodes(this.model.sampled_tracks);
+		this.addNodes(this.model.sampled_tracks, 'samples');
 		this.attachSubviews();
 		return this;
 	},
