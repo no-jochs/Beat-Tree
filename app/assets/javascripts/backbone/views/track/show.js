@@ -213,7 +213,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 		return this;
 	},
 	
-	addNodes: function (collection) {
+	addNodes: function (collection, relType) {
 		this.removeSubviews();
 		this.$el.find('#nodes-container').empty();
 		var that = this;
