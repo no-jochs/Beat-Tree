@@ -2,9 +2,11 @@ class User
   include Neo4j::ActiveNode
   
   before_validation :ensure_token
+  before_save :ensure_password_confirmation
   
   property :username, index: :exact, constraint: :unique
   property :password
+  property :password_confirmation
   property :pwdigest
   property :session_token, index: :exact, constraint: :unique
   property :email, constraint: :unique
@@ -19,6 +21,7 @@ class User
   validates :username, :email, :session_token, uniqueness: true
   validates :pwdigest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
+  
   
   attr_reader :password
   
@@ -47,6 +50,10 @@ class User
   
   def ensure_token
     self.session_token ||= SecureRandom::urlsafe_base64
+  end
+  
+  def ensure_password_confirmation
+    self.password == self.password_confirmation
   end
 
 end
