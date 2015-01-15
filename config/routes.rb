@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users
 
   root 'static_pages#home'
+  get 'johnochs', to: 'static_pages#johnochs'
   
   namespace :api, defaults: { format: :json} do
     resources :tracks, only: [:create, :update, :index, :show, :destroy]
