@@ -18,7 +18,6 @@ BT.Views.NewUser = Backbone.CompositeView.extend({
 	signUp: function (event) {
 		event.preventDefault();
 		var userData = $('.new-user-data').serializeJSON();
-		debugger
 		this.model.set(userData);
 		this.model.save({}, {
 			success: function (model, response, options) {
