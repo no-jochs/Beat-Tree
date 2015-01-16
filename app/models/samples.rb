@@ -13,4 +13,7 @@ class Samples
   property :parent_url
   property :child_start_time
   property :parent_start_time
+  property :contest_count
+  property :created_at
+  property :updated_at
 end

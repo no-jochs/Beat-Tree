@@ -6,5 +6,6 @@ class Covers
   type 'COVERS'
   
   property :notes
+  property :contest_count
   property :added_by
 end
