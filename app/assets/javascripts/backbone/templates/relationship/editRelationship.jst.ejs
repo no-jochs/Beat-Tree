@@ -1,1 +1,76 @@
-<h1>Coming Soon!</h1>
+<div class="row">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Relationship</h3>
+	  </div>
+	  <div class="panel-body">
+		<div class="col-xs-4 col-xs-offset-1 background-grey">
+			<div class="media">
+			  <a class="media-left" href="#tracks/<%= relationship.startNode.escape('track_spotify_id') %>">
+			    <img class="relationship-show-album-img" src="<%= relationship.startNode.escape('album_m_image') %>" alt="...">
+			  </a>
+			  <div class="media-body">
+			    <h3 class="media-heading"><%= relationship.startNode.escape('track_name') %></h3>
+		        <p><strong>Artist: </strong><%= relationship.startNode.escape('artist_name') %></p>
+				<p><strong>Album: </strong><%= relationship.startNode.escape('album_name') %></p>
+			  </div>
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<div>
+				<h3 class="text-center rel-type-designator">
+				-[:<%= relationship.get('type') %>]->
+				</h3>
+			</div>
+		</div>
+		<div class="col-xs-4 background-grey">
+			<div class="media">
+			  <a class="media-left" href="#tracks/<%= relationship.endNode.escape('track_spotify_id') %>">
+			    <img class="relationship-show-album-img" src="<%= relationship.endNode.escape('album_m_image') %>" alt="...">
+			  </a>
+			  <div class="media-body">
+			    <h3 class="media-heading"><%= relationship.endNode.escape('track_name') %></h3>
+		        <p><strong>Artist: </strong><%= relationship.endNode.escape('artist_name') %></p>
+				<p><strong>Album: </strong><%= relationship.endNode.escape('album_name') %></p>
+			  </div>
+			</div>
+		</div>
+	  </div>
+  </div>
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+  		<h3 class="panel-title">Edit Relationship Data</h3>
+  	</div>
+	<div class="panel-body">
+		<form>
+			<div class="row">
+				<h3>Notes</h3>
+				<hr>
+				<textarea name="relationship[notes]"><%= relationship.escape('notes') %></textarea>
+				<% if (relationship.escape('type') === 'SAMPLES') { %>
+					<h3>Other Relationship Data</h3>
+					<hr>
+					<label for="sample-use" >
+					<select class="form-control" id="sample-use">
+					  <option value="1">Extensive Use (Major Sample)</option>
+					  <option value="2">High Use (Frequently Sampled)</option>
+					  <option value="3">Moderate Use (Used a Fair Amount)</option>
+					  <option value="4">Light Use (Use is Limited)</option>
+					  <option value="5">Very Light Use (Sample is Referenced Once or Twice)</option>
+					</select>
+				<% } %>
+			</div>
+		<% if (relationship.escape('type') === 'SAMPLES') { %>
+		<div class="row">
+			<div class="col-xs-6">
+				
+			</div>
+		</div>
+		<% } %>
+		<strong>Relationship Created By: </strong>
+		<a href="#users/<%= relationship.escape('added_by') %>">
+			<%= relationship.escape('added_by') %>
+		</a>
+	</div>
+  </div>
+</div>
