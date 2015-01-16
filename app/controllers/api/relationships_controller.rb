@@ -70,7 +70,7 @@ class Api::RelationshipsController < ApplicationController
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     else
-      render json: ['Not Found'], status: :not_found
+      render json: ['Not Found'], status: :conflict
     end
   end
   
