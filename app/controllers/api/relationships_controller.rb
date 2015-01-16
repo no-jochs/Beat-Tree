@@ -1,7 +1,7 @@
 class Api::RelationshipsController < ApplicationController
   
-  def index
-    @startNode = Track.find_by(track_spotify_id: params[:startNodeId])
+  def show(id)
+    @startNode = Track.find_by(track_spotify_id: params[:id])
     @endNode = Track.find_by(track_spotify_id: params[:endNodeId])
     type = params[:type]
     
@@ -34,9 +34,9 @@ class Api::RelationshipsController < ApplicationController
     end
   end
   
-  def update
+  def update(id)
     puts "here is yr params: #{params}"
-    @startNode = Track.find_by(track_spotify_id: params[:startNodeId])
+    @startNode = Track.find_by(track_spotify_id: params[:id])
     @endNode = Track.find_by(track_spotify_id: params[:endNodeId])
     type = params[:type]
     @rel = Track.query_as(:t)
