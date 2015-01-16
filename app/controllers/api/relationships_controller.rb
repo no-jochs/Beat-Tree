@@ -51,21 +51,21 @@ class Api::RelationshipsController < ApplicationController
     
     if type == "SAMPLES"
       if @rel.update(relationship_params)
-        redirect_to "#relationship/type=SAMPLES&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/SAMPLES/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "COVERS"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/COVERS/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "REMIXES"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/REMIXES/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
