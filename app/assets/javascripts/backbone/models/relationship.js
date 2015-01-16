@@ -6,7 +6,7 @@ BT.Models.Relationship = Backbone.Model.extend({
 	},
 	
 	url: function () {
-		return "http://www.beat-tree.com/api/relationships/" + this.startNodeId +"?type=" + 
+		return "api/relationships/" + this.startNodeId +"?type=" + 
 				this.type + "&endNodeId=" + this.endNodeId
 	},
 	
