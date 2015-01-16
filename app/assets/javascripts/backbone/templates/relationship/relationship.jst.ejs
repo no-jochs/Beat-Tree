@@ -44,11 +44,6 @@
 	<div class="panel-body">
 		<h3>Notes</h3>
 		<hr>
-		<% if (relationship.has('sample_type')) { %>
-			<p>
-				<strong>Sample Type: </strong><%= relationship.escape('sample_type') %>
-			</p>
-		<% } %>
 		<% if (relationship.has('notes')) { %>
 			<%= relationship.escape('notes') %>
 		<% } else { %>
@@ -59,6 +54,10 @@
 		<a href="#users/<%= relationship.escape('added_by') %>">
 			<%= relationship.escape('added_by') %>
 		</a>
+		<% if (relationship.escape('added_by') == BT.current_user) %>
+			<button type="btn btn-warning" id="update-relationship">Update Relationship</button>
+			<button type="btn btn-danger" id="delete-relationship">Delete Relationship</button>
+		<% end %>
 	</div>
   </div>
 </div>
