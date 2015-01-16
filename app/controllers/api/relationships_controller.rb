@@ -51,26 +51,26 @@ class Api::RelationshipsController < ApplicationController
     
     if type == "SAMPLES"
       if @rel.update(relationship_params)
-        redirect_to "#relationship/SAMPLES/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
+        render 'api/relationships/relationship', status: :ok
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "COVERS"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "#relationship/COVERS/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
+        render 'api/relationships/relationship', status: :ok
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "REMIXES"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "#relationship/REMIXES/#{@startNode.track_spotify_id}/#{@endNode.track_spotify_id}"
+        render 'api/relationships/relationship', status: :ok
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     else
-      render json: ['Not Found'], status: :conflict
+      render json: ['Not Found'], status: :not_found
     end
   end
   
