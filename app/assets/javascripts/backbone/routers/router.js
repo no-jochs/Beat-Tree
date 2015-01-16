@@ -9,8 +9,13 @@ BT.Router = Backbone.Router.extend({
 		 "feed": "feed",
 		 "stats": "stats",
 		 "graphview": "graphView",
-		 "relationship/:query": "showRelationship",
+		 "relationship/edit/:type/:startNodeId/:endNodeId": "updateRelationship",
+		 "relationship/:type/:startNodeId/:endNodeId": "showRelationship",
 		 "learnmore": "learnMore",
+	},
+	updateRelationship: function(type, startNodeId, endNodeId) {
+		var view = new BT.Views.EditRelationship
+		this._swapView(view);
 	},
 	splash: function () {
 		var view = new BT.Views.Splash();
@@ -45,16 +50,16 @@ BT.Router = Backbone.Router.extend({
 		var view = new BT.Views.GraphView();
 		this._swapView(view);
 	},
-	showRelationship: function (query) {
-		var that = this;
-		$.ajax({
-			type: "GET",
-			url: "http://www.beat-tree.com/api/relationships?" + query,
-		}).done( function(data) {
-			var model = new BT.Models.Relationship(data, { parse: true });
-			var view = new BT.Views.Relationship({ model: model });
-			that._swapView(view)
-		});
+	showRelationship: function (type, startNodeId, endNodeId) {
+		options = {
+			type: type,
+			startNodeId: startNodeId,
+			endNodeId: endNodeId
+		};
+		var model = new BT.Models.Relationship(options);
+		model.fetch();
+		var view = new BT.Views.Relationship({ model: model });
+		this._swapView(view);
 	},
 	learnMore: function () {
 		var view = new BT.Views.LearnMore();
