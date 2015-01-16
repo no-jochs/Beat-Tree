@@ -23,7 +23,6 @@ BT.Router = Backbone.Router.extend({
 		var that = this;
 		model.fetch({
 			success: function (model, response, options) {
-				debugger
 				var view = new BT.Views.EditRelationship({ model: model });
 				that._swapView(view);
 			}
