@@ -7,5 +7,7 @@ class Covers
   
   property :notes
   property :contest_count
+  property :created_at
+  property :updated_at
   property :added_by
 end
