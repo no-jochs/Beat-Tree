@@ -20,6 +20,6 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 		
 		var attrs = $('#relationship-update-form').serializeJSON();
 		this.model.set(attrs);
-		this.model.save();
+		this.model.save({}, { patch: true });
 	}
 })
