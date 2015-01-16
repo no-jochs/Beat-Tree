@@ -51,21 +51,21 @@ class Api::RelationshipsController < ApplicationController
     
     if type == "SAMPLES"
       if @rel.update(relationship_params)
-        redirect_to "www.beat-tree.com/#relationship/type=SAMPLES&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/type=SAMPLES&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "COVERS"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "www.beat-tree.com/#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
     elsif type == "REMIXES"
       @rel.notes = relationship_params[:notes]
       if @rel.save
-        redirect_to "www.beat-tree.com/#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+        redirect_to "#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
       else
         render json: @rel.errors.full_messages, status: :unprocessable_entity
       end
@@ -77,7 +77,7 @@ class Api::RelationshipsController < ApplicationController
   private
   
   def relationship_params
-    params.require(:relationship).permit(:sample_type, :added_by, :notes, :signifance, :child_url,
+    params.require(:relationship).permit(:sample_type, :added_by, :notes, :significance, :child_url,
                                          :parent_url, :child_start_time, :child_start_time, :parent_start_time)
   end
   
