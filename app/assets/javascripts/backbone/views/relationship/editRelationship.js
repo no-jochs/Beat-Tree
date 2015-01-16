@@ -1,7 +1,9 @@
 BT.Views.EditRelationship = Backbone.CompositeView.extend({
 	initialize: function () {},
 	
-	events: {},
+	events: {
+		"click button#submit-update-relationship-form": "submitForm"
+	},
 	
 	template: JST['backbone/templates/relationship/editRelationship'],
 	
@@ -9,5 +11,15 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 		var renderedContent = this.template({ relationship: this.model });
 		this.$el.html(renderedContent);
 		return this;
+	},
+	
+	submitForm: function (event) {
+		event.preventDefault();
+		
+		debugger
+		
+		var attrs = $('#relationship-update-form').serializeJSON();
+		this.model.set(attrs);
+		this.model.save();
 	}
 })
