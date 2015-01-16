@@ -16,6 +16,7 @@ BT.Models.Relationship = Backbone.Model.extend({
 			
 		this.startNode = new BT.Models.Track(startNodeData);
 		this.endNode = new BT.Models.Track(endNodeData);
+		this.set({ id: this.startNode.get('track_spotify_id')});
 		
 		delete dataJSON.startNode;
 		delete dataJSON.endNode;
