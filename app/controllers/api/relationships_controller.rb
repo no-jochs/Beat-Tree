@@ -35,6 +35,7 @@ class Api::RelationshipsController < ApplicationController
   end
   
   def update
+    puts "here is yr params: #{params}"
     @startNode = Track.find_by(track_spotify_id: params[:startNodeId])
     @endNode = Track.find_by(track_spotify_id: params[:endNodeId])
     type = params[:type]
