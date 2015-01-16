@@ -7,8 +7,8 @@ BT.Models.Relationship = Backbone.Model.extend({
 	
 	urlRoot: function () {
 		return "http://www.beat-tree.com/api/relationships?type=" + 
-				this.type + "startNodeId=" + this.startNodeId +
-				"endNodeId=" + this.endNodeId
+				this.type + "&startNodeId=" + this.startNodeId +
+				"&endNodeId=" + this.endNodeId
 	},
 	
 	parse: function (dataJSON) {
