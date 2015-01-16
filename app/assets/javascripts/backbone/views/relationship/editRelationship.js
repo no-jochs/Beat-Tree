@@ -1,5 +1,5 @@
 BT.Views.EditRelationship = Backbone.CompositeView.extend({
-	initialize: function () {};
+	initialize: function () {},
 	
 	events: {},
 	
