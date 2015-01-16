@@ -42,7 +42,7 @@
   		<h3 class="panel-title">Edit Relationship Data</h3>
   	</div>
 	<div class="panel-body">
-		<form>
+		<form id="relationship-update-form">
 			<div class="row">
 				<h3>Notes</h3>
 				<hr>
@@ -50,27 +50,58 @@
 				<% if (relationship.escape('type') === 'SAMPLES') { %>
 					<h3>Other Relationship Data</h3>
 					<hr>
-					<label for="sample-use" >
-					<select class="form-control" id="sample-use">
-					  <option value="1">Extensive Use (Major Sample)</option>
-					  <option value="2">High Use (Frequently Sampled)</option>
-					  <option value="3">Moderate Use (Used a Fair Amount)</option>
-					  <option value="4">Light Use (Use is Limited)</option>
-					  <option value="5">Very Light Use (Sample is Referenced Once or Twice)</option>
+					<label for="sample-use" >Sample Significance</label>
+					<select class="form-control" name="significance" id="sample-use">
+					  <option value="1" <% if (relationship.escape('significance') === 1) { %>selected <% } %>>Extensive Use</option>
+					  <option value="2" <% if (relationship.escape('significance') === 2) { %>selected <% } %>>Frequent Use</option>
+					  <option value="3" <% if (relationship.escape('significance') === 3) { %>selected <% } %>>Moderate Use</option>
+					  <option value="4" <% if (relationship.escape('significance') === 4) { %>selected <% } %>>Light Use</option>
+					  <option value="5" <% if (relationship.escape('significance') === 5) { %>selected <% } %>>Very Light Use</option>
+					</select>
+					<label for="sample-type" >Sample Type</label>
+					<select class="form-control" name="sample_type" id="sample-type">
+					  <option value="Hook" <% if (relationship.escape('sample_type') === 'Hook') { %>selected <% } %>>Hook/Riff</option>
+					  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected <% } %>>Drums</option>
+					  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected <% } %>>Vocals</option>
+					  <option value="Bass" <% if (relationship.escape('sample_type') === 'Bass') { %>selected <% } %>>Bass</option>
+					  <option value="Sound Effect" <% if (relationship.escape('sample_type') === 'Sound Effect') { %>selected <% } %>>Sound Effect</option>
+					  <option value="Multiple Elements" <% if (relationship.escape('sample_type') === 'Multiple Elements') { %>selected <% } %>>Multiple Elements</option>
 					</select>
 				<% } %>
 			</div>
 		<% if (relationship.escape('type') === 'SAMPLES') { %>
 		<div class="row">
+			<hr>
 			<div class="col-xs-6">
-				
+				<h3 class="text-center">Child Data</h3>
+				<label>YouTube Sharing URL
+					<input type="url" class="form-control" name="child_url" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
+				</label>
+				<label>YouTube Start Time
+					<input type="text" class="form-control" name="child_start_time" placeholder="Format: 1:52" <% if (relationship.escape('child_start_time') != null) { %>value="<%= relationship.escape('child_start_time') %>"<% } %>>
+				</label>
+			</div>
+			<div class="col-xs-6">
+				<h3 class="text-center">Parent Data</h3>
+				<label>YouTube Sharing URL
+					<input type="url" class="form-control" name="parent_url" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>
+				</label>
+				<label>YouTube Start Time
+					<input type="text" class="form-control" name="parent_start_time" placeholder="Format: 1:52" <% if (relationship.escape('parent_start_time') != null) { %>value="<%= relationship.escape('parent_start_time') %>"<% } %>>
+				</label>
 			</div>
 		</div>
 		<% } %>
-		<strong>Relationship Created By: </strong>
-		<a href="#users/<%= relationship.escape('added_by') %>">
-			<%= relationship.escape('added_by') %>
-		</a>
+		<div class="row">
+			<div class="col-xs-12">
+				<strong>Relationship Created By: </strong>
+				<a href="#users/<%= relationship.escape('added_by') %>">
+					<%= relationship.escape('added_by') %>
+				</a>
+				<button type="button" class="btn btn-success" id="submit-update-relationship-form">Submit</button>
+			</div>
+		</div>
+	  </form>
 	</div>
   </div>
 </div>
