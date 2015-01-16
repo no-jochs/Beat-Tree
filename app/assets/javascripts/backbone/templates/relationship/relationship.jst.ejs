@@ -54,10 +54,10 @@
 		<a href="#users/<%= relationship.escape('added_by') %>">
 			<%= relationship.escape('added_by') %>
 		</a>
-		<% if (relationship.escape('added_by') == BT.current_user) %>
+		<% if (relationship.escape('added_by') == BT.current_user) { %>
 			<button type="btn btn-warning" id="update-relationship">Update Relationship</button>
 			<button type="btn btn-danger" id="delete-relationship">Delete Relationship</button>
-		<% end %>
+		<% } %>
 	</div>
   </div>
 </div>
