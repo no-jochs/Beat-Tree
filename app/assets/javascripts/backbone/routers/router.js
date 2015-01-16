@@ -20,9 +20,14 @@ BT.Router = Backbone.Router.extend({
 			endNodeId: endNodeId
 		};
 		var model = new BT.Models.Relationship(options);
-		model.fetch();
-		var view = new BT.Views.EditRelationship({ model: model });
-		this._swapView(view);
+		var that = this;
+		model.fetch({
+			success: function (model, response, options) {
+				debugger
+				var view = new BT.Views.EditRelationship({ model: model });
+				that._swapView(view);
+			}
+		});
 	},
 	splash: function () {
 		var view = new BT.Views.Splash();
