@@ -19,8 +19,8 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 		var that = this;
 		this.model.save(attrs, {
 			success: function (model, response, options) {
-				Backbone.history.navigate('#relationship/' + that.startNodeId + 
-						'?type=' + that.type + '&endNodeId=' + that.endNodeId,
+				Backbone.history.navigate('#relationship/' + that.model.startNodeId + 
+						'?type=' + that.model.type + '&endNodeId=' + that.model.endNodeId,
 						{ trigger: true}
 				);
 				that.model.trigger('sync');
