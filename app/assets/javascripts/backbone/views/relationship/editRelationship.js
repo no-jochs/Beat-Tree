@@ -19,12 +19,15 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 		debugger
 		
 		var attrs = $('#relationship-update-form').serializeJSON();
+		var that = this;
 		this.model.save(attrs, {
 			success: function (model, response, options) {
-				Backbone.history.navigate('#relationship/' + this.startNode.get('track_spotify_id') + 
-						'?type=' + this.type + '&endNodeId=' + this.endNode.get('track_spotify_id'),
+				that.model = model;
+				Backbone.history.navigate('#relationship/' + that.startNode.get('track_spotify_id') + 
+						'?type=' + that.type + '&endNodeId=' + that.endNode.get('track_spotify_id'),
 						{ trigger: true}
 				);
+				that.model.trigger('sync');
 			}
 		});
 	}
