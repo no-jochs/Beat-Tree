@@ -6,7 +6,10 @@ class Api::RelationshipsController < ApplicationController
     type = params[:type]
     
     if type == "SAMPLES"
-      @rel = Track.query_as(:t).match("t-[r:SAMPLES]->(t2)").where("t.track_spotify_id = '#{@startNode.track_spotify_id}' AND t2.track_spotify_id = '#{@endNode.track_spotify_id}'").pluck(:r).first
+      @rel = Track.query_as(:t)
+                  .match("t-[r:SAMPLES]->(t2)")
+                  .where("t.track_spotify_id = '#{@startNode.track_spotify_id}' AND t2.track_spotify_id = '#{@endNode.track_spotify_id}'")
+                  .pluck(:r).first
       if @startNode && @endNode && @rel
         render 'api/relationships/relationship', status: :ok
       else
@@ -29,6 +32,52 @@ class Api::RelationshipsController < ApplicationController
     else
       render json: ['Not Found'], status: :not_found
     end
+  end
+  
+  def update
+    @startNode = Track.find_by(track_spotify_id: params[:startNodeId])
+    @endNode = Track.find_by(track_spotify_id: params[:endNodeId])
+    type = params[:type]
+    @rel = Track.query_as(:t)
+                .match("t-[r:#{type}]->(t2)")
+                .where("t.track_spotify_id = '#{@startNode.track_spotify_id}' AND t2.track_spotify_id = '#{@endNode.track_spotify_id}'")
+                .pluck(:r).first
+    
+    if @rel.added_by != current_user.username
+      render json: ['Not authorized'], status: :not_authorized
+      return
+    end
+    
+    if type == "SAMPLES"
+      if @rel.update(relationship_params)
+        redirect_to "www.beat-tree.com/#relationship/type=SAMPLES&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+      else
+        render json: @rel.errors.full_messages, status: :unprocessable_entity
+      end
+    elsif type == "COVERS"
+      @rel.notes = relationship_params[:notes]
+      if @rel.save
+        redirect_to "www.beat-tree.com/#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+      else
+        render json: @rel.errors.full_messages, status: :unprocessable_entity
+      end
+    elsif type == "REMIXES"
+      @rel.notes = relationship_params[:notes]
+      if @rel.save
+        redirect_to "www.beat-tree.com/#relationship/type=COVERS&startNodeId=#{@startNode.track_spotify_id}&endNodeId=#{@endNode.track_spotify_id}"
+      else
+        render json: @rel.errors.full_messages, status: :unprocessable_entity
+      end
+    else
+      render json: ['Not Found'], status: :not_found
+    end
+  end
+  
+  private
+  
+  def relationship_params
+    params.require(:relationship).permit(:sample_type, :added_by, :notes, :signifance, :child_url,
+                                         :parent_url, :child_start_time, :child_start_time, :parent_start_time)
   end
   
 end
