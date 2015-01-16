@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resource :neojson, only: [:show]
     resources :users, only: [:create, :show, :update, :destroy]
     resource :session, only: [:create, :destroy]
-    resources :relationships, only: [:show, :create, :destroy]
+    resources :relationships, only: [:show, :update, :destroy]
   end
   
   resources :tracks do
