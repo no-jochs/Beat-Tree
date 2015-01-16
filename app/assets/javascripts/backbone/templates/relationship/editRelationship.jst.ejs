@@ -46,7 +46,7 @@
 			<div class="row">
 				<h3>Notes</h3>
 				<hr>
-				<textarea name="relationship[notes]"><%= relationship.escape('notes') %></textarea>
+				<textarea class="form-control" name="notes"><%= relationship.escape('notes') %></textarea>
 				<% if (relationship.escape('type') === 'SAMPLES') { %>
 					<h3>Other Relationship Data</h3>
 					<hr>
@@ -59,7 +59,7 @@
 					  <option value="5" <% if (relationship.escape('significance') === 5) { %>selected <% } %>>Very Light Use</option>
 					</select>
 					<label for="sample-type" >Sample Type</label>
-					<select class="form-control" name="relationship[sample_type]" id="sample-type">
+					<select class="form-control" name="sample_type" id="sample-type">
 					  <option value="Hook" <% if (relationship.escape('sample_type') === 'Hook') { %>selected <% } %>>Hook/Riff</option>
 					  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected <% } %>>Drums</option>
 					  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected <% } %>>Vocals</option>
@@ -75,19 +75,19 @@
 			<div class="col-xs-6">
 				<h3 class="text-center">Child Data</h3>
 				<label>YouTube Sharing URL
-					<input type="url" class="form-control" name="relationship[child_url]" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
+					<input type="url" class="form-control" name="child_url" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
 				</label>
 				<label>YouTube Start Time
-					<input type="text" class="form-control" name="relationship[child_start_time]" placeholder="Format: 1:52" <% if (relationship.escape('child_start_time') != null) { %>value="<%= relationship.escape('child_start_time') %>"<% } %>>
+					<input type="text" class="form-control" name="child_start_time" placeholder="Format: 1:52" <% if (relationship.escape('child_start_time') != null) { %>value="<%= relationship.escape('child_start_time') %>"<% } %>>
 				</label>
 			</div>
 			<div class="col-xs-6">
 				<h3 class="text-center">Parent Data</h3>
 				<label>YouTube Sharing URL
-					<input type="url" class="form-control" name="relationship[parent_url]" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>
+					<input type="url" class="form-control" name="parent_url" placeholder="Format: http://youtu.be/bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>
 				</label>
 				<label>YouTube Start Time
-					<input type="text" class="form-control" name="relationship[parent_start_time]" placeholder="Format: 1:52" <% if (relationship.escape('parent_start_time') != null) { %>value="<%= relationship.escape('parent_start_time') %>"<% } %>>
+					<input type="text" class="form-control" name="parent_start_time" placeholder="Format: 1:52" <% if (relationship.escape('parent_start_time') != null) { %>value="<%= relationship.escape('parent_start_time') %>"<% } %>>
 				</label>
 			</div>
 		</div>
