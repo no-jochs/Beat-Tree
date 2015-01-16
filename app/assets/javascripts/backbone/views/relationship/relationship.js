@@ -14,8 +14,8 @@ BT.Views.Relationship = Backbone.CompositeView.extend({
 	},
 	
 	updateRelationship: function () {
-		Backbone.history.navigate( "#relationship/edit/" + this.type +
-									"/" + this.startNodeId + "/" + this.endNodeId,
+		Backbone.history.navigate( "#relationship/edit/" + this.model.type +
+									"/" + this.model.startNodeId + "/" + this.model.endNodeId,
 									{ trigger: true}
 								);
 	}
