@@ -2,7 +2,7 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 	initialize: function () {},
 	
 	events: {
-		"click button#submit-update-relationship-form": "submitForm"
+		"click #submit-update-relationship-form": "submitForm"
 	},
 	
 	template: JST['backbone/templates/relationship/editRelationship'],
