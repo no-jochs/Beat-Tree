@@ -295,44 +295,38 @@ BT.Views.TrackShowNodeView = Backbone.CompositeView.extend({
 	goToRelationship: function(event) {
 		if (this.model.get('relationshipType') === 'sampling') {
 			Backbone.history.navigate(
-				"#relationship/type=SAMPLES&startNodeId=" + 
-				this.model.get('track_spotify_id') + '&' +
-				"endNodeId=" + this.model.get('parentNodeId'),
+				"#relationship/SAMPLES/" + 
+				this.model.get('track_spotify_id') + '/' + this.model.get('parentNodeId'),
 				{ trigger: true }
 			);
 		} else if (this.model.get('relationshipType') === 'covering') {
 			Backbone.history.navigate(
-				"#relationship/type=COVERS&startNodeId=" + 
-				this.model.get('track_spotify_id') + '&' +
-				"endNodeId=" + this.model.get('parentNodeId'),
+				"#relationship/COVERS/" + 
+				this.model.get('track_spotify_id') + '/' + this.model.get('parentNodeId'),
 				{ trigger: true }
 			);
 		} else if (this.model.get('relationshipType') === 'remixing') {
 			Backbone.history.navigate(
-				"#relationship/type=REMIXES&startNodeId=" + 
-				this.model.get('track_spotify_id') + '&' +
-				"endNodeId=" + this.model.get('parentNodeId'),
+				"#relationship/REMIXES/" + 
+				this.model.get('track_spotify_id') + '/' + this.model.get('parentNodeId'),
 				{ trigger: true }
 			);
 		} else if (this.model.get('relationshipType') === 'samples') {
 			Backbone.history.navigate(
-				"#relationship/type=SAMPLES&startNodeId=" + 
-				this.model.get('parentNodeId') + '&' +
-				"endNodeId=" + this.model.get('id'),
+				"#relationship/SAMPLES/" + 
+				this.model.get('parentNodeId') + '/' + this.model.get('id'),
 				{ trigger: true }
 			);
 		} else if (this.model.get('relationshipType') === 'covers') {
 			Backbone.history.navigate(
-				"#relationship/type=COVERS&startNodeId=" + 
-				this.model.get('parentNodeId') + '&' +
-				"endNodeId=" + this.model.get('id'),
+				"#relationship/COVERS/" + 
+				this.model.get('parentNodeId') + '/' + this.model.get('id'),
 				{ trigger: true }
 			);
 		} else if (this.model.get('relationshipType') === 'remixes') {
 			Backbone.history.navigate(
-				"#relationship/type=REMIXES&startNodeId=" + 
-				this.model.get('parentNodeId') + '&' +
-				"endNodeId=" + this.model.get('id'),
+				"#relationship/REMIXES/" + 
+				this.model.get('parentNodeId') + '/' + this.model.get('id'),
 				{ trigger: true }
 			);
 		}
