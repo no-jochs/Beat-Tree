@@ -52,11 +52,11 @@
 					<hr>
 					<label for="sample-use" >Sample Significance</label>
 					<select class="form-control" name="significance" id="sample-use">
-					  <option value="1" <% if (relationship.escape('significance') === 1) { %>selected <% } %>>Extensive Use</option>
-					  <option value="2" <% if (relationship.escape('significance') === 2) { %>selected <% } %>>Frequent Use</option>
-					  <option value="3" <% if (relationship.escape('significance') === 3) { %>selected <% } %>>Moderate Use</option>
-					  <option value="4" <% if (relationship.escape('significance') === 4) { %>selected <% } %>>Light Use</option>
-					  <option value="5" <% if (relationship.escape('significance') === 5) { %>selected <% } %>>Very Light Use</option>
+					  <option value="1" <% if (relationship.escape('significance') === "1") { %>selected<% } %>>Extensive Use</option>
+					  <option value="2" <% if (relationship.escape('significance') === "2") { %>selected<% } %>>Frequent Use</option>
+					  <option value="3" <% if (relationship.escape('significance') === "3") { %>selected<% } %>>Moderate Use</option>
+					  <option value="4" <% if (relationship.escape('significance') === "4") { %>selected<% } %>>Light Use</option>
+					  <option value="5" <% if (relationship.escape('significance') === "5") { %>selected<% } %>>Very Light Use</option>
 					</select>
 					<label for="sample-type" >Sample Type</label>
 					<select class="form-control" name="sample_type" id="sample-type">
