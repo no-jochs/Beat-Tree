@@ -42,22 +42,93 @@
   		<h3 class="panel-title">Relationship Data</h3>
   	</div>
 	<div class="panel-body">
-		<h3>Notes</h3>
-		<hr>
-		<% if (relationship.has('notes')) { %>
-			<%= relationship.escape('notes') %>
-		<% } else { %>
-			No notes to show.
+		<% if (relationship.escape('type') === 'SAMPLES' && relationship.escape('type') != null) { %>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="marker<%= relationship.escape('significance') %> rel-marker">
+						<h2 class="text-center">
+							<% if (relationship.escape('significance') === '1') { %>
+								Extensive Sampling
+							<% } else if (relationship.escape('significance') === '2') { %>
+								Frequent Sampling
+							<% } else if (relationship.escape('significance') === '3') { %>
+								Moderate Sampling
+							<% } else if (relationship.escape('significance') === '4') { %>
+								Light Sampling
+							<% } else if (relationship.escape('significance') === '5') { %>
+								Very Light Sampling
+							<% } %>
+						</h2>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="<%= relationship.escape('sample_type') %>-marker rel-marker">
+						<h2><%= relationship.escape('sample_type') %></h2>
+					</div>
+				</div>
+			</div>
 		<% } %>
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<h3>Notes</h3>
+				<hr>
+					<div class="well well-lg">
+						<% if (relationship.has('notes') && relationship.escape('notes').length > 0) { %>
+							<%= relationship.escape('notes') %>
+						<% } else { %>
+							No notes to show.
+						<% } %>
+					</div>
+			</div>
+		</div>
 		<hr>
-		<strong>Relationship Created By: </strong>
-		<a href="#users/<%= relationship.escape('added_by') %>">
-			<%= relationship.escape('added_by') %>
-		</a>
-		<% if (relationship.escape('added_by') == BT.current_user) { %>
-			<button class="btn btn-warning" id="update-relationship">Update Relationship</button>
-			<button class="btn btn-danger" id="delete-relationship">Delete Relationship</button>
+		<% if (relationship.escape('type') === "SAMPLES") { %>
+			<div class="row">
+				<h3>Sample Comparison</h3>
+				<div class="col-xs-5">
+					<center>
+						<h4><%= relationship.startNode.escape('track_name') %></h4>
+						<h5>By: <%= relationship.startNode.escape('artist_name') %></h5>
+						<% if (relationship.has('child_url')) { %>
+							<iframe width="300" height="225" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
+						<% } else { %>
+							<h4 class="special-red">No YouTube URI Provided</h4>
+						<% } %>
+					</center>
+				</div>
+				<div class="col-xs-2">
+					<div>
+						<h3 class="text-center rel-type-designator">
+						-[:<%= relationship.get('type') %>]->
+						</h3>
+					</div>
+				</div>
+				<div class="col-xs-5">
+					<center>
+						<h4><%= relationship.endNode.escape('track_name') %></h4>
+						<h5>By: <%= relationship.endNode.escape('artist_name') %></h5>
+						<% if (relationship.has('parent_url')) { %>
+							<iframe width="300" height="225" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
+						<% } else { %>
+							<h4 class="special-red">No YouTube URI Provided</h4>
+						<% } %>
+					</center>
+				</div>
+				<hr>
+			</div>
 		<% } %>
+		<div class="row">
+			<div class="col-xs-12">
+				<strong>Relationship Created By: </strong>
+				<a href="#users/<%= relationship.escape('added_by') %>">
+					<%= relationship.escape('added_by') %>
+				</a>
+				<% if (relationship.escape('added_by') == BT.current_user) { %>
+					<button class="btn btn-warning floater-right" id="update-relationship">Update Relationship</button>
+					<button class="btn btn-danger floater-right" id="delete-relationship">Delete Relationship</button>
+				<% } %>
+			</div>
+		</div>
 	</div>
   </div>
 </div>
