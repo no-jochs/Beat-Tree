@@ -63,7 +63,7 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="<%= relationship.escape('sample_type') %>-marker rel-marker">
-						<h2><%= relationship.escape('sample_type') %></h2>
+						<h2 class="text-center">Sample type: <%= relationship.escape('sample_type') %></h2>
 					</div>
 				</div>
 			</div>
@@ -84,14 +84,18 @@
 		<hr>
 		<% if (relationship.escape('type') === "SAMPLES") { %>
 			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2">
 				<h3>Sample Comparison</h3>
+				<hr>
+			</div>
 				<div class="col-xs-5">
 					<center>
 						<h4><%= relationship.startNode.escape('track_name') %></h4>
 						<h5>By: <%= relationship.startNode.escape('artist_name') %></h5>
 						<% if (relationship.has('child_url')) { %>
-							<iframe width="300" height="225" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
+							<iframe width="640" height="480" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
 							<% if (relationship.has('child_start_time')) { %>
+								<br>
 							<em>Sample starts at <%= relationship.escape('child_start_time') %></em>
 							<% } %>
 						<% } else { %>
@@ -111,8 +115,9 @@
 						<h4><%= relationship.endNode.escape('track_name') %></h4>
 						<h5>By: <%= relationship.endNode.escape('artist_name') %></h5>
 						<% if (relationship.has('parent_url')) { %>
-							<iframe width="300" height="225" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
+							<iframe width="640" height="480" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
 							<% if (relationship.has('parent_start_time')) { %>
+								<br>
 							<em>Sample starts at <%= relationship.escape('parent_start_time') %></em>
 							<% } %>
 						<% } else { %>
