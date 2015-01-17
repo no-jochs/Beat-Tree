@@ -93,7 +93,7 @@
 						<h4><%= relationship.startNode.escape('track_name') %></h4>
 						<h5>By: <%= relationship.startNode.escape('artist_name') %></h5>
 						<% if (relationship.has('child_url')) { %>
-							<iframe width="640" height="480" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
+							<iframe width="550" height="413" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
 							<% if (relationship.has('child_start_time')) { %>
 								<br>
 							<em>Sample starts at <%= relationship.escape('child_start_time') %></em>
@@ -115,7 +115,7 @@
 						<h4><%= relationship.endNode.escape('track_name') %></h4>
 						<h5>By: <%= relationship.endNode.escape('artist_name') %></h5>
 						<% if (relationship.has('parent_url')) { %>
-							<iframe width="640" height="480" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
+							<iframe width="550" height="413" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
 							<% if (relationship.has('parent_start_time')) { %>
 								<br>
 							<em>Sample starts at <%= relationship.escape('parent_start_time') %></em>
@@ -129,6 +129,7 @@
 			</div>
 		<% } %>
 		<div class="row">
+			<hr>
 			<div class="col-xs-12">
 				<strong>Relationship Created By: </strong>
 				<a href="#users/<%= relationship.escape('added_by') %>">
