@@ -1,5 +1,7 @@
 BT.Views.EditRelationship = Backbone.CompositeView.extend({
-	initialize: function () {},
+	initialize: function () {
+		this.listenTo(this.model, 'sync', this.render);
+	},
 	
 	events: {
 		"click #submit-update-relationship-form": "submitForm"
@@ -24,7 +26,7 @@ BT.Views.EditRelationship = Backbone.CompositeView.extend({
 						'/' + that.model.startNodeId + '/' + that.model.endNodeId,
 						{ trigger: true}
 				);
-				that.model.trigger('sync');
+				that.model.fetch();
 			}
 		});
 	}
