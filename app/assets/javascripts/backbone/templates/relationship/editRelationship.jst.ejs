@@ -77,24 +77,29 @@
 			<hr>
 			<div class="col-xs-6">
 				<h3 class="text-center">Child Data</h3>
-				<label>YouTube URI
-					<input type="url" class="form-control" name="child_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
-				</label>
-				<label>YouTube Start Time
-					<input type="text" class="form-control" name="child_start_time" placeholder="Format: 1:52" <% if (relationship.escape('child_start_time') != null) { %>value="<%= relationship.escape('child_start_time') %>"<% } %>>
-				</label>
+				<center>
+					<label>YouTube URI
+						<input type="url" class="form-control" name="child_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
+					</label>
+					<label>YouTube Start Time
+						<input type="text" class="form-control" name="child_start_time" placeholder="Format: 1:52" <% if (relationship.escape('child_start_time') != null) { %>value="<%= relationship.escape('child_start_time') %>"<% } %>>
+					</label>
+				</center>
 			</div>
 			<div class="col-xs-6">
 				<h3 class="text-center">Parent Data</h3>
-				<label>YouTube URI
-					<input type="url" class="form-control" name="parent_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>
-				</label>
-				<label>YouTube Start Time
-					<input type="text" class="form-control" name="parent_start_time" placeholder="Format: 1:52" <% if (relationship.escape('parent_start_time') != null) { %>value="<%= relationship.escape('parent_start_time') %>"<% } %>>
-				</label>
+				<center>
+					<label>YouTube URI
+						<input type="url" class="form-control" name="parent_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>
+					</label>
+					<label>YouTube Start Time
+						<input type="text" class="form-control" name="parent_start_time" placeholder="Format: 1:52" <% if (relationship.escape('parent_start_time') != null) { %>value="<%= relationship.escape('parent_start_time') %>"<% } %>>
+					</label>
+				</center>
 			</div>
 		</div>
 		<% } %>
+		<hr>
 		<div class="row">
 			<div class="col-xs-12">
 				<strong>Relationship Created By: </strong>
