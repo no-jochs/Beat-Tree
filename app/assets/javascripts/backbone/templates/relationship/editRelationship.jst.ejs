@@ -60,12 +60,13 @@
 					</select>
 					<label for="sample-type" >Sample Type</label>
 					<select class="form-control" name="sample_type" id="sample-type">
-					  <option value="Hook" <% if (relationship.escape('sample_type') === 'Hook') { %>selected <% } %>>Hook/Riff</option>
-					  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected <% } %>>Drums</option>
-					  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected <% } %>>Vocals</option>
-					  <option value="Bass" <% if (relationship.escape('sample_type') === 'Bass') { %>selected <% } %>>Bass</option>
+					  <option value="Hook" <% if (relationship.escape('sample_type') === 'Hook') { %>selected<% } %>>Hook/Riff</option>
+					  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected<% } %>>Drums</option>
+					  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected<% } %>>Vocals</option>
+					  <option value="Bass" <% if (relationship.escape('sample_type') === 'Bass') { %>selected<% } %>>Bass</option>
 					  <option value="Sound Effect" <% if (relationship.escape('sample_type') === 'Sound Effect') { %>selected <% } %>>Sound Effect</option>
-					  <option value="Multiple Elements" <% if (relationship.escape('sample_type') === 'Multiple Elements') { %>selected <% } %>>Multiple Elements</option>
+					  <option value="Multiple Elements" <% if (relationship.escape('sample_type') === 'Multiple Elements') { %>selected<% } %>>Multiple Elements</option>
+					  <option value="Other" <% if (relationship.escape('sample_type') === 'Other') { %>selected<% } %>>Other</option>
 					</select>
 				<% } %>
 			</div>
