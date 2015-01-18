@@ -412,14 +412,17 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 		switch(option){
 			case "samples":
 				this.childModel.set({new_samples: this.parentModel.id});
+				this.relationship = 'SAMPLES';
 				proceed = true;
 				break;
 			case "covers":
 				this.childModel.set({new_covers: this.parentModel.id});
 				proceed = true;
+				this.relationship = 'COVERS';
 				break;
 			case "remixes":
 				this.childModel.set({new_remixes: this.parentModel.id});
+				this.relationship = "REMIXES"
 				proceed = true;
 				break;
 			default:
@@ -429,9 +432,7 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 			var that = this;
 			this.childModel.save({},{
 				success: function (model, response, options) {
-					that.childModel.fetch();
-					that.parentModel.fetch();
-					BT.Utils.FreePage();
+					Backbone.history.navigate("#relationship/edit/" + that.relationship + '/' + that.childModel.get('track_spotify_id') + '/' + that.parentModel.get('track_spotify_id'), {trigger: true});
 				}
 			});
 		}
