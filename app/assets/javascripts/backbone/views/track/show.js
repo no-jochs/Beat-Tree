@@ -432,7 +432,8 @@ BT.Views.nodeConfirmView = Backbone.CompositeView.extend({
 			var that = this;
 			this.childModel.save({},{
 				success: function (model, response, options) {
-					Backbone.history.navigate("#relationship/edit/" + that.relationship + '/' + that.childModel.get('track_spotify_id') + '/' + that.parentModel.get('track_spotify_id'), {trigger: true});
+					Backbone.history.navigate("#relationship/edit/" + that.relationship + '/' + that.childModel.id + '/' + that.parentModel.id, {trigger: true});
+					BT.Utils.FreePage();
 				}
 			});
 		}
