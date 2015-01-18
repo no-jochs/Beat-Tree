@@ -12,6 +12,12 @@
 			    <h3 class="media-heading"><%= BT.Utils.SliceText(relationship.startNode.escape('track_name'), 45) %></h3>
 		        <p><strong>Artist: </strong><%= BT.Utils.SliceText(relationship.startNode.escape('artist_name'), 55) %></p>
 				<p><strong>Album: </strong><%= BT.Utils.SliceText(relationship.startNode.escape('album_name'), 55) %></p>
+				<p>
+				  	<button class="btn btn-default add-child-track-to-player" type="button">
+				  		<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+						Add Track to Player
+				  	</button>
+				</p>
 			  </div>
 			</div>
 		</div>
@@ -31,6 +37,12 @@
 			    <h3 class="media-heading"><%= BT.Utils.SliceText(relationship.endNode.escape('track_name'), 45) %></h3>
 		        <p><strong>Artist: </strong><%= BT.Utils.SliceText(relationship.endNode.escape('artist_name'), 55) %></p>
 				<p><strong>Album: </strong><%= BT.Utils.SliceText(relationship.endNode.escape('album_name'), 55) %></p>
+				<p>
+				  	<button class="btn btn-default add-parent-track-to-player" type="button">
+				  		<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+						Add Track to Player
+				  	</button>
+				</p>
 			  </div>
 			</div>
 		</div>

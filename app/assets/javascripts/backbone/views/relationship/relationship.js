@@ -3,7 +3,9 @@ BT.Views.Relationship = Backbone.CompositeView.extend({
 	
 	events: {
 		"click button#update-relationship": "updateRelationship",
-		"click button#delete-relationship": "deleteRelationship"
+		"click button#delete-relationship": "deleteRelationship",
+		"click button.add-child-track-to-player": "addChildToPlayer",
+		"click button.add-parent-track-to-player": "addParentToPlayer"
 	},
 	
 	template: JST['backbone/templates/relationship/relationship'],
@@ -27,5 +29,13 @@ BT.Views.Relationship = Backbone.CompositeView.extend({
 				Backbone.history.navigate('#feed', { trigger: true });
 			}
 		});
+	},
+	
+	addChildToPlayer: function () {
+		BT.Utils.changePlayerTrack(this.model.startNode.get('track_spotify_id'));
+	},
+	
+	addParentToPlayer: function () {
+		BT.Utils.changePlayerTrack(this.model.endNode.get('track_spotify_id'));
 	}
 });
