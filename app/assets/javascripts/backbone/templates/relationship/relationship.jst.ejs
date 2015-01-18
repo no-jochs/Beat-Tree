@@ -65,7 +65,7 @@
 				</div>
 				<div class="<%= relationship.escape('sample_type') %>-marker rel-marker">
 					<h4 class="text-center">
-						<% if (relationship.escape('sample_type').length > 0) %>
+						<% if (relationship.escape('sample_type').length > 0) { %>
 						Sample Type: <%= relationship.escape('sample_type') %>
 						<% } else { %>
 						Sample Type Not Provided
