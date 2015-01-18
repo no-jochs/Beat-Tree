@@ -5,6 +5,7 @@ BT.Router = Backbone.Router.extend({
 	routes: {
 		 "search": "trackSearch",
 		 "tracks/:id": "trackShow",
+		"users/:id": "userShow",
 		 "welcome": "welcomePage",
 		 "feed": "feed",
 		 "stats": "stats",
@@ -12,6 +13,16 @@ BT.Router = Backbone.Router.extend({
 		 "relationship/edit/:type/:startNodeId/:endNodeId": "updateRelationship",
 		 "relationship/:type/:startNodeId/:endNodeId": "showRelationship",
 		 "learnmore": "learnMore",
+	},
+	userShow: function (id) {
+		var that = this;
+		var user = new BT.Models.User({ id: id });
+		user.fetch({
+			success: function (model) {
+				var view = new BT.Views.UserShow({ model: model });
+				that._swapView(view)
+			}
+		});
 	},
 	updateRelationship: function(type, startNodeId, endNodeId) {
 		options = {
