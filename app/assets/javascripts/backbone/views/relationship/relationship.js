@@ -24,7 +24,7 @@ BT.Views.Relationship = Backbone.CompositeView.extend({
 	deleteRelationship: function () {
 		this.model.destroy({
 			success: function () {
-				Backbone.history.navigate('#feed');
+				Backbone.history.navigate('#feed', { trigger: true });
 			}
 		});
 	}
