@@ -16,7 +16,7 @@ BT.Router = Backbone.Router.extend({
 	},
 	userShow: function (id) {
 		var that = this;
-		var user = new BT.Models.User({ id: id });
+		var user = new BT.Models.User({ username: id });
 		user.fetch({
 			success: function (model) {
 				var view = new BT.Views.UserShow({ model: model });
