@@ -34,6 +34,20 @@ class Api::UsersController < ApplicationController
     end
   end
   
+  def show
+    @user = User.find_by(username: params[:id])
+    
+    if @user
+      @relcount = Neo4j::Session.query("MATCH (a:Track)-[r]->(b:Track) WHERE r.added_by = '#{@user.username}' RETURN COUNT(r)")
+      @trackcount = Neo4j::Session.query("MATCH (a:Track) WHERE a.added_by = '#{@user.username}' RETURN COUNT(a)")
+      @relationships = Neo4j::Session.query("MATCH (n:Track)-[r]->(n2) WHERE r.added_by = '#{@user.username}' RETURN startNode(r) AS startNode, endNode(r) AS endNode, type(r) as type")
+      render "api/users/show"
+    else
+      render json: ["Not Found"], status: :not_found
+    end
+    
+  end
+  
   def destroy
     @user = User.find_by(username: params[:id])
     
