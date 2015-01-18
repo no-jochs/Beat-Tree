@@ -53,6 +53,7 @@
 						<hr>
 						<label for="sample-use" >Sample Significance</label>
 						<select class="form-control" name="significance" id="sample-use">
+						  <option value="" <% if (relationship.escape('significance') === "") { %>selected<% } %>></option>
 						  <option value="1" <% if (relationship.escape('significance') === "1") { %>selected<% } %>>Extensive Sampling</option>
 						  <option value="2" <% if (relationship.escape('significance') === "2") { %>selected<% } %>>Frequent Sampling</option>
 						  <option value="3" <% if (relationship.escape('significance') === "3") { %>selected<% } %>>Moderate Sampling</option>
@@ -61,6 +62,7 @@
 						</select>
 						<label for="sample-type" >Sample Type</label>
 						<select class="form-control" name="sample_type" id="sample-type">
+						  <option value="" <% if (relationship.escape('sample_type') === '') { %>selected<% } %>></option>
 						  <option value="Hook" <% if (relationship.escape('sample_type') === 'Hook') { %>selected<% } %>>Hook/Riff</option>
 						  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected<% } %>>Drums</option>
 						  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected<% } %>>Vocals</option>
