@@ -9,9 +9,9 @@
 			    <img class="relationship-show-album-img" src="<%= relationship.startNode.escape('album_m_image') %>" alt="...">
 			  </a>
 			  <div class="media-body">
-			    <h3 class="media-heading"><%= relationship.startNode.escape('track_name') %></h3>
-		        <p><strong>Artist: </strong><%= relationship.startNode.escape('artist_name') %></p>
-				<p><strong>Album: </strong><%= relationship.startNode.escape('album_name') %></p>
+			    <h3 class="media-heading"><%= BT.Utils.SliceText(relationship.startNode.escape('track_name'), 45) %></h3>
+		        <p><strong>Artist: </strong><%= BT.Utils.SliceText(relationship.startNode.escape('artist_name'), 55) %></p>
+				<p><strong>Album: </strong><%= BT.Utils.SliceText(relationship.startNode.escape('album_name'), 55) %></p>
 			  </div>
 			</div>
 		</div>
@@ -28,9 +28,9 @@
 			    <img class="relationship-show-album-img" src="<%= relationship.endNode.escape('album_m_image') %>" alt="...">
 			  </a>
 			  <div class="media-body">
-			    <h3 class="media-heading"><%= relationship.endNode.escape('track_name') %></h3>
-		        <p><strong>Artist: </strong><%= relationship.endNode.escape('artist_name') %></p>
-				<p><strong>Album: </strong><%= relationship.endNode.escape('album_name') %></p>
+			    <h3 class="media-heading"><%= BT.Utils.SliceText(relationship.endNode.escape('track_name'), 45) %></h3>
+		        <p><strong>Artist: </strong><%= BT.Utils.SliceText(relationship.endNode.escape('artist_name'), 55) %></p>
+				<p><strong>Album: </strong><%= BT.Utils.SliceText(relationship.endNode.escape('album_name'), 55) %></p>
 			  </div>
 			</div>
 		</div>
@@ -97,8 +97,8 @@
 	<div clas='row'>
 		<div class="col-xs-5">
 			<center>
-				<h4><%= relationship.startNode.escape('track_name') %></h4>
-				<h5>By: <%= relationship.startNode.escape('artist_name') %></h5>
+				<h4><%= BT.Utils.SliceText(relationship.startNode.escape('track_name'), 50) %></h4>
+				<h5><%= BT.Utils.SliceText(relationship.startNode.escape('artist_name', 60) %></h5>
 				<% if (relationship.has('child_url') && relationship.escape('child_url').length > 0) { %>
 					<iframe width="550" height="413" src="//www.youtube.com/embed/<%= relationship.escape('child_url') %>" frameborder="0" allowfullscreen></iframe>
 					<% if (relationship.has('child_start_time')) { %>
@@ -112,15 +112,15 @@
 		</div>
 		<div class="col-xs-2">
 			<div>
-				<h3 class="text-center rel-type-designator">
+				<h3 class="text-center rel-type-designator2">
 				-[:<%= relationship.get('type') %>]->
 				</h3>
 			</div>
 		</div>
 		<div class="col-xs-5">
 			<center>
-				<h4><%= relationship.endNode.escape('track_name') %></h4>
-				<h5>By: <%= relationship.endNode.escape('artist_name') %></h5>
+				<h4><%= BT.Utils.SliceText(relationship.endNode.escape('track_name'), 50) %></h4>
+				<h5><%= BT.Utils.SliceText(relationship.endNode.escape('artist_name'), 60) %></h5>
 				<% if (relationship.has('parent_url') && relationship.escape('parent_url').length > 0) { %>
 					<iframe width="550" height="413" src="//www.youtube.com/embed/<%= relationship.escape('parent_url') %>" frameborder="0" allowfullscreen></iframe>
 					<% if (relationship.has('parent_start_time')) { %>
