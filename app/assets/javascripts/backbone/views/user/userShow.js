@@ -7,7 +7,7 @@ BT.Views.UserShow = Backbone.CompositeView.extend({
 		var renderedContent = this.template({ user: this.model });
 		this.$el.html(renderedContent);
 		this.addRelationships();
-		return
+		return this;
 	},
 	
 	addRelationships: function () {
