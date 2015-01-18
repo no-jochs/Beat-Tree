@@ -54,11 +54,11 @@
 						<label for="sample-use" >Sample Significance</label>
 						<select class="form-control" name="significance" id="sample-use">
 						  <option value="" <% if (relationship.escape('significance') === "") { %>selected<% } %>></option>
-						  <option value="1" <% if (relationship.escape('significance') === "1") { %>selected<% } %>>Extensive Sampling</option>
-						  <option value="2" <% if (relationship.escape('significance') === "2") { %>selected<% } %>>Frequent Sampling</option>
-						  <option value="3" <% if (relationship.escape('significance') === "3") { %>selected<% } %>>Moderate Sampling</option>
-						  <option value="4" <% if (relationship.escape('significance') === "4") { %>selected<% } %>>Light Sampling</option>
-						  <option value="5" <% if (relationship.escape('significance') === "5") { %>selected<% } %>>Very Light Sampling</option>
+						  <option value="1" <% if (relationship.escape('significance') === "1") { %>selected<% } %>>Foundational</option>
+						  <option value="2" <% if (relationship.escape('significance') === "2") { %>selected<% } %>>Used Heavily</option>
+						  <option value="3" <% if (relationship.escape('significance') === "3") { %>selected<% } %>>Used Moderately</option>
+						  <option value="4" <% if (relationship.escape('significance') === "4") { %>selected<% } %>>Used Lightly</option>
+						  <option value="5" <% if (relationship.escape('significance') === "5") { %>selected<% } %>>Barely Used / Used Once</option>
 						</select>
 						<label for="sample-type" >Sample Type</label>
 						<select class="form-control" name="sample_type" id="sample-type">
@@ -67,9 +67,12 @@
 						  <option value="Drums" <% if (relationship.escape('sample_type') === 'Drums') { %>selected<% } %>>Drums</option>
 						  <option value="Vocals" <% if (relationship.escape('sample_type') === 'Vocals') { %>selected<% } %>>Vocals</option>
 						  <option value="Bass" <% if (relationship.escape('sample_type') === 'Bass') { %>selected<% } %>>Bass</option>
+						  <option value="Piano" <% if (relationship.escape('sample_type') === 'Piano') { %>selected<% } %>>Piano</option>
+						  <option value="Strings" <% if (relationship.escape('sample_type') === 'Strings') { %>selected<% } %>>Strings</option>
+						  <option value="Horns" <% if (relationship.escape('sample_type') === 'Horns') { %>selected<% } %>>Horns</option>
 						  <option value="Sound Effect" <% if (relationship.escape('sample_type') === 'Sound Effect') { %>selected <% } %>>Sound Effect</option>
 						  <option value="Multiple Elements" <% if (relationship.escape('sample_type') === 'Multiple Elements') { %>selected<% } %>>Multiple Elements</option>
-						  <option value="Other" <% if (relationship.escape('sample_type') === 'Other') { %>selected<% } %>>Other</option>
+						  <option value="Other" <% if (relationship.escape('sample_type') === 'Other') { %>selected<% } %>>Other (Describe in Notes)</option>
 						</select>
 					<% } %>
 				</div>
