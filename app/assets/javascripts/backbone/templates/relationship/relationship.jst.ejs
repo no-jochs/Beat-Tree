@@ -49,17 +49,17 @@
 				<div class="marker<%= relationship.escape('significance') %> rel-marker">
 					<h4 class="text-center">
 						<% if (relationship.escape('significance') === '1') { %>
-							Extensive Sampling
+							Significance: Foundational
 						<% } else if (relationship.escape('significance') === '2') { %>
-							Frequent Sampling
+							Significance: Used Heavily
 						<% } else if (relationship.escape('significance') === '3') { %>
-							Moderate Sampling
+							Significance: Used Moderately
 						<% } else if (relationship.escape('significance') === '4') { %>
-							Light Sampling
+							Significance: Used Lightly
 						<% } else if (relationship.escape('significance') === '5') { %>
-							Very Light Sampling
+							Significance: Barely Used
 						<% } else { %>
-							Use Type Not Provided
+							Significance Not Yet Set
 						<% } %>
 					</h4>
 				</div>
