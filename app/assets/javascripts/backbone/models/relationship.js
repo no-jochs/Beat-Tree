@@ -6,8 +6,7 @@ BT.Models.Relationship = Backbone.Model.extend({
 	},
 	
 	url: function () {
-		return "api/relationships/" + this.startNodeId +"?type=" + 
-				this.type + "&endNodeId=" + this.endNodeId
+		return "api/relationships/" + this.startNodeId +"?type=" + this.type + "&endNodeId=" + this.endNodeId;
 	},
 	
 	parse: function (dataJSON) {
