@@ -7,7 +7,7 @@ BT.Models.User = Backbone.Model.extend({
 	
 	idAttribute: "username",
 	
-	urlRoot: "api/users",
+	urlRoot: function () { return "api/users" + this.id },
 	
 	parse: function (jsonResp) {
 		var that = this;
