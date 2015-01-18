@@ -1,7 +1,7 @@
 class Api::TracksController < ApplicationController
   
   def index
-    @tracks = Track.query_as(:t).return(:t).order(created_at: :desc).limit(10)
+    @tracks = Neo4j::Session.query("MATCH (t:Track) RETURN t ORDER BY t.created_at DESC LIMIT 20")
     render json: @tracks, status: :ok
   end
   
