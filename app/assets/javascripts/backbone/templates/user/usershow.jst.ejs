@@ -1,0 +1,76 @@
+<div class="row">
+	<div class="col-xs-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">User Details</h3>
+		  </div>
+		  <div class="panel-body">
+  		    <div class="row">
+				<div class="col-xs-4">
+					<% if (user.escape('img_url').length > 0) { %>
+					<img class="current-track-album-show" src="<%= user.escape('img_url') %>">
+					<% } else {  %>
+					<img class="current-track-album-show" src="https://s3-us-west-1.amazonaws.com/beat-tree-images/headphones-man-512.gif">
+					<% } %>
+				</div>
+				<div class="col-xs-8">
+					<dl class="dl-horizontal">
+					  <h4>
+					  <dt>Username:</dt>
+					  <dd><%= user.escape('username') %></dd>
+					  <dt>Full Name:</dt>
+					  <dd><%= user.escape('fname') %> <%= user.escape('lname') %></dd>
+  					  </h4>
+					  <hr>
+					  <dt>Location:</dt>
+					  <dd><%= user.escape('location') %></dd>
+				    </dl>
+			    </div>
+			</div>
+		  </div>
+	    </div>
+	</div>
+	<div class="col-xs-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-heading">User Stats</h3>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-12">
+					<dl class="dl-horizontal">
+						<dt>Relationships Created:</dt>
+						<dd><h3><%= user.escape('relationship_count') %></h3></dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Relationships Created</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-4">
+						<h3 class="text-center">Samples</h3>
+						<div class="user-samples-container">
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<h3 class="text-center">Covers</h3>
+						<div class="user-covers-container">
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<h3 class="text-center">Remixes</h3>
+						<div class="user-remixes-container">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
