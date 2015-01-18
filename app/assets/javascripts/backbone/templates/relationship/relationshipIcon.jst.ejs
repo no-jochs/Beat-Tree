@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-xs-5">
+		<div class="well">
+			<a class="media-left" href="#tracks/<%= relationship.startNode.id %>">
+				<img src="<%= relationship.startNode.escape('album_s_image') %>">
+			</a>
+			<div class="media-body">
+				<h6 class="media-heading"><%= BT.Utils.SliceText(relationship.startNode.escape('track_name'), 40) %></h6>
+				<em><%= BT.Utils.SliceText(relationship.startNode.escape('artist_name'), 50) %></em>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<div class="text-center">
+			-[:<code><%= relationship.escape('type') %></code>]->
+		</div>
+	</div>
+	<div class="col-xs-5">
+		<div class="well">
+			<a class="media-left" href="#tracks/<%= relationship.endNode.id %>">
+				<img src="<%= relationship.endNode.escape('album_s_image') %>">
+			</a>
+			<div class="media-body">
+				<h6 class="media-heading"><%= BT.Utils.SliceText(relationship.endNode.escape('track_name'), 40) %></h6>
+				<em><%= BT.Utils.SliceText(relationship.endNode.escape('artist_name'), 50) %></em>
+			</div>
+		</div>
+	</div>
+</div>
