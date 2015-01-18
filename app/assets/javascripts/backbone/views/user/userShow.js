@@ -7,12 +7,13 @@ BT.Views.UserShow = Backbone.CompositeView.extend({
 		var renderedContent = this.template({ user: this.model });
 		this.$el.html(renderedContent);
 		this.addRelationships();
+		this.attachSubviews();
 		return this;
 	},
 	
 	addRelationships: function () {
 		var that = this;
-		_(that.relationships).each ( function (rel) {
+		_(that.model.relationships).each ( function (rel) {
 			var view = new BT.Views.RelationshipIcon({ model: rel });
 			if (rel.escape('type') === "SAMPLES") {
 				that.addSubview('.user-samples-container', view);
