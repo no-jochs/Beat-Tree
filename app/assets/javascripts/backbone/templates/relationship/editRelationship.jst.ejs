@@ -79,6 +79,7 @@
 			<hr>
 			<div class="col-xs-6">
 				<h3 class="text-center">Child Data</h3>
+				<h4><%= relationship.startNode.escape('track_name') %></h4>
 				<center>
 					<label>YouTube URI
 						<input type="url" class="form-control" name="child_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('child_url') != null) { %>value="<%= relationship.escape('child_url') %>"<% } %>>
@@ -90,6 +91,7 @@
 			</div>
 			<div class="col-xs-6">
 				<h3 class="text-center">Parent Data</h3>
+				<h4>(<%= relationship.endNode.escape('track_name') %>)</h4>
 				<center>
 					<label>YouTube URI
 						<input type="url" class="form-control" name="parent_url" placeholder="Ex: bT0gVTjZEFE" <% if (relationship.escape('parent_url') != null) { %>value="<%= relationship.escape('parent_url') %>"<% } %>>

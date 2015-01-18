@@ -44,9 +44,9 @@
 	<div class="row">
 		<div class="col-xs-4">
 			<% if (relationship.escape('type') === 'SAMPLES') { %>
+				<h3>Sample Attributes</h3>
+				<hr>
 				<div class="marker<%= relationship.escape('significance') %> rel-marker">
-					<h3>Sample Attributes</h3>
-					<hr>
 					<h4 class="text-center">
 						<% if (relationship.escape('significance') === '1') { %>
 							Extensive Sampling
@@ -143,8 +143,8 @@
 				<%= relationship.escape('added_by') %>
 			</a>
 			<% if (relationship.escape('added_by') == BT.current_user) { %>
-				<button class="btn btn-warning floater-right" id="update-relationship">Update Relationship</button>
 				<button class="btn btn-danger floater-right" id="delete-relationship">Delete Relationship</button>
+				<button class="btn btn-warning floater-right" id="update-relationship">Update Relationship</button>
 			<% } %>
 		</div>
 	</div>
