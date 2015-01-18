@@ -3,6 +3,8 @@ BT.Models.Relationship = Backbone.Model.extend({
 		this.type = options.type;
 		this.startNodeId = options.startNodeId;
 		this.endNodeId = options.endNodeId;
+		this.startNode = options.startNode;
+		this.endNode = options.endNode;
 	},
 	
 	url: function () {
