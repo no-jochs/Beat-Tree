@@ -14,11 +14,11 @@ BT.Views.UserShow = Backbone.CompositeView.extend({
 		var that = this;
 		_(that.relationships).each ( function (rel) {
 			var view = new BT.Views.RelationshipIcon({ model: rel });
-			if (rel.escape('type') == "SAMPLES") {
+			if (rel.escape('type') === "SAMPLES") {
 				that.addSubview('.user-samples-container', view);
-			} else if(rel.escape('type') == "COVERS") {
+			} else if(rel.escape('type') === "COVERS") {
 				that.addSubview('.user-covers-container', view);
-			} else if(rel.escape('type') == "REMIXES") {
+			} else if(rel.escape('type') === "REMIXES") {
 				that.addSubview('.user-remixes-container', view);
 			}	
 		});
