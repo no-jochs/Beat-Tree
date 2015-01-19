@@ -1,6 +1,6 @@
 /* JSON response from server comes in as:
 
-[ {type: 'SAMPLES', startNode: {track: [track JSON]}, endNode: {track: [track JSON]}}, {}, {}, ...]
+[ {type: 'SAMPLES', startNode: {track: [track OBJ]}, endNode: {track: [track OBJ]}}, {}, {}, ...]
 
 */
 
