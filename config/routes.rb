@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'johnochs', to: 'static_pages#johnochs'
+  get 'learnmore', to: 'static_pages#learnmore'
   
   namespace :api, defaults: { format: :json} do
     resources :tracks, only: [:create, :update, :index, :show, :destroy]
