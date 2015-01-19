@@ -31,6 +31,9 @@ class Api::NeojsonsController < ApplicationController
     elsif params[:query_type] == 'mother-o-drums'
       json = Neo4j::Session.query("MATCH (prog)-[r:SAMPLES {sample_type: 'Drums'}]->(b:Track) WITH b, COUNT(prog) AS n ORDER BY n DESC LIMIT 5 MATCH (b)<-[r2:SAMPLES]-(c:Track) RETURN c AS startNode, type(r2) AS type, b AS endNode")
       render json: json, status: :ok
+    elsif params[:query_type] == 'popularity'
+      json = Neo4j::Session.query("MATCH (a)-[r]->(b:Track) RETURN a AS startNode, type(r) AS type, b AS endNode ORDER BY a.track_popularity DESC LIMIT 5")
+      render json: json, status: :ok
     else
       render json: "Not Implemented", status: :not_implemented
     end
