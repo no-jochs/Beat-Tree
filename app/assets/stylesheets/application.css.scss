@@ -2,6 +2,34 @@
 @import "bootstrap";
 @import url(https://fonts.googleapis.com/css?family=Exo:300);
 
+
+//Custom Alert CSS
+
+#dialogoverlay{
+	display: none;
+	opacity: .8;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #FFF;
+	width: 100%;
+	z-index: 10;
+}
+#dialogbox{
+	display: none;
+	position: fixed;
+	background: black;
+	border-radius:7px; 
+	width:550px;
+	z-index: 10;
+}
+#dialogbox > div{ background: white; margin:2px; }
+#dialogbox > div > #dialogboxhead{ background-color: black; font-size:19px; padding:10px; color: white; }
+#dialogbox > div > #dialogboxbody{ background-color: white; padding:20px; color: black; }
+#dialogbox > div > ul { background-color: white; padding:20px; color: black; }
+#dialogbox > div > #dialogboxfoot{ background-color: black; padding:10px; text-align:right; }
+
+
 //GRAPHVIEW
 
 #graph-view-d3-port {

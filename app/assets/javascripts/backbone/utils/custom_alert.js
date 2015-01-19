@@ -12,13 +12,13 @@ BT.Alert = function () {
 		dialogbox.style.left = (winW/2) - (550 * .5)+"px";
 	    dialogbox.style.top = "100px";
 	    dialogbox.style.display = "block";
-		document.getElementById('dialogboxhead').innerHTML = header;
+		document.getElementById('dialogboxhead').innerHTML = '<h3>' + header + '</h3>';
 	    document.getElementById('dialogboxbody').innerHTML = message;
 		var errorlist = $('#customalertitems');
 		_(items).each( function (item) {
 			errorlist.append("<li>" + item + "</li>");
 		})
-		document.getElementById('dialogboxfoot').innerHTML = '<button class="btn-default btn" onclick="window.currentCAlert.ok()">Dismiss</button>';
+		document.getElementById('dialogboxfoot').innerHTML = '<button type="button" class="btn-default btn" onclick="BT.currentCAlert.ok()">Dismiss</button>';
 	}
 	this.ok = function(){
 		document.getElementById('dialogbox').style.display = "none";

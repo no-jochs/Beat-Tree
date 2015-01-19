@@ -96,16 +96,21 @@ BT.Views.SearchResult = Backbone.CompositeView.extend({
 	},
 	addToDB: function () {
 		var that = this;
-		this.model.save({},{
-			success: function (model, response, options) {
-				var btn = that.$el.find('#add-to-db');
-				that.model.set('id', that.model.get('track_spotify_id'));
-				btn.replaceWith('<button type="button" id="use-existing-track" class="btn btn-success">Go</button>');
-			},
-			error: function (model, response, options) {
-				alert("Something went wrong with the request.  Please refresh the page and try your search again.");
-			}
-		});	
+		if (BT.current_user != null) {
+			this.model.save({},{
+				success: function (model, response, options) {
+					var btn = that.$el.find('#add-to-db');
+					that.model.set('id', that.model.get('track_spotify_id'));
+					btn.replaceWith('<button type="button" id="use-existing-track" class="btn btn-success">Go</button>');
+				},
+				error: function (model, response, options) {
+					alert("Something went wrong with the request.  Please refresh the page and try your search again.");
+				}
+			});
+		} else {
+			BT.currentCAlert = new BT.Alert;
+			BT.currentCAlert.render('Must Log In', 'You need to log in or create an account before you can add nodes to the BeatTree Database.');
+		}
 	},
 	useExistingTrack: function () {
 		Backbone.history.navigate("tracks/" + this.model.get('track_spotify_id'), { trigger: true });

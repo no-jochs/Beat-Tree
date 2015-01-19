@@ -173,11 +173,17 @@ BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 	
 	addSearchView: function (event) {
 		event.preventDefault();
-		$('#progeny-node-search-container').empty();
-		$('#progeny-node-confirm-container').empty();
-		$('#progeny-node-relationship-container').empty();
-		var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
-		this.addSubview('#progeny-node-search-container', searchView);
+		
+		if (BT.current_user != null) {
+			$('#progeny-node-search-container').empty();
+			$('#progeny-node-confirm-container').empty();
+			$('#progeny-node-relationship-container').empty();
+			var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
+			this.addSubview('#progeny-node-search-container', searchView);
+		} else {
+			BT.currentCAlert = new BT.Alert;
+			BT.currentCAlert.render('Must Log In', 'You need to log in or create an account before you can add nodes to the BeatTree Database.');
+		}
 	},
 	
 	addConfirmationView: function (model) {
@@ -257,11 +263,17 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 	
 	addSearchView: function (event) {
 		event.preventDefault();
-		$('#predecessor-node-search-container').empty();
-		$('#predecessor-node-confirm-container').empty();
-		$('#predecessor-node-relationship-container').empty();
-		var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
-		this.addSubview('#predecessor-node-search-container', searchView);
+		
+		if (BT.current_user != null) {
+			$('#predecessor-node-search-container').empty();
+			$('#predecessor-node-confirm-container').empty();
+			$('#predecessor-node-relationship-container').empty();
+			var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
+			this.addSubview('#predecessor-node-search-container', searchView);
+		} else {
+			BT.currentCAlert = new BT.Alert;
+			BT.currentCAlert.render('Must Log In', 'You need to log in or create an account before you can add nodes to the BeatTree Database.');
+		}
 	},
 	
 	addConfirmationView: function (model) {
