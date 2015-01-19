@@ -23,17 +23,23 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 	
 	mostSampled: function () {
 		var that = this;
+		
+		var title = "Most Sampled Tracks",
+			info = "Showing the top 5 most sampled tracks in the BeatTree database along with the tracks that sample them.";
 		if (!this.mostSampledData) {
 			$.ajax({
 				type: "GET",
-				url: "http://www.beat-tree.com/api/neojson?query_type=most-sampled"
+				url: "api/neojson?query_type=most-sampled"
 			}).done( function (jsonResp) {
-				that.fillGraph(jsonResp);
+				that.mostSampledData = jsonResp;
+				that.fillGraph(that.mostSampledData, title, info);
 			});
+		} else {
+			this.fillGraph(this.mostSampledData, title, info);
 		}
 	},
 	
-	fillGraph: function (jsonData) {
-		
+	fillGraph: function (data, title, info) {
+		BT.Utils.GVD3(this, data, title, info);
 	}
 })
