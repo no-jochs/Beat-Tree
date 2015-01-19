@@ -4,4 +4,6 @@ class StaticPagesController < ApplicationController
   def home;end
   
   def johnochs;end
+  
+  def learnmore;end
 end
