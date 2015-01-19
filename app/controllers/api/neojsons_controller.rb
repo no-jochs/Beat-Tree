@@ -22,6 +22,12 @@ class Api::NeojsonsController < ApplicationController
     elsif params[:query_type] == 'most-remixed'
       json = Neo4j::Session.query("MATCH (prog)-[r:REMIXES]->(b:Track) WITH b, COUNT(prog) AS n ORDER BY n DESC LIMIT 5 MATCH (b)<-[r2:REMIXES]-(c:Track) RETURN c AS startNode, type(r2) AS type, b AS endNode")
       render json: json, status: :ok
+    elsif params[:query_type] == 'lots-o-samples'
+      json = Neo4j::Session.query("MATCH (a:Track)-[r:SAMPLES]->(pred) WITH a, COUNT(pred) AS n ORDER BY n DESC LIMIT 5 MATCH (a)-[r2:SAMPLES]->(c:Track) RETURN a AS startNode, type(r2) AS type, c AS endNode")
+      render json: json, status: :ok
+    elsif params[:query_type] == 'lone-nodes'
+      json = Neo4j::Session.query("MATCH (a:Track) WHERE NOT (a)-[]-(:Track) RETURN a AS startNode")
+      render json: json, status: :ok
     else
       render json: "Not Implemented", status: :not_implemented
     end
