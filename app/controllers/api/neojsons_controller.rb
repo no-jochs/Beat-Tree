@@ -15,6 +15,7 @@ class Api::NeojsonsController < ApplicationController
       render json: json, status: :ok
     elsif params[:query_type] == 'most-sampled'
       json = Neo4j::Session.query("MATCH (prog)-[r:SAMPLES]->(b:Track) WITH b, COUNT(prog) AS n ORDER BY n DESC LIMIT 5 MATCH (b)<-[r2:SAMPLES]-(c:Track) RETURN b AS startNode, type(r2) AS type, c AS endNode")
+      render json: json, status: :ok
     else
       render json: "Not Implemented", status: :not_implemented
     end
