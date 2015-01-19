@@ -418,4 +418,10 @@ button#cancel-relationship-create {
 	height: 100%;
 	background-color: #e8e8e8;
 	color: black;
+	border-radius: 7px;
+	border: 2px solid black;
+}
+
+.no-node-placeholder-text {
+	margin-top: 10px;
 }

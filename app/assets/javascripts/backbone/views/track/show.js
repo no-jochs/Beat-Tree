@@ -145,7 +145,8 @@ BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 			this.$el.find('#nodes-container').html(
 				'<div class="no-node-placeholder">' +
 					'<h3 class="text-center no-node-placeholder-text">' +
-						'No Nodes To Show' +
+							'<span class="glyphicon glyphicon-remove"></span>' +
+						' No Nodes To Show' +
 					'</h3>' +
 				'</div>');
 		}
@@ -229,7 +230,8 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 			this.$el.find('#nodes-container').html(
 				'<div class="no-node-placeholder">' +
 					'<h3 class="text-center no-node-placeholder-text">' +
-						'No Nodes To Show' +
+						'<span class="glyphicon glyphicon-remove"></span>' +
+						' No Nodes To Show' +
 					'</h3>' +
 				'</div>');
 		}
