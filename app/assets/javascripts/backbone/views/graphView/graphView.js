@@ -25,13 +25,11 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		var that = this;
 		if (!this.mostSampledData) {
 			$.ajax({
-				$.ajax({
-					type: "GET",
-					url: "http://www.beat-tree.com/api/neojson?query_type=most-sampled"
-				}).done( function (jsonResp) {
-					that.fillGraph(jsonResp);
-				});
-			})
+				type: "GET",
+				url: "http://www.beat-tree.com/api/neojson?query_type=most-sampled"
+			}).done( function (jsonResp) {
+				that.fillGraph(jsonResp);
+			});
 		}
 	},
 	
