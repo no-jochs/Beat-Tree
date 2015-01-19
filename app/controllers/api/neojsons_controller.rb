@@ -13,6 +13,8 @@ class Api::NeojsonsController < ApplicationController
     elsif params[:query_type] == 'subgraph'
       json = Neo4j::Session.query("MATCH p=(a:Track)-[r*]-() WHERE a.track_spotify_id = '#{params[:node_id]}' UNWIND r AS rel RETURN startNode(rel) AS startNode, type(rel) as type, endNode(rel) as endNode")
       render json: json, status: :ok
+    elsif params[:query_type] == 'most-sampled'
+      json = Neo4j::Session.query("MATCH (prog)-[r:SAMPLES]->(b:Track) WITH b, COUNT(prog) AS n ORDER BY n DESC LIMIT 5 MATCH (b)<-[r2:SAMPLES]-(c:Track) RETURN b AS startNode, type(r2) AS type, c AS endNode")
     else
       render json: "Not Implemented", status: :not_implemented
     end
