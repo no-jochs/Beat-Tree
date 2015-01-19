@@ -32,7 +32,12 @@
 					      <img src="<%= track.t.album_m_image %>" alt="...">
 					  </a>
 				      <div class="caption">
-				        <h3><%= track.t.track_name %></h3>
+				        <h3><% if track.t.track_name.length < 50 %>
+							<%= track.t.track_name %>
+							<% else %>
+							<%= track.t.track_name[0...47] %>...
+							<% end %>
+						</h3>
 				        <p><string>Artist: </string><%= track.t.artist_name %></p>
 						<p>Sampled by <%= track.count %> other tracks.</p>
 				      </div>
