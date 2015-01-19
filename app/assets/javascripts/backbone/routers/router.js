@@ -8,11 +8,9 @@ BT.Router = Backbone.Router.extend({
 		"users/:id": "userShow",
 		 "welcome": "welcomePage",
 		 "feed": "feed",
-		 "stats": "stats",
 		 "graphview": "graphView",
 		 "relationship/edit/:type/:startNodeId/:endNodeId": "updateRelationship",
 		 "relationship/:type/:startNodeId/:endNodeId": "showRelationship",
-		 "learnmore": "learnMore",
 	},
 	userShow: function (id) {
 		var that = this;
@@ -52,17 +50,9 @@ BT.Router = Backbone.Router.extend({
 		var view = new BT.Views.TrackShow({ model: track });
 		this._swapView(view);
 	},
-	newUser: function () {
-		var view = new BT.Views.NewUser();
-		this._swapView(view);
-	},
 	welcomePage: function () {
 		var view = new BT.Views.Welcome();
 		this._swapView(view)
-	},
-	signIn: function () {
-		var view = new BT.Views.SignIn();
-		this._swapView(view);
 	},
 	feed: function () {
 		var view = new BT.Views.Feed();
@@ -86,14 +76,6 @@ BT.Router = Backbone.Router.extend({
 				that._swapView(view);
 			}
 		});
-	},
-	learnMore: function () {
-		var view = new BT.Views.LearnMore();
-		this._swapView(view);
-	},
-	johnOchs: function () {
-		var view = new BT.Views.JohnOchs();
-		this._swapView(view);
 	},
 	_swapView: function (view) {
 		this._currentView && this._currentView.remove();
