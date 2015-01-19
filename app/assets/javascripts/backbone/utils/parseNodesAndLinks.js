@@ -13,9 +13,13 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 	
 	_(data).each ( function (respObj) {
 		
-		var startNodeId = respObj.startNode.track.id;
-		var endNodeId = respObj.endNode.track.id;
-		var relType = respObj.type;
+		var startNodeId = respObj.startNode.track.id
+		if (respObj.endNode != undefined) {
+			var endNodeId = respObj.endNode.track.id;
+		}
+		if (respObj.type != undefined) {
+			var relType = respObj.type;
+		}
 		
 		//If start node has not been added to the nodes array, it adds it
 		//while keeping track of its position in the array.
@@ -26,43 +30,46 @@ BT.Utils.ParseNodesAndLinks = function (data, trackId) {
 		
 		//Does the same thing for the end node.
 		
-		if (nodeHash[endNodeId] === undefined) {
-			nodeHash[endNodeId] = nodeArray.length;
-			nodeArray.push(respObj.endNode.track);
-		}
+		if (endNodeId != undefined) {
 		
+			if (nodeHash[endNodeId] === undefined) {
+				nodeHash[endNodeId] = nodeArray.length;
+				nodeArray.push(respObj.endNode.track);
+			}
+		}
 		//Creates a link if it hasn't been created already.  The linkHash
 		//also keeps track of the predecessors of a particular track as such:
 		// linkHash = {trackID : { samples: [pred1ID, pred2ID, ...], covers: [ ... ], ...} ... }
-		
-		if (linkHash[startNodeId] === undefined) {
-			linkHash[startNodeId] = {};
-			linkHash[startNodeId][relType] = [endNodeId];
-			linkArray.push({
-				"source": nodeHash[startNodeId],
-				"target": nodeHash[endNodeId],
-				"label": relType
-			});
-		} else if (linkHash[startNodeId][relType] === undefined) {
-			linkHash[startNodeId][relType] = [];
-			linkHash[startNodeId][relType].push(endNodeId);
-			linkArray.push({
-				"source": nodeHash[startNodeId],
-				"target": nodeHash[endNodeId],
-				"label": relType
-			});
+		if (relType != undefined) {
 			
-		} else {
-			if (linkHash[startNodeId][relType].indexOf(endNodeId) === -1) {
+			if (linkHash[startNodeId] === undefined) {
+				linkHash[startNodeId] = {};
+				linkHash[startNodeId][relType] = [endNodeId];
+				linkArray.push({
+					"source": nodeHash[startNodeId],
+					"target": nodeHash[endNodeId],
+					"label": relType
+				});
+			} else if (linkHash[startNodeId][relType] === undefined) {
+				linkHash[startNodeId][relType] = [];
 				linkHash[startNodeId][relType].push(endNodeId);
 				linkArray.push({
 					"source": nodeHash[startNodeId],
 					"target": nodeHash[endNodeId],
 					"label": relType
 				});
+			
+			} else {
+				if (linkHash[startNodeId][relType].indexOf(endNodeId) === -1) {
+					linkHash[startNodeId][relType].push(endNodeId);
+					linkArray.push({
+						"source": nodeHash[startNodeId],
+						"target": nodeHash[endNodeId],
+						"label": relType
+					});
+				}
 			}
 		}
-		
 		
 	});
 	
