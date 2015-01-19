@@ -111,6 +111,24 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		}
 	},
 	
+	motherOfDrums: function () {
+		var that = this;
+		
+		var title = "Where the Drums Come From",
+			info = "Showing the top 5 tracks which are most sampled for their drums along with the tracks that sampled them.";
+		if (!this.motherOfDrumsData) {
+			$.ajax({
+				type: "GET",
+				url: "api/neojson?query_type=mother-o-drums"
+			}).done( function (jsonResp) {
+				that.motherOfDrumsData = jsonResp;
+				that.fillGraph(that.motherOfDrumsData, title, info);
+			});
+		} else {
+			this.fillGraph(this.motherOfDrumsData, title, info);
+		}
+	},
+	
 	fillGraph: function (data, title, info) {
 		BT.Utils.GVD3(this, data, title, info);
 	}
