@@ -75,7 +75,44 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		}
 	},
 	
+	lotsOfSamples: function () {
+		var that = this;
+		
+		var title = "Tracks That Sample the Most",
+			info = "Showing the top 5 which sample the most tracks along with the tracks they sample.";
+		if (!this.lotsOfSamplesData) {
+			$.ajax({
+				type: "GET",
+				url: "api/neojson?query_type=lots-o-samples"
+			}).done( function (jsonResp) {
+				that.lotsOfSamplesData = jsonResp;
+				that.fillGraph(that.lotsOfSamplesData, title, info);
+			});
+		} else {
+			this.fillGraph(this.lotsOfSamplesData, title, info);
+		}
+	},
+	
+	loneNodes: function () {
+		var that = this;
+		
+		var title = "Tracks With No Relationships",
+			info = "Showing tracks which are in the BeatTree database, but have no relationships.  Help them out!";
+		if (!this.loneNodesData) {
+			$.ajax({
+				type: "GET",
+				url: "api/neojson?query_type=lone-nodes"
+			}).done( function (jsonResp) {
+				that.loneNodesData = jsonResp;
+				that.fillGraph(that.loneNodesData, title, info);
+			});
+		} else {
+			this.fillGraph(this.loneNodesData, title, info);
+		}
+	},
+	
 	fillGraph: function (data, title, info) {
 		BT.Utils.GVD3(this, data, title, info);
 	}
-})
+	
+});
