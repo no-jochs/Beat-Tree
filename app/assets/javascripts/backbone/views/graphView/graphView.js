@@ -129,6 +129,34 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		}
 	},
 	
+	popularity: function () {
+		var that = this;
+		
+		var title = "Most Popular Tracks",
+			info = "Showing the most popular Spotify tracks in the BeatTree database along with their relationships.";
+		
+			if (!this.popularityData) {
+				$.ajax({
+					type: "GET",
+					url: "api/neojson?query_type=popularity"
+				}).done( function (jsonResp) {
+					that.popularityData = jsonResp;
+					that.fillGraph(that.popularityData, title, info);
+				});
+			} else {
+				this.fillGraph(this.popularityData, title, info);
+			}
+		
+	},
+	
+	pathSearch: function () {
+		alert("This feature is coming soon!");
+	},
+	
+	trackSubgraph: function () {
+		alert("This feature is coming soon!");
+	},
+	
 	fillGraph: function (data, title, info) {
 		BT.Utils.GVD3(this, data, title, info);
 	}
