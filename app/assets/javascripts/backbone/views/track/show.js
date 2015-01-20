@@ -371,6 +371,7 @@ BT.Views.trackShowSpotSearch = BT.Views.nodeSearch.extend({
 			});
 			that.addSubview('#spot-search-results', resultView);
 		});
+		BT.Utils.ResizeModalBackdrop();
 	},
 
 	populateBTResults: function (data) {
@@ -383,6 +384,7 @@ BT.Views.trackShowSpotSearch = BT.Views.nodeSearch.extend({
 			});
 			that.addSubview("#bt-search-results", resultView);
 		});
+		BT.Utils.ResizeModalBackdrop();
 	}
 
 });
