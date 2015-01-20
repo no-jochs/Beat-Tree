@@ -10,6 +10,13 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 			that.recentlyAdded.reset(tracks);
 		});
 		this.listenTo(this.recentlyAdded, 'reset', this.render);
+		
+		$.ajax({
+			type: "GET",
+			url: "api/users",
+		}).done( function (data) {
+			that.addTopUsers(data);
+		});
 	},
 	
 	template: JST['backbone/templates/feed/feed'],
@@ -26,6 +33,19 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 		this.recentlyAdded.each( function (trackObj) {
 			var view = new BT.Views.RecentTrackMedia({ model: trackObj });
 			that.addSubview('#recently-added-tracks-rows', view);
+		});
+	},
+	
+	addTopUsers: function (data) {
+		var table = $('tbody.highscores')
+		table.empty();
+		var c = 1;
+		_(data).each( function (highscore) {
+			table.append(
+				'<tr>' + '<th scope="row">' + c + '</th>' +
+				'<td><a href="#users/' + highscore.user + '">' + highscore.user + '</a></td>' +
+				'<td><strong>' + highscore.count + '</a></td>'
+			);
 		});
 	}
 });

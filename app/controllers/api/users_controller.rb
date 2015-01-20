@@ -1,5 +1,10 @@
 class Api::UsersController < ApplicationController
   
+  def index
+    json = Neo4j::Session.query('MATCH ()-[r]->() RETURN r.added_by AS user, COUNT(r.added_by) as count ORDER BY count DESC LIMIT 10');
+    render json: json, status: :ok
+  end
+  
   def create
     @user = User.new(user_params)
     
