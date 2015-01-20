@@ -1,4 +1,4 @@
-BT.Utils.GVD3 = function (view, data, title, info) {
+BT.Utils.GVD3 = function (view, data, title, info, relaxed) {
 	$('div.view-description-box')
 	    .empty()
 		.html(
@@ -11,6 +11,12 @@ BT.Utils.GVD3 = function (view, data, title, info) {
 	var that = view;
 	
 	var w = 1337, h = 670;
+	
+	if (relaxed) {
+		var charge = -300;
+	} else {
+		var charge = -1000;
+	}
 	
 	var parsedData = BT.Utils.ParseNodesAndLinks(data);
 	var nodes = parsedData.nodes, links = parsedData.links;
@@ -37,8 +43,8 @@ BT.Utils.GVD3 = function (view, data, title, info) {
 	var force = d3.layout.force()
 						  .nodes(nodes)
 						  .links(links)
-						  .gravity(0.1)
-						  .charge(-1000)
+						  .gravity(0.2)
+						  .charge(charge)
 						  .size([w, h])
 						  .linkDistance(100);
 	
