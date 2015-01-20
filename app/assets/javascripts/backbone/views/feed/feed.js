@@ -11,10 +11,13 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 		});
 		this.listenTo(this.recentlyAdded, 'reset', this.render);
 		
+		this.topUsersData = {};
+		
 		$.ajax({
 			type: "GET",
 			url: "api/users",
 		}).done( function (data) {
+			that.topUsersData = data
 			that.addTopUsers(data);
 		});
 	},
@@ -25,6 +28,7 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 		var renderedContent = this.template();
 		this.$el.html(renderedContent);
 		this.addRecentTracks();
+		this.addTopUsers();
 		return this;
 	},
 	
@@ -36,11 +40,11 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 		});
 	},
 	
-	addTopUsers: function (data) {
+	addTopUsers: function () {
 		var table = $('tbody.highscores')
 		table.empty();
 		var c = 1;
-		_(data).each( function (highscore) {
+		_(this.topUsersData).each( function (highscore) {
 			table.append(
 				'<tr>' + '<th scope="row">' + c + '</th>' +
 				'<td><a href="#users/' + highscore.user + '">' + highscore.user + '</a></td>' +
