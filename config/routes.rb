@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :tracks, only: [:create, :update, :index, :show, :destroy]
     resources :tracksearch, only: [:index]
     resource :neojson, only: [:show]
-    resources :users, only: [:create, :show, :update, :destroy]
+    resources :users, only: [:index, :show, :update, :destroy]
     resource :session, only: [:create, :destroy]
     resources :relationships, only: [:show, :update, :destroy]
   end
