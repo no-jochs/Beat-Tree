@@ -5,6 +5,7 @@ class User
   before_save :ensure_password_confirmation
   
   property :username, index: :exact, constraint: :unique
+  property :password
   property :pwdigest
   property :session_token, index: :exact, constraint: :unique
   property :email, constraint: :unique
