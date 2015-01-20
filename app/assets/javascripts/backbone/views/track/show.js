@@ -181,6 +181,7 @@ BT.Views.ConnectionsProgenyView = Backbone.CompositeView.extend({
 			var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
 			this.addSubview('#progeny-node-search-container', searchView);
 		} else {
+			BT.Utils.FreePage();
 			BT.currentCAlert = new BT.Alert;
 			BT.currentCAlert.render('Must Log In', 'You need to log in or create an account before you can add nodes to the BeatTree Database.');
 		}
@@ -271,6 +272,7 @@ BT.Views.ConnectionsPredecessorsView = Backbone.CompositeView.extend({
 			var searchView = new BT.Views.trackShowSpotSearch({ parentModel: this });
 			this.addSubview('#predecessor-node-search-container', searchView);
 		} else {
+			BT.Utils.FreePage();
 			BT.currentCAlert = new BT.Alert;
 			BT.currentCAlert.render('Must Log In', 'You need to log in or create an account before you can add nodes to the BeatTree Database.');
 		}
