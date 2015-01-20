@@ -6,6 +6,7 @@ class User
   
   property :username, index: :exact, constraint: :unique
   property :password
+  property :password_confirmation
   property :pwdigest
   property :session_token, index: :exact, constraint: :unique
   property :email, constraint: :unique
