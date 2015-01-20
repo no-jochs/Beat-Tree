@@ -46,6 +46,7 @@ BT.Views.Feed = Backbone.CompositeView.extend({
 				'<td><a href="#users/' + highscore.user + '">' + highscore.user + '</a></td>' +
 				'<td><strong>' + highscore.count + '</a></td>'
 			);
+			c++;
 		});
 	}
 });
