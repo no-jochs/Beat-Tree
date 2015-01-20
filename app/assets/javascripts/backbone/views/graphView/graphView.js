@@ -150,7 +150,7 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		
 	},
 	
-	popularity: function () {
+	wholeGraph: function () {
 		var that = this;
 		
 		var title = "The Entire BeatTree Graph",
@@ -162,10 +162,10 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 					url: "api/neojson?query_type=whole-graph"
 				}).done( function (jsonResp) {
 					that.wholeGraphData = jsonResp;
-					that.fillGraph(that.wholeGraphData, title, info);
+					that.fillGraph(that.wholeGraphData, title, info, true);
 				});
 			} else {
-				this.fillGraph(this.wholeGraphData, title, info);
+				this.fillGraph(this.wholeGraphData, title, info, true);
 			}
 		
 	},
@@ -178,8 +178,8 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		alert("This feature is coming soon!");
 	},
 	
-	fillGraph: function (data, title, info) {
-		BT.Utils.GVD3(this, data, title, info);
+	fillGraph: function (data, title, info, relaxed) {
+		BT.Utils.GVD3(this, data, title, info, relaxed);
 	}
 	
 });
