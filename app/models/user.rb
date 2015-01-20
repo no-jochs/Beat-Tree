@@ -21,7 +21,7 @@ class User
   validates :password, length: { minimum: 6, allow_nil: true }
   
   
-  attr_reader :password
+  attr_reader :password, :password_confirmation
   
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -33,6 +33,10 @@ class User
     self.session_token = SecureRandom::urlsafe_base64
     self.save
     self.session_token
+  end
+  
+  def password_confirmation=(password_confirmation)
+    @password_confirmation = password_confirmation
   end
   
   def password=(password)
@@ -51,7 +55,11 @@ class User
   end
   
   def ensure_password_confirmation
-    self.password == self.password_confirmation
+    if user.persisted?
+      return true
+    else
+      self.password == self.password_confirmation
+    end
   end
 
 end
