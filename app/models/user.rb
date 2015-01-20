@@ -55,7 +55,7 @@ class User
   end
   
   def ensure_password_confirmation
-    if user.persisted?
+    if self.persisted?
       return true
     else
       self.password == self.password_confirmation
