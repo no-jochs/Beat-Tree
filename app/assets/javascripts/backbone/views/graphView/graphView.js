@@ -12,7 +12,8 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 		"click button#mother-o-drums": "motherOfDrums",
 		"click button#popularity": "popularity",
 		"click button#track-subgraph": "trackSubgraph",
-		"click button#path-search": "pathSearch"
+		"click button#path-search": "pathSearch",
+		"click button#whole-graph": "wholeGraph"
 	},
 	
 	render: function () {
@@ -145,6 +146,26 @@ BT.Views.GraphView = Backbone.CompositeView.extend({
 				});
 			} else {
 				this.fillGraph(this.popularityData, title, info);
+			}
+		
+	},
+	
+	popularity: function () {
+		var that = this;
+		
+		var title = "The Entire BeatTree Graph",
+			info = "Showing all nodes and the relationships between them.";
+		
+			if (!this.wholeGraphData) {
+				$.ajax({
+					type: "GET",
+					url: "api/neojson?query_type=whole-graph"
+				}).done( function (jsonResp) {
+					that.wholeGraphData = jsonResp;
+					that.fillGraph(that.wholeGraphData, title, info);
+				});
+			} else {
+				this.fillGraph(this.wholeGraphData, title, info);
 			}
 		
 	},

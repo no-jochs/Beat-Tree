@@ -34,6 +34,9 @@ class Api::NeojsonsController < ApplicationController
     elsif params[:query_type] == 'popularity'
       json = Neo4j::Session.query("MATCH (a)-[r]->(b:Track) RETURN a AS startNode, type(r) AS type, b AS endNode ORDER BY a.track_popularity DESC LIMIT 5")
       render json: json, status: :ok
+    elsif params[:query_type] == 'whole-graph'
+      json = Neo4j::Session.query("MATCH ()-[r]->() RETURN type(r) as type, startNode(r) as startNode, endNode(r) as endNode")
+      render json: json, status: :ok
     else
       render json: "Not Implemented", status: :not_implemented
     end
