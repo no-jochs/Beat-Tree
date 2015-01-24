@@ -11,8 +11,9 @@
 	<div class="col-xs-4 col-xs-offset-4">
 	<form class="new-user-data" action="/users" method="POST">
 		<input type="hidden" value="authenticity-token">
+		<blockquote>Note that the only required fields are username (must be HTML-safe), password, and password confirmation.</blockquote>
 		<div class="form-group">
-			<label for="username-field">Username*</label>
+			<label for="username-field">Username (Required)</label>
 			<input type="text" id="username-field" class="form-control" name="user[username]">
 
 		</div>
@@ -37,11 +38,11 @@
 			<input type="text" class="form-control" id="location-field" name="user[location]">
 		</div>
 		<div class="form-group">
-			<label for="password-field">Password*</label>
+			<label for="password-field">Password (Required)</label>
 			<input type="password" class="form-control" id="password-field" name="user[password]">
 		</div>
 		<div class="form-group">
-			<label for="confirm-password-field">Confirm Password*</label>
+			<label for="confirm-password-field">Confirm Password (Required)</label>
 			<input type="password" class="form-control" id="confirm-password-field" name="user[password_confirmation]">
 		</div>
 		<div class="form-group">
