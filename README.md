@@ -31,7 +31,7 @@ The BeatTree stack uses the following libraries, gems, and technologies:
 
 * **[Heroku](https://www.heroku.com/)**: BeatTree is deployed using the Heroku platform.
 
-##Future of BeatTree
+## Future of BeatTree
 Here are some ideas which may come to BeatTree soon:
 
 * Integration with [Echo Nest](http://developer.echonest.com/) API.  Spotify is great, but it doesn't have all the music that exists.  In the future, BeatTree may be able to integrate with the Echo Nest API to find additional songs which Spotify doesn't have.
@@ -42,5 +42,5 @@ Here are some ideas which may come to BeatTree soon:
 
 * Spotify Playlist exporting.  We may add support to create Spotify playlists based on predecessor/progeny relationships and subgraphs.
 
-##Your Support
+## Your Support
 If you find bugs or have ideas for features, we'd love to hear them!  Please submit issues or feature requests [here](https://github.com/johnochs/beat-tree/issues).  Or, you can email John directly [here](mailto:john.ochs@gmail.com).
